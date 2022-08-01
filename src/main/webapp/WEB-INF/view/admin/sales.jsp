@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<input type="date" name="salse_date"  />
+	<input type="date" name="salse_date" />
 	<label> <input type="radio" name="shop_name" value="1" />A店 <input
 		type="radio" name="shop_name" value="2" />B店
 
@@ -44,7 +44,38 @@
 
 
 
-	<input type="text" />
+
+	<table border="1">
+		<tr>
+			<th>利用日時</th>
+			<th>店舗名</th>
+			<th>名前1</th>
+			<th>名前2</th>
+			<th>ふりがな</th>
+			<th>店名</th>
+			<th>オプション</th>
+			<th>指名</th>
+			<th>支払</th>
+			<th>売上</th>
+			<th>交通費</th>
+			<th>給与</th>
+			<th>経費</th>
+			<th>利益</th>
+			<th>顧客情報</th>
+			<th>売上編集</th>
+		</tr>
+
+
+
+	</table>
+
+	<p>
+		<input type="button" value="画面印刷" /> <input type="button"
+			value="画面出力" />
+
+
+
+	</p>
 
 </body>
 </html>
