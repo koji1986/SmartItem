@@ -64,6 +64,31 @@
 			<th>顧客情報</th>
 			<th>売上編集</th>
 		</tr>
+		<c:forEach items="${salesList}" var="sales" >
+		<tr>
+			<td><c:out value="${sales.id}" /></td>
+			<td><c:out value="${sales.salesDate}" /></td>
+			<td><c:out value="${sales.salesTime}" /></td>
+			<td><c:out value="${sales.shopInfId}" /></td>
+			<td><c:out value="${sales.customerCategolyId}" /></td>
+			<td><c:out value="${sales.customerId}" /></td>
+			<td><c:out value="${sales.picId}" /></td>
+			<td><c:out value="${sales.salesNomination}" /></td>
+			<td><c:out value="${sales.salesPayment}" /></td>
+			<td><c:out value="${sales.courseId}" /></td>
+			<td><c:out value="${sales.optionId}" /></td>
+			<td><c:out value="${sales.salesCarfare}" /></td>
+			<td><c:out value="${sales.salesSalary}" /></td>
+			<td><c:out value="${sales.salesCost}" /></td>
+			<td><c:out value="${sales.adId}" /></td>
+			<td><c:out value="${sales.adId}" /></td>
+			<td><c:out value="${sales.discountId}" /></td>
+			<td><c:out value="${sales.salesDiscountFee}" /></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
+		</c:forEach>
 
 
 
