@@ -49,12 +49,15 @@
 		<tr>
 			<th>利用日時</th>
 			<th>店舗名</th>
-			<th>名前1</th>
-			<th>名前2</th>
-			<th>ふりがな</th>
-			<th>店名</th>
-			<th>オプション</th>
+			<th>種別</th>
+			<th>顧客名</th>
+			<th>施術者名</th>
+			<th>コース</th>
+			
 			<th>指名</th>
+			
+			<th>オプション</th>
+		
 			<th>支払</th>
 			<th>売上</th>
 			<th>交通費</th>
@@ -64,30 +67,28 @@
 			<th>顧客情報</th>
 			<th>売上編集</th>
 		</tr>
-		<c:forEach items="${salesList}" var="sales" >
-		<tr>
-			<td><c:out value="${sales.id}" /></td>
-			<td><c:out value="${sales.salesDate}" /></td>
-			<td><c:out value="${sales.salesTime}" /></td>
-			<td><c:out value="${sales.shopInfId}" /></td>
-			<td><c:out value="${sales.customerCategolyId}" /></td>
-			<td><c:out value="${sales.customerId}" /></td>
-			<td><c:out value="${sales.picId}" /></td>
-			<td><c:out value="${sales.salesNomination}" /></td>
-			<td><c:out value="${sales.salesPayment}" /></td>
-			<td><c:out value="${sales.courseId}" /></td>
-			<td><c:out value="${sales.optionId}" /></td>
-			<td><c:out value="${sales.salesCarfare}" /></td>
-			<td><c:out value="${sales.salesSalary}" /></td>
-			<td><c:out value="${sales.salesCost}" /></td>
-			<td><c:out value="${sales.adId}" /></td>
-			<td><c:out value="${sales.adId}" /></td>
-			<td><c:out value="${sales.discountId}" /></td>
-			<td><c:out value="${sales.salesDiscountFee}" /></td>
-			<td></td>
-			<td></td>
-		</tr>
-		
+		<c:forEach items="${salesList}" var="sales">
+			<tr>
+				<td><c:out value="${sales.salesDate}" /></td>
+				
+				<td><c:out value="${sales.shopInfName}" /></td>
+				<td><c:out value="${sales.customerCategolyName}" /></td>
+				<td><c:out value="${sales.customerName}" /></td>
+				<td><c:out value="${sales.picName}" /></td>
+				<td><c:out value="${sales.courseName}" /></td>
+				<td><c:out value="${sales.salesNomination}" /></td>
+				<td><c:out value="${sales.optionName}" /></td>
+				<td><c:out value="${sales.salesPayment}" /></td>
+				<td></td>
+				<td><c:out value="${sales.salesCarfare}" /></td>
+				<td><c:out value="${sales.salesSalary}" /></td>
+				<td><c:out value="${sales.salesCost}" /></td>
+				<td></td>
+				
+				<td></td>
+				<td><a href="sales/update?id=<c:out value="${sales.id}" />"><input type="button" value="編集"  /></a></td>
+			</tr>
+
 		</c:forEach>
 
 

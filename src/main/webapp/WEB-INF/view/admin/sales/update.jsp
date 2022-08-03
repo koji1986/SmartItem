@@ -19,14 +19,14 @@
 			<input type="time" name="salse_time" />
 		</div>
 		<div>
-			<label>店舗 <input type="radio" name="shopInf_name" value="1" />A店
+			<label>店舗 <input type="radio" name="shopInf_id" value="1" />A店
 				<input type="radio" name="shopInf_name" value="2" />B店
 			</label>
 		</div>
 
 		<div>
-			顧客種別 <label> <input type="radio" name="customerCategoly_name"
-				value="1" />新規 <input type="radio" name="customerCategoly_name"
+			顧客種別 <label> <input type="radio" name="customerCategoly_id"
+				value="1" />新規 <input type="radio" name="customerCategoly_id"
 				value="2" />会員
 
 			</label>
@@ -34,10 +34,10 @@
 
 
 		<div>
-			顧客名 <input type="text" name="customer_name" placeholder="顧客名" />
+			顧客名 <input type="number" name="customer_id" placeholder="顧客名" />
 		</div>
-		<div>
-			<select name="pic_name">
+		<div>施術者
+			<select name="pic_id">
 				<option value="1">太郎</option>
 				<option value="2">次郎</option>
 				<option value="3">三郎</option>
@@ -48,9 +48,9 @@
 
 		<div>
 			指名 <label> <input type="radio" name="sales_nomination"
-				value="1" />フリー <input type="radio" name="sales_nomination"
-				value="2" />NET指名 <input type="radio" name="sales_nomination"
-				value="3" />本指名
+				value="フリー" />フリー <input type="radio" name="sales_nomination"
+				value="NET指名" />NET指名 <input type="radio" name="sales_nomination"
+				value="本指名" />本指名
 
 
 			</label>
@@ -58,14 +58,15 @@
 
 		<div>
 			支払方法 <label> <input type="radio" name="sales_payment"
-				value="1" />現金 <input type="radio" name="sales_payment" value="2" />クレジットカード
-				<input type="radio" name="sales_payment" value="3" />その他
+				value="現金" />現金 
+				<input type="radio" name="sales_payment" value="クレジットカード" />クレジットカード
+				<input type="radio" name="sales_payment" value="その他" />その他
 			</label>
 		</div>
 
 
 		<div>
-			コース <select name="course_name">
+			コース <select name="course_id">
 				<option value="1">60分</option>
 				<option value="2">70分</option>
 				<option value="3">80分</option>
@@ -75,7 +76,7 @@
 		</div>
 
 		<div>
-			オプション <select name="option_name">
+			オプション <select name="option_id">
 				<option value="1">肩</option>
 				<option value="2">腰</option>
 				<option value="3">首</option>
@@ -85,7 +86,7 @@
 		</div>
 
 		<div>
-			担当者 <select name="staff_name">
+			担当者 <select name="staff_id">
 				<option value="1">店長</option>
 				<option value="2">主任</option>
 				<option value="3">課長</option>
@@ -97,7 +98,7 @@
 
 
 		<div>
-			交通費 <input type="number" name="sales_carfare" />
+			交通費 <input type="number" name="sales_carfare" value="<c:out value="${salesCarfare}" />" />
 		</div>
 
 		<div>
@@ -108,7 +109,7 @@
 		</div>
 
 		<div>
-			広告媒体 <select name="ad_name">
+			広告媒体 <select name="ad_id">
 				<option value="1">なし</option>
 				<option value="2">HP</option>
 				<option value="3">新聞</option>
@@ -119,7 +120,7 @@
 
 
 		<div>
-			割引名 <select name="discount_name">
+			割引名 <select name="discount_id">
 				<option value="1">500円割引</option>
 				<option value="2">600円割引</option>
 				<option value="3">700円割引</option>

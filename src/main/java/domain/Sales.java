@@ -8,20 +8,54 @@ public class Sales {
 	private Date salesDate;
 	private Date salesTime;
 	private Integer shopInfId;
+	private String shopInfName;
 	private Integer customerCategolyId;
+	private String customerCategolyName;
 	private Integer customerId;
+	private String customerName;
 	private Integer picId;
+	private String picName;
 	private String salesNomination;
 	private String salesPayment;
 	private Integer courseId;
+	private String courseName;
 	private Integer optionId;
+	private String optionName;
 	private Integer staffId;
+	private String staffName;
 	private Integer salesCarfare;
 	private Integer salesSalary;
 	private Integer salesCost;
 	private Integer adId;
+	private String adName;
 	private Integer discountId;
+	private String discountName;
 	private Integer salesDiscountFee;
+
+	public Sales(Integer id, Date salesDate, Date salesTime, String shopInfName, String customerCategolyName,
+			String customerName, String picName, String salesNomination, String salesPayment, String courseName,
+			String optionName, String staffName, Integer salesCarfare, Integer salesSalary, Integer salesCost,
+			String adName, String discountName, Integer salesDiscountFee) {
+		super();
+		this.id = id;
+		this.salesDate = salesDate;
+		this.salesTime = salesTime;
+		this.shopInfName = shopInfName;
+		this.customerCategolyName = customerCategolyName;
+		this.customerName = customerName;
+		this.picName = picName;
+		this.salesNomination = salesNomination;
+		this.salesPayment = salesPayment;
+		this.courseName = courseName;
+		this.optionName = optionName;
+		this.staffName = staffName;
+		this.salesCarfare = salesCarfare;
+		this.salesSalary = salesSalary;
+		this.salesCost = salesCost;
+		this.adName = adName;
+		this.discountName = discountName;
+		this.salesDiscountFee = salesDiscountFee;
+	}
 
 	public Sales(Integer id, Date salesDate, Date salesTime, Integer shopInfId, Integer customerCategolyId,
 			Integer customerId, Integer picId, String salesNomination, String salesPayment, Integer courseId,
@@ -194,6 +228,78 @@ public class Sales {
 
 	public void setSalesDiscountFee(Integer salesDiscountFee) {
 		this.salesDiscountFee = salesDiscountFee;
+	}
+
+	public String getShopInfName() {
+		return shopInfName;
+	}
+
+	public void setShopInfName(String shopInfName) {
+		this.shopInfName = shopInfName;
+	}
+
+	public String getCustomerCategolyName() {
+		return customerCategolyName;
+	}
+
+	public void setCustomerCategolyName(String customerCategolyName) {
+		this.customerCategolyName = customerCategolyName;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getOptionName() {
+		return optionName;
+	}
+
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
+
+	public String getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+
+	public String getAdName() {
+		return adName;
+	}
+
+	public void setAdName(String adName) {
+		this.adName = adName;
+	}
+
+	public String getDiscountName() {
+		return discountName;
+	}
+
+	public void setDiscountName(String discountName) {
+		this.discountName = discountName;
 	}
 
 }
