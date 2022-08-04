@@ -89,7 +89,7 @@ public class AdminSalesInputServlet extends HttpServlet {
 
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			salesDao.insert(sales);
-			request.getRequestDispatcher("/WEB-INF/view/admin/sales.jsp").forward(request, response);
+			response.sendRedirect("../sales");
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

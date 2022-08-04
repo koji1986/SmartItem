@@ -20,24 +20,23 @@
 		</div>
 		<div>
 			<label>店舗 <input type="radio" name="shopInf_id" value="1" />A店
-				<input type="radio" name="shopInf_name" value="2" />B店
+			</label> <label><input type="radio" name="shopInf_id" value="2" />B店
 			</label>
 		</div>
 
 		<div>
-			顧客種別 <label> <input type="radio"
-				name="customerCategoly_id" value="1" />新規 <input type="radio"
-				name="customerCategoly_id" value="2" />会員
-
-			</label>
+			顧客種別 <label> <input type="radio" name="customerCategoly_id"
+				value="1" />新規
+			</label> <label><input type="radio" name="customerCategoly_id"
+				value="2" />会員 </label>
 		</div>
 
 
 		<div>
 			顧客名 <input type="number" name="customer_id" placeholder="顧客名" />
 		</div>
-		<div>施術者
-			<select name="pic_id">
+		<div>
+			施術者 <select name="pic_id">
 				<option value="1">太郎</option>
 				<option value="2">次郎</option>
 				<option value="3">三郎</option>
@@ -48,20 +47,18 @@
 
 		<div>
 			指名 <label> <input type="radio" name="sales_nomination"
-				value="フリー" />フリー <input type="radio" name="sales_nomination"
-				value="NET指名" />NET指名 <input type="radio" name="sales_nomination"
-				value="本指名" />本指名
-
-
-			</label>
+				value="フリー" />フリー
+			</label> <label><input type="radio" name="sales_nomination"
+				value="NET指名" />NET指名</label> <label><input type="radio"
+				name="sales_nomination" value="本指名" />本指名 </label>
 		</div>
 
 		<div>
-			支払方法 <label> 
-			<input type="radio" name="sales_payment" value="現金" />現金 
-				<input type="radio" name="sales_payment" value="クレジットカード" />クレジットカード
-				<input type="radio" name="sales_payment" value="その他" />その他
-			</label>
+			支払方法 <label> <input type="radio" name="sales_payment"
+				value="現金" />現金
+			</label> <label><input type="radio" name="sales_payment"
+				value="クレジットカード" />クレジットカード</label> <label><input type="radio"
+				name="sales_payment" value="その他" />その他 </label>
 		</div>
 
 

@@ -12,6 +12,9 @@ public class DaoFactory {
 	public static SalesDao createSalesDao() {
 		return new SalesDaoImpl(getDataSource());
 	}
+	public static CostDao createCostDao() {
+		return new CostDaoImpl(getDataSource());
+	}
 
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;

@@ -15,7 +15,7 @@
 		<input type="date" />
 	</div>
 	<div>
-		<input type="button" value="経費情報入力" />
+		<a href="cost/input"><input type="button" value="経費情報入力" /></a>
 
 	</div>
 
@@ -30,24 +30,19 @@
 				<td>詳細</td>
 				<td>削除</td>
 			</tr>
+			<c:forEach items="${costList}" var="cost" >
+			
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type="button" value="詳細" /></td>
+				<td><c:out value="${cost.costDestination}" /></td>
+				<td><c:out value="${cost.costSubjectName}" /></td>
+				<td><c:out value="${cost.costFee}" /></td>
+				<td><c:out value="${cost.staffName}" /></td>
+				<td><c:out value="${cost.costDetail}" /></td>
+				<td><a href="cost/update?id=<c:out value="${cost.id}" />"><input type="button" value="詳細" /></a></td>
 				<td><input type="button" value="削除" /></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type="button" value="詳細" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
+			</c:forEach>
+			
 
 
 		</table>

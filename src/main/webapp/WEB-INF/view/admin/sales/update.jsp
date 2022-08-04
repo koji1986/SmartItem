@@ -10,18 +10,20 @@
 </head>
 <body>
 
+
+
 	<form action="" method="post">
 
 		<div>
-			<input type="date" name="salse_date" />
+			<input type="date" name="sales_date" value="<fmt:formatDate value="${salesDate}" pattern="yyyy-MM-dd" />"/>
 		</div>
 		<div>
-			<input type="time" name="salse_time" />
+			<input type="time" name="sales_time" value="<fmt:formatDate value="${salesTime}" pattern="HH:mm" />" />
 		</div>
 		<div>
-			<label>店舗 <input type="radio" name="shopInf_id" value="1" />A店
-				<input type="radio" name="shopInf_name" value="2" />B店
-			</label>
+			店舗 <label><input type="radio" name="shopInf_id" value="1"  />A店</label>
+				<label><input type="radio" name="shopInf_id" value="2" />B店</label>
+			
 		</div>
 
 		<div>
@@ -47,21 +49,20 @@
 		</div>
 
 		<div>
-			指名 <label> <input type="radio" name="sales_nomination"
-				value="フリー" />フリー <input type="radio" name="sales_nomination"
-				value="NET指名" />NET指名 <input type="radio" name="sales_nomination"
-				value="本指名" />本指名
+			指名
+			 <label> <input type="radio" name="sales_nomination"value="フリー" />フリー</label>
+			 <label><input type="radio" name="sales_nomination"value="NET指名" />NET指名</label>
+			<label> <input type="radio" name="sales_nomination"value="本指名" />本指名</label>
 
 
-			</label>
+			
 		</div>
 
 		<div>
-			支払方法 <label> <input type="radio" name="sales_payment"
-				value="現金" />現金 
-				<input type="radio" name="sales_payment" value="クレジットカード" />クレジットカード
-				<input type="radio" name="sales_payment" value="その他" />その他
-			</label>
+			支払方法 
+			<label> <input type="radio" name="sales_payment"value="現金" />現金</label> 
+			<label><input type="radio" name="sales_payment" value="クレジットカード" />クレジットカード</label>
+			<label><input type="radio" name="sales_payment" value="その他" />その他</label>
 		</div>
 
 
@@ -102,10 +103,10 @@
 		</div>
 
 		<div>
-			給与 <input type="number" name="sales_salary" />
+			給与 <input type="number" name="sales_salary" value="<c:out value="${salesSalary}" />" />
 		</div>
 		<div>
-			経費 <input type="number" name="sales_cost" />
+			経費 <input type="number" name="sales_cost" value="<c:out value="${salesCost}" />" />
 		</div>
 
 		<div>
@@ -130,13 +131,16 @@
 		</div>
 
 		<div>
-			割引額 <input type="number" name="sales_discount_fee" />
+			割引額 <input type="number" name="sales_discount_fee" value="<c:out value="${salesDiscountFee}" />"/>
 		</div>
 		<input type="submit" value="更新" />
 
 
 
 	</form>
+
+  
+
 
 
 </body>

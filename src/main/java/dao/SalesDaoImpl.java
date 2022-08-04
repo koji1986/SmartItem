@@ -118,7 +118,37 @@ public class SalesDaoImpl implements SalesDao {
 
 	@Override
 	public void update(Sales sales) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = " update sales set \n" + "sales_date=?, \n" + "sales_time=?,\n" + "shopInf_id=?,\n"
+					+ "customerCategoly_id=?,\n" + "customer_id=?,\n" + "pic_id=?,\n" + "sales_nomination=?,\n"
+					+ "sales_payment=?,\n" + "course_id=?,\n" + "option_id=?,\n" + "staff_id=?,\n"
+					+ "sales_carfare=?,\n" + "sales_salary=?,\n" + "sales_cost=?,\n" + "ad_id=?,\n" + "discount_id=?,\n"
+					+ "sales_discount_fee=?\n" + "where id=?;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, sales.getSalesDate());
+			stmt.setObject(2, sales.getSalesTime());
+			stmt.setObject(3, sales.getShopInfId(), Types.INTEGER);
+			stmt.setObject(4, sales.getCustomerCategolyId(), Types.INTEGER);
+			stmt.setObject(5, sales.getCustomerId(), Types.INTEGER);
+			stmt.setObject(6, sales.getPicId(), Types.INTEGER);
+			stmt.setString(7, sales.getSalesNomination());
+			stmt.setString(8, sales.getSalesPayment());
+			stmt.setObject(9, sales.getCourseId(), Types.INTEGER);
+			stmt.setObject(10, sales.getOptionId(), Types.INTEGER);
+			stmt.setObject(11, sales.getStaffId(), Types.INTEGER);
+			stmt.setObject(12, sales.getSalesCarfare(), Types.INTEGER);
+			stmt.setObject(13, sales.getSalesSalary(), Types.INTEGER);
+			stmt.setObject(14, sales.getSalesCost(), Types.INTEGER);
+			stmt.setObject(15, sales.getAdId(), Types.INTEGER);
+			stmt.setObject(16, sales.getDiscountId(), Types.INTEGER);
+			stmt.setObject(17, sales.getSalesDiscountFee(), Types.INTEGER);
+			stmt.setObject(18, sales.getId(), Types.INTEGER);
+
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
