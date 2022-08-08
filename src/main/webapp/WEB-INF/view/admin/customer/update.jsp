@@ -12,45 +12,58 @@
 	<form action="" method="post">
 
 		<div>
-			会員NO <input type="text" name="customer_no" />
+			会員NO <input type="text" name="customer_no"
+				value="<c:out value="${customerNo}" />" />
 		</div>
 		<div>
-			会員名 <input type="text" name="customer_name" />
+			会員名 <input type="text" name="customer_name"
+				value="<c:out value="${customerName}" />" />
 		</div>
 		<div>
-			ふりがな <input type="text" name="customer_kana" />
+			ふりがな <input type="text" name="customer_kana"
+				value="<c:out value="${customerKana}" />" />
 		</div>
 		<div>
-			電話番号1 <input type="tel" name="customer_phone_number1" />
+			電話番号1 <input type="tel" name="customer_phone_number1"
+				value="<c:out value="${customerPhoneNumber1}" />" />
 		</div>
 		<div>
-			電話番号2 <input type="tel" name="customer_phone_number2" />
+			電話番号2 <input type="tel" name="customer_phone_number2"
+				value="<c:out value="${customerPhoneNumber2}" />" />
 		</div>
 		<div>
-			電話番号3 <input type="tel" name="customer_phone_number3" />
+			電話番号3 <input type="tel" name="customer_phone_number3"
+				value="<c:out value="${customerPhoneNumber3}" />" />
 		</div>
 		<div>
-			メールアドレス <input type="email" name="customer_email" />
+			メールアドレス <input type="email" name="customer_email"
+				value="<c:out value="${customerEmail}" />" />
 		</div>
 		<div>
-			住所1 <input type="text" name="customer_address1" />
+			住所1 <input type="text" name="customer_address1"
+				value="<c:out value="${customerAddress1}" />" />
 		</div>
 		<div>
-			住所2 <input type="text" name="customer_address2" />
+			住所2 <input type="text" name="customer_address2"
+				value="<c:out value="${customerAddress2}" />" />
 		</div>
 
 		<div>
-			クレジットカード番号 <input type="text" name="credit_number" />
+			クレジットカード番号 <input type="text" name="customer_credit_number"
+				value="<c:out value="${customerCreditNumber}" />" />
 		</div>
 		<div>
-			有効期限 <input type="text" name="customer_date" />
+			有効期限 <input type="text" name="customer_credit_date"
+				value="<c:out value="${customerCreditDate}" />" />
 		</div>
 		<div>
-			cvv <input type="number" name="customer_credit_cvv" />
+			cvv <input type="number" name="customer_credit_cvv"
+				value="<c:out value="${customerCreditCvv}" />" />
 		</div>
 		<div>
 			注意事項
-			<textarea name="customer_memo" cols="30" rows="10"></textarea>
+			<textarea name="customer_memo" cols="30" rows="10"><c:out
+					value="${customerMemo}" /></textarea>
 		</div>
 		<div>
 			<input type="submit" value="更新" />

@@ -11,10 +11,10 @@
 <body>
 	<form action="" method="post">
 		<div>
-			<input type="date" name="cost_name" />
+			<input type="date" name="cost_date" value="<fmt:formatDate value="${costDate}" pattern="yyyy-MM-dd" />" />
 		</div>
 		<div>
-			担当者 <select name="staff_name">
+			担当者 <select name="staff_id">
 				<option value="1">店長</option>
 				<option value="2">主任</option>
 				<option value="3">課長</option>
@@ -23,17 +23,18 @@
 			</select>
 		</div>
 		<div>
-			店舗 <label> <input type="radio" name="shop_name" value="1" />A店
-				<input type="radio" value="2" name="shop_name" />B店
+			店舗
+			 <label> <input type="radio" name="shop_id" value="1" />A店</label>
+			<label>	<input type="radio" value="2" name="shop_id" />B店
 			</label>
 		</div>
 
 		<div>
-			支払先 <input type="text" name="cost_destination" />
+			支払先 <input type="text" name="cost_destination" value="<c:out value="${costDestination}" />" />
 		</div>
 
 		<div>
-			科目 <select name="cost_subject">
+			科目 <select name="cost_subject_id">
 				<option value="1">交通費</option>
 				<option value="2">消耗品費</option>
 				<option value="3">備品日</option>
@@ -41,10 +42,10 @@
 		</div>
 
 		<div>
-			金額 <input type="number" name="cost_fee" />
+			金額 <input type="number" name="cost_fee" value="<c:out value="${costFee}" />"/>
 		</div>
 		<div>
-			内容 <input type="text" name="cost_detail" />
+			内容 <input type="text" name="cost_detail" value="<c:out value="${costDetail}" />" />
 		</div>
 		<input type="submit" value="更新" />
 	</form>

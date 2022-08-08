@@ -12,15 +12,18 @@ public class Customer {
 	private String customerEmail;
 	private String customerAddress1;
 	private String customerAddress2;
-	private Integer customerCreditNumber;
+	private String customerCreditNumber;
 	private String customerCreditDate;
-	private Integer customerCreditCvv;
+	private String customerCreditCvv;
 	private String customerMemo;
+
+	public Customer() {
+	};
 
 	public Customer(Integer id, String customerNo, String customerName, String customerKana,
 			String customerPhoneNumber1, String customerPhoneNumber2, String customerPhoneNumber3, String customerEmail,
-			String customerAddress1, String customerAddress2, Integer customerCreditNumber, String customerCreditDate,
-			Integer customerCreditCvv, String customerMemo) {
+			String customerAddress1, String customerAddress2, String customerCreditNumber, String customerCreditDate,
+			String customerCreditCvv, String customerMemo) {
 		super();
 		this.id = id;
 		this.customerNo = customerNo;
@@ -118,11 +121,11 @@ public class Customer {
 		this.customerAddress2 = customerAddress2;
 	}
 
-	public Integer getCustomerCreditNumber() {
+	public String getCustomerCreditNumber() {
 		return customerCreditNumber;
 	}
 
-	public void setCustomerCreditNumber(Integer customerCreditNumber) {
+	public void setCustomerCreditNumber(String customerCreditNumber) {
 		this.customerCreditNumber = customerCreditNumber;
 	}
 
@@ -134,11 +137,11 @@ public class Customer {
 		this.customerCreditDate = customerCreditDate;
 	}
 
-	public Integer getCustomerCreditCvv() {
+	public String getCustomerCreditCvv() {
 		return customerCreditCvv;
 	}
 
-	public void setCustomerCreditCvv(Integer customerCreditCvv) {
+	public void setCustomerCreditCvv(String customerCreditCvv) {
 		this.customerCreditCvv = customerCreditCvv;
 	}
 

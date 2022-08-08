@@ -14,7 +14,7 @@
 
 		<div>店舗A</div>
 		<div>
-			施術者ランク <select name="picRank_nameA">
+			施術者ランク <select name="picRank_idA">
 				<option value="1">達人</option>
 				<option value="2">名人</option>
 
@@ -29,9 +29,9 @@
 		</div>
 		<div>店舗B</div>
 		<div>
-			施術者ランク <select name="picRank_nameB">
-				<option value="1">新人</option>
-				<option value="2">ベテラン</option>
+			施術者ランク <select name="picRank_idB">
+				<option value="3">新人</option>
+				<option value="4">ベテラン</option>
 
 
 			</select>

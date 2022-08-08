@@ -9,11 +9,25 @@ public class DaoFactory {
 	public static AdminsDao createAdminsDao() {
 		return new AdminsDaoImpl(getDataSource());
 	}
+
 	public static SalesDao createSalesDao() {
 		return new SalesDaoImpl(getDataSource());
 	}
+
 	public static CostDao createCostDao() {
 		return new CostDaoImpl(getDataSource());
+	}
+
+	public static CustomerDao createCustomerDao() {
+		return new CustomerDaoImpl(getDataSource());
+	}
+
+	public static PicDao createPicDao() {
+		return new PicDaoImpl(getDataSource());
+	}
+
+	public static CourseDao createCourseDao() {
+		return new CourseDaoImpl(getDataSource());
 	}
 
 	private static DataSource getDataSource() {

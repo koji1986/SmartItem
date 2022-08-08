@@ -6,6 +6,7 @@ public class Pic {
 
 	private Integer id;
 	private Integer picRankIdA;
+	private String picRankName;
 	private String picNameA;
 	private String picKanaA;
 	private Integer picRankIdB;
@@ -17,6 +18,28 @@ public class Pic {
 	private Date picEntryDay;
 	private Date picOutDay;
 	private String picMemo;
+
+	public Pic() {
+	};
+
+	public Pic(Integer id, String picRankName, String picNameA, String picKanaA, String picNameB, String picKanaB,
+			String picPhoneNumber, String picEmail, String picAddress, Date picEntryDay, Date picOutDay,
+			String picMemo) {
+		super();
+		this.id = id;
+		this.picRankName = picRankName;
+		this.picNameA = picNameA;
+		this.picKanaA = picKanaA;
+
+		this.picNameB = picNameB;
+		this.picKanaB = picKanaB;
+		this.picPhoneNumber = picPhoneNumber;
+		this.picEmail = picEmail;
+		this.picAddress = picAddress;
+		this.picEntryDay = picEntryDay;
+		this.picOutDay = picOutDay;
+		this.picMemo = picMemo;
+	}
 
 	public Pic(Integer id, Integer picRankIdA, String picNameA, String picKanaA, Integer picRankIdB, String picNameB,
 			String picKanaB, String picPhoneNumber, String picEmail, String picAddress, Date picEntryDay,
@@ -139,6 +162,14 @@ public class Pic {
 
 	public void setPicMemo(String picMemo) {
 		this.picMemo = picMemo;
+	}
+
+	public String getPicRankName() {
+		return picRankName;
+	}
+
+	public void setPicRankName(String picRankName) {
+		this.picRankName = picRankName;
 	}
 
 }

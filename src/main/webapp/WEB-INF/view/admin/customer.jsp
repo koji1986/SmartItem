@@ -25,29 +25,25 @@
 				<td>名前</td>
 				<td>ふりがな</td>
 				<td>電話番号</td>
-				<td>経費利用日時</td>
+				<td>利用日時</td>
 				<td>詳細</td>
 				<td>削除</td>
 			</tr>
+			<c:forEach items="${customerList}" var="customer">
 
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><a href=""><input type="button" value="編集" /></a></td>
-				<td><a href=""><input type="button" value="削除" /></a></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><a href=""><input type="button" value="編集" /></a></td>
-				<td><a href=""><input type="button" value="削除" /></a></td>
-			</tr>
+				<tr>
+					<td><c:out value="${customer.customerNo}" /></td>
+					<td><c:out value="${customer.customerName}" /></td>
+					<td><c:out value="${customer.customerKana}" /></td>
+					<td><c:out value="${customer.customerPhoneNumber1}" /></td>
+					<td></td>
+					<td><a
+						href="customer/update?id=<c:out value="${customer.id}" />"><input
+							type="button" value="編集" /></a></td>
+					<td><a href=""><input type="button" value="削除" /></a></td>
+				</tr>
+			</c:forEach>
+
 		</table>
 
 	</div>

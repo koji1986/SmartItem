@@ -41,10 +41,10 @@
 		</div>
 
 		<div>
-			クレジットカード番号 <input type="text" name="credit_number" />
+			クレジットカード番号 <input type="text" name="customer_credit_number" />
 		</div>
 		<div>
-			有効期限 <input type="text" name="customer_date" />
+			有効期限 <input type="text" name="customer_credit_date" />
 		</div>
 		<div>
 			cvv <input type="number" name="customer_credit_cvv" />

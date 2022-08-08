@@ -13,7 +13,7 @@
 
 		<div>店舗A</div>
 		<div>
-			施術者ランク <select name="picRank_nameA">
+			施術者ランク <select name="picRank_idA">
 				<option value="1">達人</option>
 				<option value="2">名人</option>
 
@@ -21,14 +21,16 @@
 			</select>
 		</div>
 		<div>
-			施術者名1 <input type="text" name="pic_nameA" />
+			施術者名1 <input type="text" name="pic_nameA"
+				value=<c:out value="${picNameA}" /> />
 		</div>
 		<div>
-			ふりがな <input type="text" name="pic_kanaA" />
+			ふりがな <input type="text" name="pic_kanaA"
+				value=<c:out value="${picKanaA}" /> />
 		</div>
 		<div>店舗B</div>
 		<div>
-			施術者ランク <select name="picRank_nameB">
+			施術者ランク <select name="picRank_idB">
 				<option value="1">新人</option>
 				<option value="2">ベテラン</option>
 
@@ -36,30 +38,38 @@
 			</select>
 		</div>
 		<div>
-			施術者名2 <input type="text" name="pic_nameB" />
+			施術者名2 <input type="text" name="pic_nameB"
+				value="<c:out value="${picNameB}" />" />
 		</div>
 		<div>
-			ふりがな <input type="text" name="pic_kanaB" />
+			ふりがな <input type="text" name="pic_kanaB"
+				value="<c:out value="${picKanaB}" />" />
 		</div>
 
 		<div>
-			電話番号 <input type="tel" name="pic_phone_number" />
+			電話番号 <input type="tel" name="pic_phone_number"
+				value="<c:out value="${picPhoneNumber}" />" />
 		</div>
 		<div>
-			メールアドレス <input type="email" name="pic_email" />
+			メールアドレス <input type="email" name="pic_email"
+				value="<c:out value="${picEmail}" />" />
 		</div>
 		<div>
-			住所 <input type="text" name="pic_address" />
+			住所 <input type="text" name="pic_address"
+				value="<c:out value="${picAddress}" />" />
 		</div>
 		<div>
-			入店日 <input type="date" name="pic_entry_day" />
+			入店日 <input type="date" name="pic_entry_day"
+				value="<fmt:formatDate value="${picEntryDay}" pattern="yyyy-MM-dd" />" />
 		</div>
 		<div>
-			退店日 <input type="date" name="pic_out_day" />
+			退店日 <input type="date" name="pic_out_day"
+				value="<fmt:formatDate value="${picOutDay}" pattern="yyyy-MM-dd" />" />
 		</div>
 		<div>
 			注意事項
-			<textarea name="pic_memo" cols="30" rows="10"></textarea>
+			<textarea name="pic_memo" cols="30" rows="10"><c:out
+					value="${picMemo}" /></textarea>
 		</div>
 		<div>
 			<input type="submit" value="更新" />

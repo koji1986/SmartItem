@@ -36,27 +36,23 @@
 			<td>詳細</td>
 			<td>削除</td>
 		</tr>
+		<c:forEach items="${picList}" var="pic">
 
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><input type="button" value="詳細" /></td>
-			<td><input type="button" value="削除" /></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><input type="button" value="詳細" /></td>
-			<td><input type="button" value="削除" /></td>
-		</tr>
+
+
+			<tr>
+				<td><c:out value="${pic.picEntryDay}" /></td>
+				<td><c:out value="${pic.picRankName}" /></td>
+				<td><c:out value="${pic.picNameA}" /></td>
+				<td><c:out value="${pic.picNameB}" /></td>
+				<td><c:out value="${pic.picKanaA}" /></td>
+				<td><c:out value="${pic.picOutDay}" /></td>
+				<td><a href="pic/update?id=<c:out value="${pic.id}" />"><input
+						type="button" value="詳細" /></a></td>
+				<td><input type="button" value="削除" /></td>
+			</tr>
+		</c:forEach>
+
 
 	</table>
 

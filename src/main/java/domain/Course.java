@@ -4,10 +4,31 @@ public class Course {
 	
 	private Integer  id;
 	private Integer  shopInfId;
+	private String shopInfName;
 	private String  courseName;
 	private Integer  courseFee;
 	private Integer  courseTime;
 	private Integer  courseRow;
+	
+	public Course() {};
+	
+	
+	
+	
+	public Course(Integer id, String shopInfName, String courseName, Integer courseFee, Integer courseTime,
+			Integer courseRow) {
+		super();
+		this.id = id;
+		this.shopInfName = shopInfName;
+		this.courseName = courseName;
+		this.courseFee = courseFee;
+		this.courseTime = courseTime;
+		this.courseRow = courseRow;
+	}
+
+
+
+
 	public Course(Integer id, Integer shopInfId, String courseName, Integer courseFee, Integer courseTime,
 			Integer courseRow) {
 		super();
@@ -53,6 +74,20 @@ public class Course {
 	}
 	public void setCourseRow(Integer courseRow) {
 		this.courseRow = courseRow;
+	}
+
+
+
+
+	public String getShopInfName() {
+		return shopInfName;
+	}
+
+
+
+
+	public void setShopInfName(String shopInfName) {
+		this.shopInfName = shopInfName;
 	}
 
 	
