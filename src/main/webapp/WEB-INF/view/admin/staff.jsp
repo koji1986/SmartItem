@@ -17,30 +17,20 @@
 				<td>並び替え</td>
 				<td>削除</td>
 			</tr>
-
-			<tr>
-
-				<td><input type="text" name="staff_name" /></td>
-
-				<td><input type="number" name="staff_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-
-				<td><input type="text" name="staff_name" /></td>
-
-				<td><input type="number" name="staff_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-
-				<td><input type="text" name="staff_name" /></td>
-
-				<td><input type="number" name="staff_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
+			<c:forEach items="${staffList}" var="staff">
 
 
+				<tr>
+
+					<td><input type="text" name="staff_name"
+						value="<c:out value="${staff.staffName}" />" /></td>
+
+					<td><input type="number" name="staff_row"
+						value="<c:out value="${staff.staffRow}" />" /></td>
+					<td><input type="button" value="削除" /></td>
+				</tr>
+
+			</c:forEach>
 
 
 		</table>

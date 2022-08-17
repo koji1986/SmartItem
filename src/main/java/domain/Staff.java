@@ -6,6 +6,9 @@ public class Staff {
 	private String staffName;
 	private Integer staffRow;
 
+	
+	public Staff() {};
+	
 	public Staff(Integer id, String staffName, Integer staffRow) {
 		super();
 		this.id = id;

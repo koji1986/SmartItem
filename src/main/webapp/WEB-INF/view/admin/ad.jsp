@@ -20,30 +20,22 @@
 				<td>削除</td>
 			</tr>
 
-			<tr>
+			
+			<c:forEach items="${adList}" var="ad">
 
-				<td><input type="text" name="ad_name" /></td>
 
-				<td><input type="number" name="ad_row" /></td>
-				<td><input type="text" placeholder="トグルでON・OFFしたい" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
+				<tr>
 
-				<td><input type="text" name="ad_name" /></td>
+					<td><input type="text" name="ad_name"
+						value="<c:out value="${ad.adName}" />" /></td>
 
-				<td><input type="number" name="ad_row" /></td>
-				<td><input type="text" placeholder="トグルでON・OFFしたい" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
+					<td><input type="number" name="ad_row"
+						value="<c:out value="${ad.adRow}" />" /></td>
+					<td><input type="text" placeholder="トグルでON・OFFしたい" /></td>
+					<td><input type="button" value="削除" /></td>
+				</tr>
+			</c:forEach>
 
-				<td><input type="text" name="ad_name" /></td>
-
-				<td><input type="number" name="ad_row" /></td>
-				<td><input type="text" placeholder="トグルでON・OFFしたい" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
 
 
 

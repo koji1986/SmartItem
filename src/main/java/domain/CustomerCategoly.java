@@ -4,6 +4,8 @@ public class CustomerCategoly {
 
 	private Integer id;
 	private String customerCategolyName;
+	
+	public CustomerCategoly() {};
 
 	public CustomerCategoly(Integer id, String customerCategolyName) {
 		super();

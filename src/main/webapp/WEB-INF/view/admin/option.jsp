@@ -14,45 +14,32 @@
 			<tr>
 				<td>店舗名</td>
 				<td>オプション名</td>
-				<td>時間（分）</td>
+				<td>料金</td>
 				<td>並び替え</td>
+				<td>更新</td>
 				<td>削除</td>
 			</tr>
 
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="option_name" /></td>
-				<td><input type="number" name="option_fee" /></td>
+			<c:forEach items="${optionList}" var="option">
 
-				<td><input type="number" name="option_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="option_name" /></td>
-				<td><input type="number" name="option_fee" /></td>
+				<tr>
+					<td><select name="shopInf_id">
+							<option value="1">A店舗</option>
+							<option value="2">B店舗</option>
+					</select></td>
+					<td><input type="text" name="option_name"
+						value="<c:out value="${option.optionName}" />" /></td>
+					<td><input type="number" name="option_fee"
+						value="<c:out value="${option.optionFee}" />" /></td>
 
-				<td><input type="number" name="option_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="option_name" /></td>
-				<td><input type="number" name="option_fee" /></td>
+					<td><input type="number" name="option_row"
+						value="<c:out value="${option.optionRow}" />" /></td>
+					<td><input type="button" value="更新" /></td>
+					<td><input type="button" value="削除" /></td>
+				</tr>
 
-				<td><input type="number" name="option_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
 
+			</c:forEach>
 
 
 		</table>

@@ -6,6 +6,8 @@ public class Ad {
 	private String adName;
 	private Integer adRow;
 
+	public Ad() {};
+	
 	public Ad(Integer id, String adName, Integer adRow) {
 		super();
 		this.id = id;

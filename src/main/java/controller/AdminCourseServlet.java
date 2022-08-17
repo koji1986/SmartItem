@@ -65,12 +65,6 @@ public class AdminCourseServlet extends HttpServlet {
 				Integer courseRow = Integer.parseInt(request.getParameter("course_row"));
 
 				Integer courseId = Integer.parseInt(request.getParameter("id"));
-				System.out.println(courseId);
-				System.out.println(courseName);
-				System.out.println(courseFee);
-				System.out.println(courseTime);
-				
-				
 				Course course = new Course();
 				course.setShopInfId(shopInfId);
 				course.setCourseName(courseName);

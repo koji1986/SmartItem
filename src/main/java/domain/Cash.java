@@ -8,7 +8,21 @@ public class Cash {
 	private Date cashDate;
 	private Integer cashChange;
 	private Integer staffId;
+	private String staffName;
 	private Integer cashCost;
+
+	public Cash() {
+		super();
+	}
+
+	public Cash(Integer id, Date cashDate, Integer cashChange, String staffName, Integer cashCost) {
+		super();
+		this.id = id;
+		this.cashDate = cashDate;
+		this.cashChange = cashChange;
+		this.staffName = staffName;
+		this.cashCost = cashCost;
+	}
 
 	public Cash(Integer id, Date cashDate, Integer cashChange, Integer staffId, Integer cashCost) {
 		super();
@@ -57,6 +71,14 @@ public class Cash {
 
 	public void setCashCost(Integer cashCost) {
 		this.cashCost = cashCost;
+	}
+
+	public String getStaffName() {
+		return staffName;
+	}
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
 	}
 
 }

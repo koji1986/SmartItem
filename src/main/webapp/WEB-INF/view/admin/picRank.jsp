@@ -19,40 +19,24 @@
 				<td>並び替え</td>
 				<td>削除</td>
 			</tr>
+			<c:forEach items="${picRankList}" var="picRank">
 
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="picRank_name" /></td>
-				<td><input type="number" name="picRank_fee" /></td>
 
-				<td><input type="number" name="picRank_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="picRank_name" /></td>
-				<td><input type="number" name="picRank_fee" /></td>
+				<tr>
+					<td><select name="shopInf_name">
+							<option value="1">A店舗</option>
+							<option value="2">B店舗</option>
+					</select></td>
+					<td><input type="text" name="picRank_name"
+						value="<c:out value="${picRank.picRankName}" />" /></td>
+					<td><input type="number" name="picRank_fee"
+						value="<c:out value="${picRank.picRankFee}" />" /></td>
 
-				<td><input type="number" name="picRank_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="picRank_name" /></td>
-				<td><input type="number" name="picRank_fee" /></td>
-
-				<td><input type="number" name="picRank_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
+					<td><input type="number" name="picRank_row"
+						value="<c:out value="${picRank.picRankRow}" />" /></td>
+					<td><input type="button" value="削除" /></td>
+				</tr>
+			</c:forEach>
 
 
 

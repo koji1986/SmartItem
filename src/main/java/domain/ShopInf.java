@@ -5,6 +5,9 @@ public class ShopInf {
 	private Integer id;
 	private String shopInfName;
 
+	public ShopInf() {
+	};
+
 	public ShopInf(Integer id, String shopInfName) {
 		super();
 		this.id = id;

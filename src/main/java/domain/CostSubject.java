@@ -4,6 +4,8 @@ public class CostSubject {
 
 	private Integer id;
 	private String costSubjectName;
+	
+	public CostSubject() {};
 
 	public CostSubject(Integer id, String costSubjectName) {
 		super();

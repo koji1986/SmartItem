@@ -30,6 +30,30 @@ public class DaoFactory {
 		return new CourseDaoImpl(getDataSource());
 	}
 
+	public static OptionDao createOptionDao() {
+		return new OptionDaoImpl(getDataSource());
+	}
+
+	public static AdDao createAdDao() {
+		return new AdDaoImpl(getDataSource());
+	}
+
+	public static DiscountDao createDiscountDao() {
+		return new DiscountDaoImpl(getDataSource());
+	}
+
+	public static PicRankDao createPicRankDao() {
+		return new PicRankDaoImpl(getDataSource());
+	}
+
+	public static StaffDao createStaffDao() {
+		return new StaffDaoImpl(getDataSource());
+	}
+
+	public static CashDao createCashDao() {
+		return new CashDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;

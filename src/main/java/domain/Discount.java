@@ -4,9 +4,23 @@ public class Discount {
 
 	private Integer id;
 	private Integer shopInfId;
+	private String shopInfName;
 	private String discountName;
 	private Integer discountFee;
 	private Integer discountRow;
+
+	public Discount() {
+		super();
+	}
+
+	public Discount(Integer id, String shopInfName, String discountName, Integer discountFee, Integer discountRow) {
+		super();
+		this.id = id;
+		this.shopInfName = shopInfName;
+		this.discountName = discountName;
+		this.discountFee = discountFee;
+		this.discountRow = discountRow;
+	}
 
 	public Discount(Integer id, Integer shopInfId, String discountName, Integer discountFee, Integer discountRow) {
 		super();
@@ -55,6 +69,14 @@ public class Discount {
 
 	public void setDiscountRow(Integer discountRow) {
 		this.discountRow = discountRow;
+	}
+
+	public String getShopInfName() {
+		return shopInfName;
+	}
+
+	public void setShopInfName(String shopInfName) {
+		this.shopInfName = shopInfName;
 	}
 
 }

@@ -20,40 +20,25 @@
 				<td>並び替え</td>
 				<td>削除</td>
 			</tr>
+			<c:forEach items="${discountList}" var="discount" varStatus="vs">
 
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="discount_name" /></td>
-				<td><input type="number" name="discount_fee" /></td>
 
-				<td><input type="number" name="discount_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="discount_name" /></td>
-				<td><input type="number" name="discount_fee" /></td>
+				<tr>
+					<td><select name="shopInf_name">
+							<option value="1">A店舗</option>
+							<option value="2">B店舗</option>
+					</select></td>
+					<td><input type="text" name="discount_name"
+						value="<c:out value="${discount.discountName}" />" /></td>
+					<td><input type="number" name="discount_fee"
+						value="<c:out value="${discount.discountFee}" />" /></td>
 
-				<td><input type="number" name="discount_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
-			<tr>
-				<td><select name="shopInf_name">
-						<option value="1">A店舗</option>
-						<option value="2">B店舗</option>
-				</select></td>
-				<td><input type="text" name="discount_name" /></td>
-				<td><input type="number" name="discount_fee" /></td>
+					<td><input type="number" name="discount_row"
+						value="<c:out value="${discount.discountRow}" />" /></td>
+					<td><input type="button" value="削除" /></td>
+				</tr>
+			</c:forEach>
 
-				<td><input type="number" name="discount_row" /></td>
-				<td><input type="button" value="削除" /></td>
-			</tr>
 
 
 

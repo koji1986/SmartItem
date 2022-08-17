@@ -9,6 +9,7 @@
 
 </head>
 <body>
+<c:import url="nav.jsp" />
 	<form action="" method="post">
 
 		<div>
@@ -33,11 +34,14 @@
 					<td>更新</td>
 					<td>削除</td>
 				</tr>
+				
+				<c:forEach items="${cashList}" var="cash" >
+				
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><input type="number" name="cash_change" /></td>
+					<td><input type="number" name="cash_change" value="<c:out value="${cash.cashChange}" />"/></td>
 					<td></td>
 					<td><select name="staff_name">
 							<option value="1">主任</option>
@@ -47,46 +51,12 @@
 					</select></td>
 					<td></td>
 					<td>トグルでON・OFF</td>
-					<td><input type="number" name="cash_cost" /></td>
+					<td><input type="number" name="cash_cost" value="<c:out value="${cash.cashCost}" />" /></td>
 					<td><input type="submit" value="更新" /></td>
 					<td><input type="button" value="削除" /></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="number" name="cash_change" /></td>
-					<td></td>
-					<td><select name="staff_name">
-							<option value="1">主任</option>
-							<option value="2">店長</option>
-							<option value="3">課長</option>
-
-					</select></td>
-					<td></td>
-					<td>トグルでON・OFF</td>
-					<td><input type="number" name="cash_cost" /></td>
-					<td><input type="submit" value="更新" /></td>
-					<td><input type="button" value="削除" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="number" name="cash_change" /></td>
-					<td></td>
-					<td><select name="staff_name">
-							<option value="1">主任</option>
-							<option value="2">店長</option>
-							<option value="3">課長</option>
-
-					</select></td>
-					<td></td>
-					<td>トグルでON・OFF</td>
-					<td><input type="number" name="cash_cost" /></td>
-					<td><input type="submit" value="更新" /></td>
-					<td><input type="button" value="削除" /></td>
-				</tr>
+				
+				</c:forEach>
 
 
 			</table>

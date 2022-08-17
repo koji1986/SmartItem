@@ -40,10 +40,10 @@
 		</div>
 		<div>施術者
 			<select name="pic_id">
-				<option value="1">太郎</option>
-				<option value="2">次郎</option>
-				<option value="3">三郎</option>
+				<c:forEach items="${picList}" var="p" >
+				<option value="1" <c:out value="${p.id == pic.picId ? 'selected' : ''}" />>太郎</option>		
 
+				</c:forEach>
 
 			</select>
 		</div>

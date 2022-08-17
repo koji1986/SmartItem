@@ -1,5 +1,10 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -16,14 +21,37 @@ public class CostSubjectDaoImpl implements CostSubjectDao {
 
 	@Override
 	public List<CostSubject> findAll() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		List<CostSubject> costSubjectList = new ArrayList<>();
+		try {
+			Connection con = ds.getConnection();
+			String sql = "  select* from cost_subject;  ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				costSubjectList.add(mapToCostSubject(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return costSubjectList;
 	}
 
 	@Override
 	public CostSubject findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		CostSubject costSubject = new CostSubject();
+		try {
+			Connection con = ds.getConnection();
+			String sql = "   select cost_subject_name from cost_subject where id= ?;   ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() == true) {
+				costSubject = mapToCostSubject(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return costSubject;
 	}
 
 	@Override
@@ -41,6 +69,15 @@ public class CostSubjectDaoImpl implements CostSubjectDao {
 	@Override
 	public void delete(CostSubject costSubject) throws Exception {
 		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+	private CostSubject mapToCostSubject(ResultSet rs) throws Exception {
+
+		Integer id = (Integer) rs.getObject("id");
+		String costSubjectName = rs.getString("costSubject_name");
+
+		return new CostSubject(id, costSubjectName);
 
 	}
 
