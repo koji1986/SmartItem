@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.DiscountDao;
+import dao.ShopInfDao;
 import domain.Discount;
+import domain.ShopInf;
 
 /**
  * Servlet implementation class AdminDiscountServlet
@@ -37,8 +39,11 @@ public class AdminDiscountServlet extends HttpServlet {
 
 		try {
 			DiscountDao discountDao = DaoFactory.createDiscountDao();
+			ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
 			List<Discount> discountList = discountDao.findAll();
+			List<ShopInf> shopInfList = shopInfDao.findAll();
 			request.setAttribute("discountList", discountList);
+			request.setAttribute("shopInfList", shopInfList);
 			request.getRequestDispatcher("/WEB-INF/view/admin/discount.jsp").forward(request, response);
 
 		} catch (Exception e) {
@@ -54,9 +59,9 @@ public class AdminDiscountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getParameter("update") != null) {
-			// 更新
-			try {
+		try {
+			if (request.getParameter("update") != null) {
+				// 更新
 
 				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
 				String discountName = request.getParameter("discount_name");
@@ -77,12 +82,27 @@ public class AdminDiscountServlet extends HttpServlet {
 				DiscountDao discountDao = DaoFactory.createDiscountDao();
 				discountDao.update(discount);
 				response.sendRedirect("discount");
-			} catch (Exception e) {
-				throw new ServletException(e);
+			} else {
+				// 削除
+				Integer discountId = Integer.parseInt(request.getParameter("id"));
+				Discount discount = new Discount();
+
+				discount.setShopInfId(1);
+				discount.setDiscountName(null);
+				discount.setDiscountFee(0);
+
+				discount.setDiscountRow(0);
+				discount.setId(discountId);
+
+				DiscountDao discountDao = DaoFactory.createDiscountDao();
+				discountDao.update(discount);
+				response.sendRedirect("discount");
+
 			}
-		} else {
-			// 削除
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 	}
+
 }

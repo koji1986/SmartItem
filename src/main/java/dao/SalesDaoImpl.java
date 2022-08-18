@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -26,12 +25,12 @@ public class SalesDaoImpl implements SalesDao {
 
 		try (Connection con = ds.getConnection()) {
 			String sql = " select sales.id,sales.sales_date,sales.sales_time,\n"
-					+ "shop_inf.shopInf_name,customer_categoly.customer_categoly_name,\n"
-					+ "customer.customer_name,pic.pic_nameA,sales.sales_nomination,\n"
-					+ "sales.sales_payment,course.course_name,\n"
-					+ "smart_item_db.option.option_name,staff.staff_name,\n"
+					+ " shop_inf.id, shop_inf.shopInf_name,sales.customerCategoly_id, customer_categoly.customer_categoly_name,\n"
+					+ "sales.customer_id, customer.customer_name,sales.pic_id,  pic.pic_nameA,sales.sales_nomination,\n"
+					+ "sales.sales_payment, sales.course_id, course.course_name,\n"
+					+ "sales.option_id, smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
 					+ "sales.sales_carfare,sales.sales_salary,\n"
-					+ "sales.sales_cost,ad.ad_name,discount.discount_name,sales.sales_discount_fee\n" + "from sales\n"
+					+ "sales.sales_cost, sales.ad_id, ad.ad_name, sales.discount_id, discount.discount_name,sales.sales_discount_fee\n" + "from sales\n"
 					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
 					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
 					+ "join customer on sales.customer_id =customer.id\n" + "join pic on sales.pic_id=pic.id\n"
@@ -56,12 +55,13 @@ public class SalesDaoImpl implements SalesDao {
 		Sales sales = new Sales();
 		try (Connection con = ds.getConnection()) {
 			String sql = " select sales.id,sales.sales_date,sales.sales_time,\n"
-					+ "shop_inf.shopInf_name,customer_categoly.customer_categoly_name,\n"
-					+ "customer.customer_name,pic.pic_nameA,sales.sales_nomination,\n"
-					+ "sales.sales_payment,course.course_name,\n"
-					+ "smart_item_db.option.option_name,staff.staff_name,\n"
+					+ "shop_inf.id, shop_inf.shopInf_name, sales.customerCategoly_id, customer_categoly.customer_categoly_name,\n"
+					+ "sales.customer_id, customer.customer_name,sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
+					+ "sales.sales_payment,sales.course_id, course.course_name,\n"
+					+ " sales.option_id,  smart_item_db.option.option_name,sales.staff_id,  staff.staff_name,\n"
 					+ "sales.sales_carfare,sales.sales_salary,\n"
-					+ "sales.sales_cost,ad.ad_name,discount.discount_name,sales.sales_discount_fee\n" + "from sales\n"
+					+ "sales.sales_cost, sales.ad_id, ad.ad_name,"
+					+ " sales.discount_id, discount.discount_name,sales.sales_discount_fee\n" + "from sales\n"
 					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
 					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
 					+ "join customer on sales.customer_id =customer.id\n" + "join pic on sales.pic_id=pic.id\n"
@@ -159,28 +159,37 @@ public class SalesDaoImpl implements SalesDao {
 	}
 
 	private Sales mapToSales(ResultSet rs) throws Exception {
-		Integer id = (Integer) rs.getObject("id");
-		Date salesDate = rs.getTimestamp("sales_date");
-		Date salesTime = rs.getTimestamp("sales_time");
-		String shopInfName = rs.getString("shopInf_name");
-		String customerCategolyName = rs.getString("customer_categoly_name");
-		String customerName = rs.getString("customer_name");
-		String picName = rs.getString("pic_nameA");
-		String salesNomination = rs.getString("sales_nomination");
-		String salesPayment = rs.getString("sales_payment");
-		String courseName = rs.getString("course_name");
-		String optionName = rs.getString("option_name");
-		String staffName = rs.getString("staff_name");
-		Integer salesCarfare = (Integer) rs.getObject("sales_carfare");
-		Integer salesSalary = (Integer) rs.getObject("sales_salary");
-		Integer salesCost = (Integer) rs.getObject("sales_cost");
-		String adName = rs.getString("ad_name");
-		String discountName = rs.getString("discount_name");
-		Integer salesDiscountId = (Integer) rs.getObject("sales_discount_fee");
+		Sales sales = new Sales();
 
-		return new Sales(id, salesDate, salesTime, shopInfName, customerCategolyName, customerName, picName,
-				salesNomination, salesPayment, courseName, optionName, staffName, salesCarfare, salesSalary, salesCost,
-				adName, discountName, salesDiscountId);
+		sales.setId((Integer) rs.getObject("id"));
+		sales.setSalesDate(rs.getTimestamp("sales_date"));
+		sales.setSalesTime(rs.getTimestamp("sales_time"));
+		sales.setShopInfId((Integer) rs.getObject("shop_inf.id"));
+		sales.setShopInfName(rs.getString("shopInf_name"));
+		sales.setCustomerCategolyName(rs.getString("customer_categoly_name"));
+		sales.setCustomerCategolyId((Integer) rs.getObject("customerCategoly_id"));
+		sales.setCustomerName(rs.getString("customer_name"));
+		sales.setCustomerId((Integer) rs.getObject("customer_id"));
+		sales.setPicName(rs.getString("pic_nameA"));
+		sales.setPicId((Integer) rs.getObject("pic_id"));
+		sales.setSalesNomination(rs.getString("sales_nomination"));
+		sales.setSalesPayment(rs.getString("sales_payment"));
+		sales.setCourseName(rs.getString("course_name"));
+		sales.setCourseId((Integer) rs.getObject("course_id"));
+		sales.setOptionName(rs.getString("option_name"));
+		sales.setOptionId((Integer) rs.getObject("option_id"));
+		sales.setStaffName(rs.getString("staff_name"));
+		sales.setStaffId((Integer) rs.getObject("staff_id"));
+		sales.setSalesCarfare((Integer) rs.getObject("sales_carfare"));
+		sales.setSalesSalary((Integer) rs.getObject("sales_salary"));
+		sales.setSalesCost((Integer) rs.getObject("sales_cost"));
+		sales.setAdName(rs.getString("ad_name"));
+		sales.setAdId((Integer) rs.getObject("ad_id"));
+		sales.setDiscountName(rs.getString("discount_name"));
+		sales.setDiscountId((Integer) rs.getObject("discount_id"));
+		sales.setSalesDiscountFee((Integer) rs.getObject("sales_discount_fee"));
+
+		return sales;
 	}
 
 }

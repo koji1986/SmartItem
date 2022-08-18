@@ -24,7 +24,7 @@ public class DiscountDaoImpl implements DiscountDao {
 		List<Discount> discountList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select discount.id,shop_inf.shopInf_name,discount.discount_name,\n"
+			String sql = " select discount.id, discount.shopInf_id, shop_inf.shopInf_name,discount.discount_name,\n"
 					+ "discount.discount_fee,discount_row\n" + "from discount\n"
 					+ "join shop_inf on discount.shopInf_id=shop_inf.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class DiscountDaoImpl implements DiscountDao {
 		Discount discount = new Discount();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select discount.id,shop_inf.shopInf_name,discount.discount_name,\n"
+			String sql = " select discount.id, discount.shopInf_id, shop_inf.shopInf_name,discount.discount_name,\n"
 					+ "discount.discount_fee,discount_row\n" + "from discount\n"
 					+ "join shop_inf on discount.shopInf_id=shop_inf.id; where discount.id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -91,14 +91,16 @@ public class DiscountDaoImpl implements DiscountDao {
 
 	private Discount mapToDiscount(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		String shopInfName = rs.getString("shopInf_name");
-		String discountName = rs.getString("discount_name");
-		Integer discountFee = (Integer) rs.getObject("discount_fee");
+		Discount discount = new Discount();
 
-		Integer discountRow = (Integer) rs.getObject("discount_row");
+		discount.setId((Integer) rs.getObject("id"));
+		discount.setShopInfName(rs.getString("shopInf_name"));
+		discount.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		discount.setDiscountName(rs.getString("discount_name"));
+		discount.setDiscountFee((Integer) rs.getObject("discount_fee"));
+		discount.setDiscountRow((Integer) rs.getObject("discount_row"));
 
-		return new Discount(id, shopInfName, discountName, discountFee, discountRow);
+		return discount;
 
 	}
 }

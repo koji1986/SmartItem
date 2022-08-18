@@ -32,6 +32,10 @@ public class Sales {
 	private String discountName;
 	private Integer salesDiscountFee;
 
+	
+	
+	
+	
 	public Sales(Integer id, Date salesDate, Date salesTime, String shopInfName, String customerCategolyName,
 			String customerName, String picName, String salesNomination, String salesPayment, String courseName,
 			String optionName, String staffName, Integer salesCarfare, Integer salesSalary, Integer salesCost,

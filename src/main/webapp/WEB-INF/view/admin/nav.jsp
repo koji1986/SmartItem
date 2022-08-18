@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+<!--  NAVの階層「/SmartItem/admin/nav.jsp」 -->
 	<p>ユーザー名:</p>
 	<p>
 		<a href="/SmartItem/admin/logout">ログアウト</a>

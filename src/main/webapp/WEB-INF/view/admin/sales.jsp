@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+<c:import url="nav.jsp" />
 	<input type="date" name="salse_date" />
 	<label> <input type="radio" name="shop_name" value="1" />A店 <input
 		type="radio" name="shop_name" value="2" />B店

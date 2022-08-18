@@ -24,7 +24,7 @@ public class PicRankDaoImpl implements PicRankDao {
 		List<PicRank> picRankList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select pic_rank.id,shop_inf.shopInf_name,pic_rank.picRank_name,\n"
+			String sql = "  select pic_rank.id,pic_rank.shopInf_id, shop_inf.shopInf_name,pic_rank.picRank_name,\n"
 					+ "pic_rank.picRank_fee,pic_rank.picRank_row\n" + "from pic_rank\n"
 					+ "join shop_inf on pic_rank.shopInf_id=shop_inf.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class PicRankDaoImpl implements PicRankDao {
 		PicRank picRank = new PicRank();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select shop_inf.shopInf_name,pic_rank.picRank_name,\n"
+			String sql = " select pic_rank.shopInf_id, shop_inf.shopInf_name,pic_rank.picRank_name,\n"
 					+ "pic_rank.picRank_fee,pic_rank.picRank_row\n" + "from pic_rank\n"
 					+ "join shop_inf on pic_rank.shopInf_id=shop_inf.id where pic_rank.id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -93,14 +93,16 @@ public class PicRankDaoImpl implements PicRankDao {
 
 	private PicRank mapToPicRank(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		String shopInfName = rs.getString("shopInf_name");
-		String picRankName = rs.getString("picRank_name");
-		Integer picRankFee = (Integer) rs.getObject("picRank_fee");
+		PicRank picRank = new PicRank();
 
-		Integer picRankRow = (Integer) rs.getObject("picRank_row");
+		picRank.setId((Integer) rs.getObject("id"));
+		picRank.setShopInfName(rs.getString("shopInf_name"));
+		picRank.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		picRank.setPicRankName(rs.getString("picRank_name"));
+		picRank.setPicRankFee((Integer) rs.getObject("picRank_fee"));
+		picRank.setPicRankRow((Integer) rs.getObject("picRank_row"));
 
-		return new PicRank(id, shopInfName, picRankName, picRankFee, picRankRow);
+		return picRank;
 
 	}
 

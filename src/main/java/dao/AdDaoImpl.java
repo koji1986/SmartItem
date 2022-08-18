@@ -81,7 +81,14 @@ public class AdDaoImpl implements AdDao {
 
 	@Override
 	public void delete(Ad ad) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM ad WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, ad.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			throw e;
+			}
 
 	}
 

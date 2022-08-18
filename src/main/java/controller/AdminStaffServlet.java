@@ -54,15 +54,13 @@ public class AdminStaffServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("update") != null) {
-			// 更新
-			try {
-
+		try {
+			if (request.getParameter("update") != null) {
+				// 更新
 				String staffName = request.getParameter("staff_name");
-
 				Integer staffRow = Integer.parseInt(request.getParameter("staff_row"));
-
 				Integer staffId = Integer.parseInt(request.getParameter("id"));
+
 				Staff staff = new Staff();
 
 				staff.setStaffName(staffName);
@@ -73,11 +71,19 @@ public class AdminStaffServlet extends HttpServlet {
 				StaffDao staffDao = DaoFactory.createStaffDao();
 				staffDao.update(staff);
 				response.sendRedirect("staff");
-			} catch (Exception e) {
-				throw new ServletException(e);
+			} else {
+				Integer staffId = Integer.parseInt(request.getParameter("id"));
+				Staff staff = new Staff();
+				staff.setId(staffId);
+				staff.setStaffName(null);
+				staff.setStaffRow(0);
+				// 削除
+				StaffDao staffDao = DaoFactory.createStaffDao();
+				staffDao.update(staff);
+				response.sendRedirect("staff");
 			}
-		} else {
-			// 削除
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 	}

@@ -10,8 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.AdDao;
+import dao.CourseDao;
+import dao.CustomerCategolyDao;
+import dao.CustomerDao;
 import dao.DaoFactory;
+import dao.DiscountDao;
+import dao.OptionDao;
+import dao.PicDao;
 import dao.SalesDao;
+import dao.ShopInfDao;
+import dao.StaffDao;
 import domain.Sales;
 
 /**
@@ -39,14 +48,35 @@ public class AdminSalesUpdateServlet extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		SalesDao salesDao = DaoFactory.createSalesDao();
+		ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
+		CustomerCategolyDao customerCategolyDao = DaoFactory.createCustomerCategolyDao();
+		CustomerDao customerDao = DaoFactory.createCustomerDao();
+		PicDao picDao = DaoFactory.createPicDao();
+		CourseDao courseDao = DaoFactory.createCourseDao();
+		OptionDao optionDao = DaoFactory.createOptionDao();
+		StaffDao staffDao = DaoFactory.createStaffDao();
+		AdDao adDao = DaoFactory.createAdDao();
+		DiscountDao discountDao = DaoFactory.createDiscountDao();
 
 		try {
+			// 店舗の選択肢
+			request.setAttribute("shopInfList", shopInfDao.findAll());
+			request.setAttribute("customerCategolyList", customerCategolyDao.findAll());
+			request.setAttribute("customerList", customerDao.findAll());
+			request.setAttribute("picList", picDao.findAll());
+			request.setAttribute("courseList", courseDao.findAll());
+			request.setAttribute("optionList", optionDao.findAll());
+			request.setAttribute("staffList", staffDao.findAll());
+			request.setAttribute("adList", adDao.findAll());
+			request.setAttribute("discountList", discountDao.findAll());
 			Sales sales = salesDao.findById(id);
 
 			request.setAttribute("salesDate", sales.getSalesDate());
 			request.setAttribute("salesTime", sales.getSalesTime());
 			request.setAttribute("shopInfId", sales.getShopInfId());
 			request.setAttribute("customerCategolyId", sales.getCustomerCategolyId());
+			request.setAttribute("customerId", sales.getCustomerId());
+			request.setAttribute("customerName", sales.getCustomerName());
 			request.setAttribute("picId", sales.getPicId());
 			request.setAttribute("salesNomination", sales.getSalesNomination());
 			request.setAttribute("salesPayment", sales.getSalesPayment());
@@ -97,7 +127,7 @@ public class AdminSalesUpdateServlet extends HttpServlet {
 			Integer adId = Integer.parseInt(request.getParameter("ad_id"));
 			Integer discountId = Integer.parseInt(request.getParameter("discount_id"));
 			Integer salesDiscountFee = Integer.parseInt(request.getParameter("sales_discount_fee"));
-			Integer salesId=Integer.parseInt(request.getParameter("id"));
+			Integer salesId = Integer.parseInt(request.getParameter("id"));
 
 			Sales sales = new Sales();
 			sales.setSalesDate(salesDate);
@@ -121,7 +151,7 @@ public class AdminSalesUpdateServlet extends HttpServlet {
 
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			salesDao.update(sales);
-		response.sendRedirect("../sales");
+			response.sendRedirect("../sales");
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

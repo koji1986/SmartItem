@@ -24,8 +24,9 @@ public class CourseDaoImpl implements CourseDao {
 		List<Course> courseList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "select course.id,shop_inf.shopInf_name,course_name,\n" + "course_fee,course_time,course_row\n"
-					+ "from course\n" + "join shop_inf\n" + "on course.shopInf_id=shop_inf.id; ";
+			String sql = "select course.id,course.shopInf_id, shop_inf.shopInf_name,course_name,\n"
+					+ "course_fee,course_time,course_row\n" + "from course\n" + "join shop_inf\n"
+					+ "on course.shopInf_id=shop_inf.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -43,7 +44,7 @@ public class CourseDaoImpl implements CourseDao {
 		Course course = new Course();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select course.id,shop_inf.shopInf_name,course_name,\n"
+			String sql = " select course.id,course.shopInf_id, shop_inf.shopInf_name,course_name,\n"
 					+ "course_fee,course_time,course_row\n" + "from course\n" + "join shop_inf\n"
 					+ "on course.shopInf_id=shop_inf.id" + " where course.id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -92,14 +93,17 @@ public class CourseDaoImpl implements CourseDao {
 
 	private Course mapToCourse(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		String shopInfName = rs.getString("shopInf_name");
-		String courseName = rs.getString("course_name");
-		Integer courseFee = (Integer) rs.getObject("course_fee");
-		Integer courseTime = (Integer) rs.getObject("course_time");
-		Integer courseRow = (Integer) rs.getObject("course_row");
+		Course course = new Course();
 
-		return new Course(id, shopInfName, courseName, courseFee, courseTime, courseRow);
+		course.setId((Integer) rs.getObject("id"));
+		course.setShopInfName(rs.getString("shopInf_name"));
+		course.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		course.setCourseName(rs.getString("course_name"));
+		course.setCourseFee((Integer) rs.getObject("course_fee"));
+		course.setCourseTime((Integer) rs.getObject("course_time"));
+		course.setCourseRow((Integer) rs.getObject("course_row"));
+
+		return course;
 
 	}
 

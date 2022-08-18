@@ -54,6 +54,13 @@ public class DaoFactory {
 		return new CashDaoImpl(getDataSource());
 	}
 
+	public static ShopInfDao createShopInfDao() {
+		return new ShopInfDaoImpl(getDataSource());
+	}
+	public static CustomerCategolyDao createCustomerCategolyDao() {
+		return new CustomerCategolyDaoImpl(getDataSource());
+	}
+	
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;
@@ -72,5 +79,6 @@ public class DaoFactory {
 		}
 		return ds;
 	}
+
 
 }

@@ -76,7 +76,7 @@ public class CustomerCategolyDaoImpl implements CustomerCategolyDao {
 	private CustomerCategoly mapToCustomerCategoly(ResultSet rs) throws Exception {
 
 		Integer id = (Integer) rs.getObject("id");
-		String customerCategolyName = rs.getString("customerCategoly_name");
+		String customerCategolyName = rs.getString("customer_categoly_name");
 
 		return new CustomerCategoly(id, customerCategolyName);
 

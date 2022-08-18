@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CourseDao;
 import dao.DaoFactory;
+import dao.ShopInfDao;
 import domain.Course;
+import domain.ShopInf;
 
 /**
  * Servlet implementation class AdminCourseServlet
@@ -37,8 +39,11 @@ public class AdminCourseServlet extends HttpServlet {
 
 		try {
 			CourseDao courseDao = DaoFactory.createCourseDao();
+			ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
 			List<Course> courseList = courseDao.findAll();
+			List<ShopInf> shopInfList = shopInfDao.findAll();
 			request.setAttribute("courseList", courseList);
+			request.setAttribute("shopInfList", shopInfList);
 
 			request.getRequestDispatcher("/WEB-INF/view/admin/course.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -53,9 +58,9 @@ public class AdminCourseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("update") != null) {
+		try {
+			if (request.getParameter("update") != null) {
 			// 更新
-			try {
 
 				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
 				String courseName = request.getParameter("course_name");
@@ -76,11 +81,23 @@ public class AdminCourseServlet extends HttpServlet {
 				CourseDao courseDao = DaoFactory.createCourseDao();
 				courseDao.update(course);
 				response.sendRedirect("course");
-			} catch (Exception e) {
-				throw new ServletException(e);
-			}
 		} else {
 			// 削除
+			Integer courseId = Integer.parseInt(request.getParameter("id"));
+			Course course = new Course();
+			course.setShopInfId(1);
+			course.setCourseName(null);
+			course.setCourseFee(0);
+			course.setCourseTime(0);
+			course.setCourseRow(0);
+			course.setId(courseId);
+
+			CourseDao courseDao = DaoFactory.createCourseDao();
+			courseDao.update(course);
+			response.sendRedirect("course");
+		}
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 	}

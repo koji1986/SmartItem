@@ -5,49 +5,67 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>割引情報</title>
 
 </head>
 <body>
+<c:import url="nav.jsp" />
+	<div class="row">
+		<div class="col-1">店舗名</div>
+		<div class="col-1">割引名</div>
+		<div class="col-1">割引金額</div>
 
-	<form action="" method="post">
-		<table border="1">
-			<tr>
-				<td>店舗名</td>
-				<td>割引名</td>
-				<td>割引金額</td>
+		<div class="col-1">並び替え</div>
+		<div class="col-1">更新</div>
+		<div class="col-1">削除</div>
+	</div>
+	<c:forEach items="${discountList}" var="discount" varStatus="vs">
+		<form action="" method="post">
+			<input type="hidden" name="id"
+				value="<c:out value="${discount.id}" />" />
+			<div class="row">
 
-				<td>並び替え</td>
-				<td>削除</td>
-			</tr>
-			<c:forEach items="${discountList}" var="discount" varStatus="vs">
+				<div class="col-1">
 
+					<select name="shopInf_id">
+						<c:forEach items="${shopInfList}" var="shop">
 
-				<tr>
-					<td><select name="shopInf_name">
-							<option value="1">A店舗</option>
-							<option value="2">B店舗</option>
-					</select></td>
-					<td><input type="text" name="discount_name"
-						value="<c:out value="${discount.discountName}" />" /></td>
-					<td><input type="number" name="discount_fee"
-						value="<c:out value="${discount.discountFee}" />" /></td>
+							<option value="<c:out value="${shop.id}" />"
+								<c:out value="${shop.id == discount.shopInfId ? 'selected' : ''}" />>
 
-					<td><input type="number" name="discount_row"
-						value="<c:out value="${discount.discountRow}" />" /></td>
-					<td><input type="button" value="削除" /></td>
-				</tr>
-			</c:forEach>
+								<c:out value="${shop.shopInfName}" /></option>
+						</c:forEach>
 
+					</select>
+				</div>
+				<div class="col-1">
+					<input type="text" name="discount_name"
+						value="<c:out value="${discount.discountName}" />" />
+				</div>
+				<div class="col-1">
+					<input type="number" name="discount_fee"
+						value="<c:out value="${discount.discountFee}" />" />
+				</div>
+				<div class="col-1">
+					<input type="number" name="discount_row"
+						value="<c:out value="${discount.discountRow}" />" />
+				</div>
+				<div class="col-1">
+					<input type="submit" value="更新" name="update" />
+				</div>
+				<div class="col-1">
 
+					<input type="submit" value="削除" />
+				</div>
+			</div>
+		</form>
+	</c:forEach>
 
-
-		</table>
-
-		<div>
-			<input type="submit" value="更新" />
-		</div>
-	</form>
 
 </body>
 </html>

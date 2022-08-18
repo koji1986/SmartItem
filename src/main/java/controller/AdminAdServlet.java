@@ -19,66 +19,73 @@ import domain.Ad;
 @WebServlet("/admin/ad")
 public class AdminAdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminAdServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public AdminAdServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		try {
 			AdDao adDao = DaoFactory.createAdDao();
 			List<Ad> adList = adDao.findAll();
 			request.setAttribute("adList", adList);
 
 			request.getRequestDispatcher("/WEB-INF/view/admin/ad.jsp").forward(request, response);
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-		
-		
-		
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("update") != null) {
-			// 更新
-			try {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			if (request.getParameter("update") != null) {
+				// 更新
 				String adName = request.getParameter("ad_name");
 				Integer adRow = Integer.parseInt(request.getParameter("ad_row"));
 				Integer adId = Integer.parseInt(request.getParameter("id"));
-								
+
 				Ad ad = new Ad();
-				
+
 				ad.setAdName(adName);
-				
+
 				ad.setAdRow(adRow);
 				ad.setId(adId);
 
 				AdDao adDao = DaoFactory.createAdDao();
 				adDao.update(ad);
-				response.sendRedirect("course");
-			} catch (Exception e) {
-				throw new ServletException(e);
+				response.sendRedirect("ad");
+			} else {
+				Integer adId = Integer.parseInt(request.getParameter("id"));
+				Ad ad = new Ad();
+				ad.setId(adId);
+				ad.setAdName(null);
+				ad.setAdRow(0);
+				// 削除
+				AdDao adDao = DaoFactory.createAdDao();
+				adDao.update(ad);
+				response.sendRedirect("ad");
 			}
-		} else {
-			// 削除
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 	}
 
-	}
-
-
+}

@@ -25,7 +25,7 @@ public class OptionDaoImpl implements OptionDao {
 
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select smart_item_db.option.id,shop_inf.shopInf_name,\n"
+			String sql = " select smart_item_db.option.id,option.shopInf_id, shop_inf.shopInf_name,\n"
 					+ "smart_item_db.option.option_name,smart_item_db.option.option_fee,\n"
 					+ "smart_item_db.option.option_row\n" + "from smart_item_db.option\n" + "join shop_inf\n"
 					+ "on smart_item_db.option.shopInf_id=shop_inf.id;";
@@ -47,7 +47,7 @@ public class OptionDaoImpl implements OptionDao {
 		Option option = new Option();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select smart_item_db.option.id,shop_inf.shopInf_name,\n"
+			String sql = " select smart_item_db.option.id,option.shopInf_id, shop_inf.shopInf_name,\n"
 					+ "smart_item_db.option.option_name,smart_item_db.option.option_fee,\n"
 					+ "smart_item_db.option.option_row\n" + "from smart_item_db.option\n" + "join shop_inf\n"
 					+ "on smart_item_db.option.shopInf_id=shop_inf.id" + " where option.id = ?;";
@@ -96,13 +96,16 @@ public class OptionDaoImpl implements OptionDao {
 
 	private Option mapToOption(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		String shopName = rs.getString("shopInf_name");
-		String optionName = rs.getString("option_name");
-		Integer optionFee = (Integer) rs.getObject("option_fee");
-		Integer optionRow = (Integer) rs.getObject("option_row");
+		Option option = new Option();
 
-		return new Option(id, shopName, optionName, optionFee, optionRow);
+		option.setId((Integer) rs.getObject("id"));
+		option.setShopInfName(rs.getString("shopInf_name"));
+		option.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		option.setOptionName(rs.getString("option_name"));
+		option.setOptionFee((Integer) rs.getObject("option_fee"));
+		option.setOptionRow((Integer) rs.getObject("option_row"));
+
+		return option;
 
 	}
 

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.OptionDao;
+import dao.ShopInfDao;
 import domain.Option;
+import domain.ShopInf;
 
 /**
  * Servlet implementation class AdminOptionServlet
@@ -37,8 +39,11 @@ public class AdminOptionServlet extends HttpServlet {
 
 		try {
 			OptionDao optionDao = DaoFactory.createOptionDao();
+			ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
 			List<Option> optionList = optionDao.findAll();
+			List<ShopInf> shopInfList = shopInfDao.findAll();
 			request.setAttribute("optionList", optionList);
+			request.setAttribute("shopInfList", shopInfList);
 
 			request.getRequestDispatcher("/WEB-INF/view/admin/option.jsp").forward(request, response);
 
@@ -54,9 +59,9 @@ public class AdminOptionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("update") != null) {
-			// 更新
-			try {
+		try {
+			if (request.getParameter("update") != null) {
+				// 更新
 
 				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
 				String optionName = request.getParameter("option_name");
@@ -77,11 +82,24 @@ public class AdminOptionServlet extends HttpServlet {
 				OptionDao optionDao = DaoFactory.createOptionDao();
 				optionDao.update(option);
 				response.sendRedirect("option");
-			} catch (Exception e) {
-				throw new ServletException(e);
+			} else {
+				// 削除
+				Integer optionId = Integer.parseInt(request.getParameter("id"));
+				Option option = new Option();
+				option.setShopInfId(1);
+				option.setOptionName(null);
+				option.setOptionFee(0);
+
+				option.setOptionRow(0);
+				option.setId(optionId);
+
+				OptionDao optionDao = DaoFactory.createOptionDao();
+				optionDao.update(option);
+				response.sendRedirect("option");
+
 			}
-		} else {
-			// 削除
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 	}
