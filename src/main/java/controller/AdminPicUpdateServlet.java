@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.PicDao;
+import dao.PicRankDao;
 import domain.Pic;
+import domain.PicRank;
 
 /**
  * Servlet implementation class AdminPicUpdateServlet
@@ -38,13 +41,17 @@ public class AdminPicUpdateServlet extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		PicDao picDao = DaoFactory.createPicDao();
+		PicRankDao picRankDao = DaoFactory.createPicRankDao();
 
+		
 		try {
 			Pic pic = picDao.findById(id);
-
+			List<PicRank> picRankList = picRankDao.findAll();
+			request.setAttribute("picRankList", picRankList);
 			request.setAttribute("picRankIdA", pic.getPicRankIdA());
 			request.setAttribute("picNameA", pic.getPicNameA());
 			request.setAttribute("picKanaA", pic.getPicKanaA());
+			request.setAttribute("picRankIdB", pic.getPicRankIdB());
 			request.setAttribute("picNameB", pic.getPicNameB());
 			request.setAttribute("picKanaB", pic.getPicKanaB());
 			request.setAttribute("picPhoneNumber", pic.getPicPhoneNumber());

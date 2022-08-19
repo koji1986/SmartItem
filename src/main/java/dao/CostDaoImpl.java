@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -25,9 +24,10 @@ public class CostDaoImpl implements CostDao {
 		List<Cost> costList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = " select cost.id,cost.cost_date,staff.staff_name,shop_inf.shopInf_name,\n"
-					+ "cost.cost_destination,cost_subject.cost_subject_name,\n" + "cost.cost_fee,cost.cost_detail\n"
-					+ "from cost\n" + "join staff on cost.staff_id=staff.id\n"
+			String sql = " select cost.id,cost.cost_date,staff.staff_name,"
+					+ " cost.staff_id,shop_inf.shopInf_name,cost.shopName_id, \n"
+					+ "cost.cost_destination,cost_subject.cost_subject_name," + " cost.costSubject_id,\n"
+					+ "cost.cost_fee,cost.cost_detail\n" + "from cost\n" + "join staff on cost.staff_id=staff.id\n"
 					+ "join shop_inf on cost.shopName_id=shop_inf.id\n"
 					+ "join cost_subject on cost.costSubject_id=cost_subject.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -45,9 +45,10 @@ public class CostDaoImpl implements CostDao {
 	public Cost findById(Integer id) throws Exception {
 		Cost cost = new Cost();
 		try (Connection con = ds.getConnection()) {
-			String sql = "select cost.id,cost.cost_date,staff.staff_name,shop_inf.shopInf_name,\n"
-					+ "cost.cost_destination,cost_subject.cost_subject_name,\n" + "cost.cost_fee,cost.cost_detail\n"
-					+ "from cost\n" + "join staff on cost.staff_id=staff.id\n"
+			String sql = "select cost.id,cost.cost_date,staff.staff_name,"
+					+ "cost.staff_id, shop_inf.shopInf_name,cost.shopName_id, \n"
+					+ "cost.cost_destination,cost_subject.cost_subject_name," + " cost.costSubject_id, \n"
+					+ "cost.cost_fee,cost.cost_detail\n" + "from cost\n" + "join staff on cost.staff_id=staff.id\n"
 					+ "join shop_inf on cost.shopName_id=shop_inf.id\n"
 					+ "join cost_subject on cost.costSubject_id=cost_subject.id where cost.id=?;";
 
@@ -113,23 +114,32 @@ public class CostDaoImpl implements CostDao {
 
 	@Override
 	public void delete(Cost cost) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM cost WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, cost.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	private Cost mapToCost(ResultSet rs) throws Exception {
-		Integer id = (Integer) rs.getObject("id");
-		Date costDate = rs.getTimestamp("cost_date");
-		String staffName = rs.getString("staff_name");
+		Cost cost = new Cost();
 
-		String shopInfName = rs.getString("shopInf_name");
+		cost.setId((Integer) rs.getObject("id"));
+		cost.setCostDate(rs.getTimestamp("cost_date"));
+		cost.setStaffName(rs.getString("staff_name"));
+		cost.setStaffId((Integer) rs.getObject("staff_id"));
+		cost.setShopInfName(rs.getString("shopInf_name"));
+		cost.setShopNameId((Integer) rs.getObject("shopName_id"));
+		cost.setCostDestination(rs.getString("cost_destination"));
+		cost.setCostSubjectName(rs.getString("cost_subject_name"));
+		cost.setCostSubjectId((Integer) rs.getObject("costSubject_id"));
+		cost.setCostFee((Integer) rs.getObject("cost_fee"));
+		cost.setCostDetail(rs.getString("cost_detail"));
 
-		String costDestination = rs.getString("cost_destination");
-		String costSubjectId = rs.getString("cost_subject_name");
-		Integer costFee = (Integer) rs.getObject("cost_fee");
-		String costDetail = rs.getString("cost_detail");
-
-		return new Cost(id, costDate, staffName, shopInfName, costDestination, costSubjectId, costFee, costDetail);
+		return cost;
 	}
 
 }

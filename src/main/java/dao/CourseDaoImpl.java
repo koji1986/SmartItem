@@ -70,14 +70,15 @@ public class CourseDaoImpl implements CourseDao {
 
 		try {
 			Connection con = ds.getConnection();
-			String sql = " update course set\n" + "shopInf_id=?,\n" + "course_name=?,\n" + "course_time=?,\n"
-					+ "course_row=?\n" + "where course.id=?;";
+			String sql = " update course set\n" + "shopInf_id=?,\n" + "course_name=?,\n" + " course_fee=?,"
+					+ "course_time=?,\n" + "course_row=?\n" + "where course.id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, course.getShopInfId(), Types.INTEGER);
 			stmt.setString(2, course.getCourseName());
-			stmt.setObject(3, course.getCourseTime(), Types.INTEGER);
-			stmt.setObject(4, course.getCourseRow(), Types.INTEGER);
-			stmt.setObject(5, course.getId(), Types.INTEGER);
+			stmt.setObject(3, course.getCourseFee(), Types.INTEGER);
+			stmt.setObject(4, course.getCourseTime(), Types.INTEGER);
+			stmt.setObject(5, course.getCourseRow(), Types.INTEGER);
+			stmt.setObject(6, course.getId(), Types.INTEGER);
 
 			stmt.executeUpdate();
 		} catch (Exception e) {

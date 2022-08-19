@@ -75,7 +75,7 @@ public class CostSubjectDaoImpl implements CostSubjectDao {
 	private CostSubject mapToCostSubject(ResultSet rs) throws Exception {
 
 		Integer id = (Integer) rs.getObject("id");
-		String costSubjectName = rs.getString("costSubject_name");
+		String costSubjectName = rs.getString("cost_subject_name");
 
 		return new CostSubject(id, costSubjectName);
 

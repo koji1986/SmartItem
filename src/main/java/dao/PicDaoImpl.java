@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -25,8 +24,8 @@ public class PicDaoImpl implements PicDao {
 		List<Pic> picList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select pic.id,pic_rank.picRank_name,pic.pic_nameA,pic.pic_kanaA,\n"
-					+ "pic_rank.picRank_name,pic.pic_nameB,pic.pic_kanaB,\n"
+			String sql = " select pic.id,pic_rank.picRank_name,pic.picRank_idA, pic.pic_nameA,pic.pic_kanaA,\n"
+					+ "pic_rank.picRank_name,pic.pic_nameB,pic.picRank_idB, pic.pic_kanaB,\n"
 					+ "pic.pic_phone_number,pic.pic_email,pic.pic_address,\n"
 					+ "pic.pic_entry_day,pic.pic_out_day,pic.pic_memo\n" + "from pic\n" + "join pic_rank\n"
 					+ "on pic.picRank_idA=pic_rank.id ;";
@@ -46,8 +45,8 @@ public class PicDaoImpl implements PicDao {
 		Pic pic = new Pic();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select pic.id,pic_rank.picRank_name,pic.pic_nameA,pic.pic_kanaA,\n"
-					+ "pic_rank.picRank_name,pic.pic_nameB,pic.pic_kanaB,\n"
+			String sql = " select pic.id,pic_rank.picRank_name,pic.picRank_idA, pic.pic_nameA,pic.pic_kanaA,\n"
+					+ "pic_rank.picRank_name,pic.pic_nameB,pic.picRank_idB,pic.pic_kanaB,\n"
 					+ "pic.pic_phone_number,pic.pic_email,pic.pic_address,\n"
 					+ "pic.pic_entry_day,pic.pic_out_day,pic.pic_memo\n" + "from pic\n" + "join pic_rank\n"
 					+ "on pic.picRank_idA=pic_rank.id  where pic.id=?;";
@@ -129,32 +128,37 @@ public class PicDaoImpl implements PicDao {
 
 	@Override
 	public void delete(Pic pic) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM pic WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, pic.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
 	private Pic mapToPic(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
+		Pic pic = new Pic();
 
-		String picRankName = rs.getString("picRank_name");
-		String picNameA = rs.getString("pic_nameA");
-		String picKanaA = rs.getString("pic_kanaA");
+		pic.setId((Integer) rs.getObject("id"));
+		pic.setPicRankName(rs.getString("picRank_name"));
+		pic.setPicRankIdA((Integer) rs.getObject("picRank_idA"));
+		pic.setPicNameA(rs.getString("pic_nameA"));
+		pic.setPicKanaA(rs.getString("pic_kanaA"));
+		pic.setPicRankIdB((Integer) rs.getObject("picRank_idB"));
+		pic.setPicNameB(rs.getString("pic_nameB"));
+		pic.setPicKanaB(rs.getString("pic_kanaB"));
+		pic.setPicPhoneNumber(rs.getString("pic_phone_number"));
+		pic.setPicEmail(rs.getString("pic_email"));
+		pic.setPicAddress(rs.getString("pic_address"));
+		pic.setPicEntryDay(rs.getDate("pic_entry_day"));
+		pic.setPicOutDay(rs.getDate("pic_out_day"));
+		pic.setPicMemo(rs.getString("pic_memo"));
 
-		String picNameB = rs.getString("pic_nameB");
-		String picKanaB = rs.getString("pic_kanaB");
-		String picPhoneNumber = rs.getString("pic_phone_number");
-
-		String picEmail = rs.getString("pic_email");
-		String picAddress = rs.getString("pic_address");
-
-		Date picEntryDay = rs.getDate("pic_entry_day");
-		Date picOutDay = rs.getDate("pic_out_day");
-
-		String picMemo = rs.getString("pic_memo");
-
-		return new Pic(id, picRankName, picNameA, picKanaA, picNameB, picKanaB, picPhoneNumber, picEmail, picAddress,
-				picEntryDay, picOutDay, picMemo);
+		return pic;
 
 	}
 }

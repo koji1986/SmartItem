@@ -124,8 +124,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public void delete(Customer customer) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM customer WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, customer.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	private Customer mapToCustomer(ResultSet rs) throws Exception {

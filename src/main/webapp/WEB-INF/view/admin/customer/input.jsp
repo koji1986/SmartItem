@@ -5,11 +5,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>顧客情報入力</title>
 
 </head>
 <body>
-
+<c:import url="../nav.jsp" />
 	<form action="" method="post">
 
 		<div>

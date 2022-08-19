@@ -37,8 +37,11 @@ public class AdminCostAServlet extends HttpServlet {
 		try {
 
 			CostDao costDao = DaoFactory.createCostDao();
+
 			List<Cost> costList = costDao.findAll();
+
 			request.setAttribute("costList", costList);
+
 			request.getRequestDispatcher("/WEB-INF/view/admin/costA.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -51,8 +54,21 @@ public class AdminCostAServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// Get パラメータの取得
+		String strId = request.getParameter("id");
+		Integer id = Integer.parseInt(strId);
+		// 削除メソッドの引数用に Member オブジェクトを作成
+		Cost cost = new Cost();
+		cost.setId(id);
+		try {
+			// データの削除
+			CostDao costDao = DaoFactory.createCostDao();
+			costDao.delete(cost);
+			response.sendRedirect("costA");
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
 	}
 
 }

@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CostDao;
+import dao.CostSubjectDao;
 import dao.DaoFactory;
+import dao.ShopInfDao;
+import dao.StaffDao;
 import domain.Cost;
+import domain.CostSubject;
+import domain.ShopInf;
+import domain.Staff;
 
 /**
  * Servlet implementation class AdminCostUpdateServlet
@@ -39,9 +46,19 @@ public class AdminCostUpdateServlet extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		CostDao costDao = DaoFactory.createCostDao();
-
+		StaffDao staffDao = DaoFactory.createStaffDao();
+		ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
+		CostSubjectDao costSubjectDao = DaoFactory.createCostSubjectDao();
+	
 		try {
 			Cost cost = costDao.findById(id);
+
+			List<Staff> staffList = staffDao.findAll();
+			List<ShopInf> shopInfList = shopInfDao.findAll();
+			List<CostSubject> costSubjectList = costSubjectDao.findAll();
+			request.setAttribute("staffList", staffList);
+			request.setAttribute("shopInfList", shopInfList);
+			request.setAttribute("costSubjectList", costSubjectList);
 
 			request.setAttribute("costDate", cost.getCostDate());
 			request.setAttribute("staffId", cost.getStaffId());

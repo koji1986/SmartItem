@@ -54,8 +54,21 @@ public class AdminCustomerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
+		// Get パラメータの取得
+		String strId = request.getParameter("id");
+		Integer id = Integer.parseInt(strId);
+		// 削除メソッドの引数用に Member オブジェクトを作成
+		Customer customer = new Customer();
+		customer.setId(id);
+		try {
+			// データの削除
+			CustomerDao customerDao = DaoFactory.createCustomerDao();
+			customerDao.delete(customer);
+			response.sendRedirect("customer");
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
 }

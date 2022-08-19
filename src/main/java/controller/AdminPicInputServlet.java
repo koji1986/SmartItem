@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.PicDao;
+import dao.PicRankDao;
 import domain.Pic;
+import domain.PicRank;
 
 /**
  * Servlet implementation class AdminPicInputServlet
@@ -36,7 +39,16 @@ public class AdminPicInputServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		try {
+		PicRankDao picRankDao = DaoFactory.createPicRankDao();
+			List<PicRank> picRankList = picRankDao.findAll();
+			request.setAttribute("picRankList", picRankList);
+		
 		request.getRequestDispatcher("/WEB-INF/view/admin/pic/input.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 	}
 

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.PicDao;
+import dao.PicRankDao;
 import domain.Pic;
+import domain.PicRank;
 
 /**
  * Servlet implementation class AdminPicServlet
@@ -36,8 +38,11 @@ public class AdminPicServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			PicDao picDao = DaoFactory.createPicDao();
+			PicRankDao picRankDao = DaoFactory.createPicRankDao();
 			List<Pic> picList = picDao.findAll();
+			List<PicRank> picRankList = picRankDao.findAll();
 			request.setAttribute("picList", picList);
+			request.setAttribute("picRankList", picRankList);
 
 			request.getRequestDispatcher("/WEB-INF/view/admin/pic.jsp").forward(request, response);
 		} catch (Exception e) {
@@ -51,8 +56,20 @@ public class AdminPicServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		// Get パラメータの取得
+		String strId = request.getParameter("id");
+		Integer id = Integer.parseInt(strId);
+		// 削除メソッドの引数用に Member オブジェクトを作成
+		Pic pic = new Pic();
+		pic.setId(id);
+		try {
+			// データの削除
+			PicDao picDao = DaoFactory.createPicDao();
+			picDao.delete(pic);
+			response.sendRedirect("pic");
 
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
 }
