@@ -10,17 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AdDao;
-import dao.CourseDao;
-import dao.CustomerCategolyDao;
-import dao.CustomerDao;
 import dao.DaoFactory;
-import dao.DiscountDao;
-import dao.OptionDao;
-import dao.PicDao;
 import dao.SalesDao;
-import dao.ShopInfDao;
-import dao.StaffDao;
 import domain.Sales;
 
 /**
@@ -48,27 +39,18 @@ public class AdminSalesUpdateServlet extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		SalesDao salesDao = DaoFactory.createSalesDao();
-		ShopInfDao shopInfDao = DaoFactory.createShopInfDao();
-		CustomerCategolyDao customerCategolyDao = DaoFactory.createCustomerCategolyDao();
-		CustomerDao customerDao = DaoFactory.createCustomerDao();
-		PicDao picDao = DaoFactory.createPicDao();
-		CourseDao courseDao = DaoFactory.createCourseDao();
-		OptionDao optionDao = DaoFactory.createOptionDao();
-		StaffDao staffDao = DaoFactory.createStaffDao();
-		AdDao adDao = DaoFactory.createAdDao();
-		DiscountDao discountDao = DaoFactory.createDiscountDao();
 
 		try {
 			// 店舗の選択肢
-			request.setAttribute("shopInfList", shopInfDao.findAll());
-			request.setAttribute("customerCategolyList", customerCategolyDao.findAll());
-			request.setAttribute("customerList", customerDao.findAll());
-			request.setAttribute("picList", picDao.findAll());
-			request.setAttribute("courseList", courseDao.findAll());
-			request.setAttribute("optionList", optionDao.findAll());
-			request.setAttribute("staffList", staffDao.findAll());
-			request.setAttribute("adList", adDao.findAll());
-			request.setAttribute("discountList", discountDao.findAll());
+			request.setAttribute("shopInfList", salesDao.findAllShopInf());
+			request.setAttribute("customerCategolyList", salesDao.findAllCustomerCategoly());
+			request.setAttribute("customerList", salesDao.findAllCustomer());
+			request.setAttribute("picList", salesDao.findAllPic());
+			request.setAttribute("courseList", salesDao.findAllCourse());
+			request.setAttribute("optionList", salesDao.findAllOption());
+			request.setAttribute("staffList", salesDao.findAllStaff());
+			request.setAttribute("adList", salesDao.findAllAd());
+			request.setAttribute("discountList", salesDao.findAllDiscount());
 			Sales sales = salesDao.findById(id);
 
 			request.setAttribute("salesDate", sales.getSalesDate());

@@ -2,7 +2,16 @@ package dao;
 
 import java.util.List;
 
+import domain.Ad;
+import domain.Course;
+import domain.Customer;
+import domain.CustomerCategoly;
+import domain.Discount;
+import domain.Option;
+import domain.Pic;
 import domain.Sales;
+import domain.ShopInf;
+import domain.Staff;
 
 public interface SalesDao {
 
@@ -15,5 +24,19 @@ public interface SalesDao {
 	void update(Sales sales) throws Exception;
 
 	void delete(Sales sales) throws Exception;
+	
+	List<ShopInf> findAllShopInf() throws Exception;
+	
+	List<CustomerCategoly> findAllCustomerCategoly() throws Exception;
+	List<Customer> findAllCustomer() throws Exception;
+	List<Pic> findAllPic() throws Exception;
+	List<Course> findAllCourse() throws Exception;
+	List<Option> findAllOption() throws Exception;
+	List<Staff> findAllStaff() throws Exception;
+	List<Ad> findAllAd() throws Exception;
+	List<Discount> findAllDiscount() throws Exception;
+	
+	
+	
 
 }

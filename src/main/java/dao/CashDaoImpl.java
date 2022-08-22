@@ -101,4 +101,23 @@ public class CashDaoImpl implements CashDao {
 
 	}
 
+	@Override
+	public Cash findByDate(Date cashDate) throws Exception {
+		Cash cash = new Cash();
+		try {
+			Connection con = ds.getConnection();
+			String sql = "  select cash.cash_date,cash.cash_change,staff.staff_name,cash.cash_cost\n"
+					+ "from cash join staff \n" + "on cash.staff_id=staff.id where cash.cash_date=?; ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, cash.getCashDate());
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next() == true) {
+				cash = mapToCash(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return cash;
+	}
+
 }

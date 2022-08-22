@@ -10,21 +10,22 @@
 </head>
 <body>
 <c:import url="nav.jsp" />
-	<form action="" method="post">
 
 		<div>
 			<h1>レジ</h1>
 		</div>
-		<div>
+		<form action="" method="get"><div>
 			<input type="date" name="cash_date" />
 		</div>
+		</form>
 
+	<form action="" method="post">
 		<div>
 			<table border="1">
 				<tr>
 					<td>店舗名</td>
 					<td>施術者名1</td>
-					<td>施術者名1</td>
+					<td>施術者名2</td>
 					<td>釣銭</td>
 					<td>売上</td>
 					<td>担当者</td>

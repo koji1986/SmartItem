@@ -5,27 +5,37 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>経費入力</title>
 
 </head>
 <body>
+	<c:import url="../nav.jsp" />
 	<form action="" method="post">
 		<div>
 			<input type="date" name="cost_date" />
 		</div>
 		<div>
 			担当者 <select name="staff_id">
-				<option value="1">店長</option>
-				<option value="2">主任</option>
-				<option value="3">課長</option>
+				<c:forEach items="${staffList}" var="staff">
+
+					<option value="<c:out value="${staff.id}" />">
+						<c:out value="${staff.staffName}" />
+					</option>
+				</c:forEach>
+
 
 
 			</select>
 		</div>
 		<div>
-			店舗 <label> 
-			<input type="radio" name="shop_id" value="1" />A店</label> 
-			<label> <input type="radio" value="2" name="shop_id" />B店</label>
+			店舗 <label> <input type="radio" name="shop_id" value="1" />A店
+			</label> <label> <input type="radio" value="2" name="shop_id" />B店
+			</label>
 		</div>
 
 		<div>
@@ -34,9 +44,13 @@
 
 		<div>
 			科目 <select name="cost_subject_id">
-				<option value="1">交通費</option>
-				<option value="2">消耗品費</option>
-				<option value="3">備品日</option>
+				<c:forEach items="${costSubjectList}" var="subject">
+
+					<option value="<c:out value="${subject.id}" />">
+						<c:out value="${subject.costSubjectName}" />
+					</option>
+				</c:forEach>
+
 			</select>
 		</div>
 

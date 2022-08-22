@@ -5,10 +5,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>売上入力</title>
 
 </head>
 <body>
+	<c:import url="../nav.jsp" />
 
 	<form action="" method="post">
 
@@ -19,16 +25,27 @@
 			<input type="time" name="sales_time" />
 		</div>
 		<div>
-			<label>店舗 <input type="radio" name="shopInf_id" value="1" />A店
-			</label> <label><input type="radio" name="shopInf_id" value="2" />B店
-			</label>
+			店舗
+			<c:forEach items="${shopInfList}" var="shop">
+				<label> <input type="radio" name="shopInf_id"
+					value="<c:out value="${shop.id}" />" /> <c:out
+						value="${shop.shopInfName}" />
+				</label>
+			</c:forEach>
+
 		</div>
 
 		<div>
-			顧客種別 <label> <input type="radio" name="customerCategoly_id"
-				value="1" />新規
-			</label> <label><input type="radio" name="customerCategoly_id"
-				value="2" />会員 </label>
+			顧客種別
+
+			<c:forEach items="${customerCategolyList}" var="categoly">
+				<label> <input type="radio" name="customerCategoly_id"
+					value="<c:out value="${categoly.id}" />" /> <c:out
+						value="${categoly.customerCategolyName}" />
+				</label>
+
+			</c:forEach>
+
 		</div>
 
 
@@ -37,9 +54,12 @@
 		</div>
 		<div>
 			施術者 <select name="pic_id">
-				<option value="1">太郎</option>
-				<option value="2">次郎</option>
-				<option value="3">三郎</option>
+				<c:forEach items="${picList}" var="pic">
+
+					<option value="<c:out value="${pic.id}" />">
+						<c:out value="${pic.picNameA}" /></option>
+				</c:forEach>
+
 
 
 			</select>
@@ -64,9 +84,12 @@
 
 		<div>
 			コース <select name="course_id">
-				<option value="1">60分</option>
-				<option value="2">70分</option>
-				<option value="3">80分</option>
+				<c:forEach items="${courseList}" var="course">
+
+					<option value="<c:out value="${course.id}" />">
+						<c:out value="${course.courseName}" />
+					</option>
+				</c:forEach>
 
 
 			</select>
@@ -74,9 +97,14 @@
 
 		<div>
 			オプション <select name="option_id">
-				<option value="1">肩</option>
-				<option value="2">腰</option>
-				<option value="3">首</option>
+				<c:forEach items="${optionList}" var="option">
+
+					<option value="<c:out value="${option.id}" />">
+						<c:out value="${option.optionName}" />
+					</option>
+				</c:forEach>
+
+
 
 
 			</select>
@@ -84,14 +112,22 @@
 
 		<div>
 			担当者 <select name="staff_id">
-				<option value="1">店長</option>
-				<option value="2">主任</option>
-				<option value="3">課長</option>
+				<c:forEach items="${staffList}" var="staff">
+
+					<option value="<c:out value="${staff.id}" />">
+						<c:out value="${staff.staffName}" />
+					</option>
+				</c:forEach>
+
 
 
 			</select>
 
 		</div>
+		<div>
+			売上合計 <input type="number" name="sales_amount" />
+		</div>
+
 
 
 		<div>
@@ -107,9 +143,13 @@
 
 		<div>
 			広告媒体 <select name="ad_id">
-				<option value="1">なし</option>
-				<option value="2">HP</option>
-				<option value="3">新聞</option>
+				<c:forEach items="${adList}" var="ad">
+
+					<option value="<c:out value="${ad.id}" />">
+						<c:out value="${ad.adName}" />
+					</option>
+				</c:forEach>
+
 
 
 			</select>
@@ -118,9 +158,14 @@
 
 		<div>
 			割引名 <select name="discount_id">
-				<option value="1">500円割引</option>
-				<option value="2">600円割引</option>
-				<option value="3">700円割引</option>
+				<c:forEach items="${discountList}" var="discount">
+
+					<option value="<c:out value="${discount.id}" />">
+
+						<c:out value="${discount.discountName}" />
+					</option>
+				</c:forEach>
+
 
 
 			</select>

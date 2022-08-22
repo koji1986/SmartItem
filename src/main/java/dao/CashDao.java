@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import domain.Cash;
@@ -7,6 +8,8 @@ import domain.Cash;
 public interface CashDao {
 
 	List<Cash> findAll() throws Exception;
+	
+	Cash findByDate(Date cashDate) throws Exception;
 
 	Cash findById(Integer id) throws Exception;
 

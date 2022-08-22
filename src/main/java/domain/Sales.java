@@ -31,11 +31,8 @@ public class Sales {
 	private Integer discountId;
 	private String discountName;
 	private Integer salesDiscountFee;
+	private Integer salesAmount;
 
-	
-	
-	
-	
 	public Sales(Integer id, Date salesDate, Date salesTime, String shopInfName, String customerCategolyName,
 			String customerName, String picName, String salesNomination, String salesPayment, String courseName,
 			String optionName, String staffName, Integer salesCarfare, Integer salesSalary, Integer salesCost,
@@ -304,6 +301,14 @@ public class Sales {
 
 	public void setDiscountName(String discountName) {
 		this.discountName = discountName;
+	}
+
+	public Integer getSalesAmount() {
+		return salesAmount;
+	}
+
+	public void setSalesAmount(Integer salesAmount) {
+		this.salesAmount = salesAmount;
 	}
 
 }

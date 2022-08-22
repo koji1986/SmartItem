@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CashDao;
 import dao.DaoFactory;
+import dao.SalesDao;
 import domain.Cash;
 
 /**
@@ -38,11 +39,41 @@ public class AdminCashServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			CashDao cashDao = DaoFactory.createCashDao();
-			List<Cash> cashList = cashDao.findAll();
-			request.setAttribute("cashList", cashList);
 
-			request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
+			// Getパラメータの日付を取得
+			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+			Date cashDate = sdfDate.parse(request.getParameter("cash_date"));
+
+			CashDao cashDao = DaoFactory.createCashDao();
+			SalesDao salesDao = DaoFactory.createSalesDao();
+			request.setAttribute("shopInfList", salesDao.findAllShopInf());
+
+			request.setAttribute("picList", salesDao.findAllPic());
+
+			request.setAttribute("staffList", salesDao.findAllStaff());
+
+			// もし日付がない: findAll
+			if (cashDate == null) {
+
+				List<Cash> cashList = cashDao.findAll();
+
+				request.setAttribute("cashList", cashList);
+
+				request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
+
+			}
+
+			else {
+
+				// 日付がある: findByDate
+
+				Cash cash = cashDao.findByDate(cashDate);
+				request.setAttribute("cashDate", cash.getCashDate());
+				request.setAttribute("cashChange", cash.getCashChange());
+				request.setAttribute("cashStaffId", cash.getStaffId());
+				request.setAttribute("cashCost", cash.getCashCost());
+
+			}
 
 		} catch (Exception e) {
 			throw new ServletException(e);

@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<c:import url="nav.jsp" />
+	<c:import url="nav.jsp" />
 	<input type="date" name="salse_date" />
 	<label> <input type="radio" name="shop_name" value="1" />A店 <input
 		type="radio" name="shop_name" value="2" />B店
@@ -53,11 +53,11 @@
 			<th>顧客名</th>
 			<th>施術者名</th>
 			<th>コース</th>
-			
+
 			<th>指名</th>
-			
+
 			<th>オプション</th>
-		
+
 			<th>支払</th>
 			<th>売上</th>
 			<th>交通費</th>
@@ -66,11 +66,13 @@
 			<th>利益</th>
 			<th>顧客情報</th>
 			<th>売上編集</th>
+			<th>削除</th>
 		</tr>
 		<c:forEach items="${salesList}" var="sales">
 			<tr>
+			
 				<td><c:out value="${sales.salesDate}" /></td>
-				
+
 				<td><c:out value="${sales.shopInfName}" /></td>
 				<td><c:out value="${sales.customerCategolyName}" /></td>
 				<td><c:out value="${sales.customerName}" /></td>
@@ -79,14 +81,17 @@
 				<td><c:out value="${sales.salesNomination}" /></td>
 				<td><c:out value="${sales.optionName}" /></td>
 				<td><c:out value="${sales.salesPayment}" /></td>
-				<td></td>
+				<td><c:out value="${sales.salesAmount}" /></td>
 				<td><c:out value="${sales.salesCarfare}" /></td>
 				<td><c:out value="${sales.salesSalary}" /></td>
 				<td><c:out value="${sales.salesCost}" /></td>
+				<td><c:out
+						value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" /></td>
+
 				<td></td>
-				
-				<td></td>
-				<td><a href="sales/update?id=<c:out value="${sales.id}" />"><input type="button" value="編集"  /></a></td>
+				<td><a href="sales/update?id=<c:out value="${sales.id}" />"><input
+						type="button" value="編集" /></a></td>
+			<td><a href="sales/delete?id=<c:out value="${sales.id}" />"><input type="button" value="削除" /></a></td>
 			</tr>
 
 		</c:forEach>
