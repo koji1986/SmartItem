@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -63,6 +64,8 @@ public class CostDaoImpl implements CostDao {
 		}
 		return cost;
 	}
+
+	
 
 	@Override
 	public void insert(Cost cost) throws Exception {
@@ -141,5 +144,29 @@ public class CostDaoImpl implements CostDao {
 
 		return cost;
 	}
+	@Override
+	public List<Cost> findByCostDate(Date costDate) throws Exception {
+		List<Cost> costList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "select cost.id,cost.cost_date,staff.staff_name,"
+					+ "cost.staff_id, shop_inf.shopInf_name,cost.shopName_id, \n"
+					+ "cost.cost_destination,cost_subject.cost_subject_name," + " cost.costSubject_id, \n"
+					+ "cost.cost_fee,cost.cost_detail\n" + "from cost\n" + "join staff on cost.staff_id=staff.id\n"
+					+ "join shop_inf on cost.shopName_id=shop_inf.id\n"
+					+ "join cost_subject on cost.costSubject_id=cost_subject.id where cost.cost_date=?;";
 
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, new java.sql.Date(costDate.getTime()));
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				costList.add(mapToCost(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return costList;
+
+	}
+	
+	
 }

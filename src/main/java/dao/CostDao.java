@@ -1,11 +1,14 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import domain.Cost;
 
 public interface CostDao {
 	List<Cost> findAll() throws Exception;
+	
+	List<Cost>findByCostDate(Date costDate) throws Exception;
 
 	Cost findById(Integer id) throws Exception;
 

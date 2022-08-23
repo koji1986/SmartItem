@@ -16,9 +16,12 @@
 <body>
 	<c:import url="nav.jsp" />
 	<div>A店舗</div>
-	<div>
-		<input type="date" />
-	</div>
+	<form action="" method="get">
+		<div>
+			<input type="date" name="cost_day" /> <input type="submit"
+				value="絞り込み" />
+		</div>
+	</form>
 	<div>
 		<a href="cost/input"><input type="button" value="経費情報入力" /></a>
 
@@ -27,7 +30,7 @@
 	<div>
 
 		<div class="row">
-		
+
 			<div class="col-1">日時</div>
 			<div class="col-1">支払先</div>
 			<div class="col-1">科目</div>
@@ -88,8 +91,7 @@
 	<div>
 		<table border="1">
 			<tr>
-				<th>経費合計  
-				</th>
+				<th>経費合計</th>
 			</tr>
 			<tr>
 				<td></td>

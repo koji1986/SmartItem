@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,13 +39,20 @@ public class AdminCostAServlet extends HttpServlet {
 		try {
 
 			CostDao costDao = DaoFactory.createCostDao();
-			
-			
+			List<Cost> costList;
 
-			List<Cost> costList = costDao.findAll();
+			if (request.getParameter("cost_day") != null) {
+				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+				Date costDate = sdfDate.parse(request.getParameter("cost_day"));
 
+				costList = costDao.findByCostDate(costDate);
+
+			} else {
+
+				costList = costDao.findAll();
+
+			}
 			request.setAttribute("costList", costList);
-
 			request.getRequestDispatcher("/WEB-INF/view/admin/costA.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException(e);
