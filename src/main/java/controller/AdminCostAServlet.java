@@ -37,6 +37,8 @@ public class AdminCostAServlet extends HttpServlet {
 		try {
 
 			CostDao costDao = DaoFactory.createCostDao();
+			
+			
 
 			List<Cost> costList = costDao.findAll();
 

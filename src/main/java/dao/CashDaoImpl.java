@@ -71,14 +71,13 @@ public class CashDaoImpl implements CashDao {
 	public void update(Cash cash) throws Exception {
 		try {
 			Connection con = ds.getConnection();
-			String sql = "    update cash set cash_date=? , cash_change=?,staff_id=?, cash_cost=? where id=?;";
+			String sql = "    update cash set  cash_change=?, cash_cost=? where id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setObject(1, cash.getCashDate());
-			stmt.setObject(2, cash.getCashChange(), Types.INTEGER);
 
-			stmt.setObject(3, cash.getStaffId(), Types.INTEGER);
-			stmt.setObject(4, cash.getCashCost(), Types.INTEGER);
-			stmt.setObject(5, cash.getId(), Types.INTEGER);
+			stmt.setObject(1, cash.getCashChange(), Types.INTEGER);
+
+			stmt.setObject(2, cash.getCashCost(), Types.INTEGER);
+			stmt.setObject(3, cash.getId(), Types.INTEGER);
 
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -97,17 +96,18 @@ public class CashDaoImpl implements CashDao {
 
 		Cash cash = new Cash();
 		cash.setId((Integer) rs.getObject("id"));
+
 		cash.setCashDate(rs.getTimestamp("sales_date"));
 		cash.setSalesTime(rs.getTimestamp("sales_time"));
 		cash.setStaffName(rs.getString("staff_name"));
 //		cash.setStaffId((Integer) rs.getObject("staff_id"));
 		cash.setShopInfName(rs.getString("shopInf_name"));
-		//cash.setShopInfId((Integer) rs.getObject("shopInf_id"));
-		cash.setPicNameA( rs.getString("pic_nameA"));
+		// cash.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		cash.setPicNameA(rs.getString("pic_nameA"));
 //		cash.setPicId((Integer) rs.getObject("pic_id"));
 		cash.setSalesAmount((Integer) rs.getObject("sales_amount"));
 		cash.setSalesSalary((Integer) rs.getObject("sales_salary"));
-		cash.setSalesSalary((Integer) rs.getObject("cash_change"));
+		cash.setCashChange((Integer) rs.getObject("cash_change"));
 		cash.setCashCost((Integer) rs.getObject("cash_cost"));
 
 		return cash;
@@ -115,22 +115,25 @@ public class CashDaoImpl implements CashDao {
 	}
 
 	@Override
-	public Cash findByDate(Date cashDate) throws Exception {
-		Cash cash = new Cash();
+	public List<Cash> findByDate(Date cashDate) throws Exception {
+		List<Cash> cashList = new ArrayList<>();
+
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.cash_date,cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "from cash join staff \n" + "on cash.staff_id=staff.id where cash.cash_date=?; ";
+			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
+					+ "					from cash join staff on cash.staff_id=staff.id \n"
+					+ "					join sales on cash.sales_id = sales.id join shop_inf on sales.shopInf_id = shop_inf.id\n"
+					+ "					join  pic on sales.pic_id= pic.id where sales.sales_date=?;  ";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setObject(1, cash.getCashDate());
+			stmt.setDate(1, new java.sql.Date(cashDate.getTime()));
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next() == true) {
-				cash = mapToCash(rs);
+			while (rs.next()) {
+				cashList.add(mapToCash(rs));
 			}
 		} catch (Exception e) {
 			throw e;
 		}
-		return cash;
+		return cashList;
 	}
 
 }

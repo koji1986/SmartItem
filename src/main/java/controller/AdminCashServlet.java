@@ -43,59 +43,30 @@ public class AdminCashServlet extends HttpServlet {
 
 			CashDao cashDao = DaoFactory.createCashDao();
 			SalesDao salesDao = DaoFactory.createSalesDao();
-			request.setAttribute("shopInfList", salesDao.findAllShopInf());
+			
+			List<Cash> cashList;
 
-			request.setAttribute("picList", salesDao.findAllPic());
-
-			request.setAttribute("staffList", salesDao.findAllStaff());
-
-			List<Cash> cashList = cashDao.findAll();
-			request.setAttribute("cashList", cashList);
-			
-			List<Sales> salesList = salesDao.findAll();
-			
-		
-			request.setAttribute("salesList", salesList);
-			
-			
-			
-			
-			
 			// Getパラメータの日付を取得
-			if(request.getParameter("cash_date") != null) {
-			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-			Date cashDate = sdfDate.parse(request.getParameter("cash_date"));
+			if (request.getParameter("cash_day") != null) {
+
+				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+				Date cashDay = sdfDate.parse(request.getParameter("cash_day"));
+
+				cashList = cashDao.findByDate(cashDay);
+				
 			
-			
-			
-			
-			Cash cash = cashDao.findByDate(cashDate);
-			request.setAttribute("cashDate", cash.getCashDate());
-			request.setAttribute("cashChange", cash.getCashChange());
-			request.setAttribute("cashStaffId", cash.getStaffId());
-			request.setAttribute("cashCost", cash.getCashCost());
+				
 			}
+			else {
+				cashList = cashDao.findAll();
 
-		
-			else
-			{
-				
+				List<Sales> salesList = salesDao.findAll();
 
-			
-			 
-				
-
-				request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
-
+				request.setAttribute("salesList", salesList);
 			}
-
-		
-
-				
-
-				
-
 			
+			request.setAttribute("cashList", cashList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);

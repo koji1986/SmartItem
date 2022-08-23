@@ -9,7 +9,7 @@ public interface CashDao {
 
 	List<Cash> findAll() throws Exception;
 	
-	Cash findByDate(Date cashDate) throws Exception;
+	List<Cash> findByDate(Date cashDate) throws Exception;
 
 	Cash findById(Integer id) throws Exception;
 

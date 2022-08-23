@@ -16,7 +16,8 @@
 	</div>
 	<form action="" method="get">
 		<div>
-			<input type="date" name="cash_date" />
+			<input type="date" name="cash_day" /> <input type="submit"
+				value="絞り込み" />
 		</div>
 	</form>
 
@@ -42,47 +43,24 @@
 				<c:forEach items="${cashList}" var="cash">
 
 					<tr>
-						<td><c:out value="${cash.cashDate}" /></td>
-						<td></td>
-						<td><select name="shopInf_id">
-								<c:forEach items="${shopInfList}" var="shop">
-
-									<option value="<c:out value="${shop.id}" />">
-										<c:out value="${shop.shopInfName}" />
-									</option>
-								</c:forEach>
-
-						</select></td>
-						<td><select name="pic_id">
-								<c:forEach items="${picList}" var="pic">
-
-									<option value="<c:out value="${pic.id}" />">
-										<c:out value="${pic.picNameA}" />
-									</option>
-								</c:forEach>
-
-
-						</select></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${cash.cashDate}" /></td>
+						<td><fmt:formatDate pattern="HH:mm" value="${cash.salesTime}" /></td>
+						<td><c:out value="${cash.shopInfName}" /></td>
+						<td><c:out value="${cash.picNameA}" /></td>
 						<td></td>
 						<td><input type="number" name="cash_change"
 							value="<c:out value="${cash.cashChange}" />" /></td>
-						<td></td>
-						<td><select name="staff_id">
-								<c:forEach items="${staffList}" var="staff">
-
-									<option value="<c:out value="${staff.id}" />">
-										<c:out value="${staff.staffName}" />
-									</option>
-								</c:forEach>
-
-
-						</select></td>
-						<td></td>
+						<td><c:out value="${cash.salesAmount}" /></td>
+						<td><c:out value="${cash.staffName}" /></td>
+						<td><c:out value="${cash.salesSalary}" /></td>
 						<td>トグルでON・OFF</td>
 						<td><input type="number" name="cash_cost"
 							value="<c:out value="${cash.cashCost}" />" /></td>
-						<td><input type="submit" value="更新" /></td>
-						<td><input type="button" value="削除" /></td>
+						<td><a href="cash/update?id=<c:out value="${cash.id}" />">
+								<input type="button" value="更新" />
+						</a></td>
+						<td><a href="sales/delete?id=<c:out value="${sales.id}" />"><input
+								type="button" value="削除" /></a></td>
 					</tr>
 
 				</c:forEach>

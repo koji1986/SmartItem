@@ -27,6 +27,8 @@
 	<div>
 
 		<div class="row">
+		
+			<div class="col-1">日時</div>
 			<div class="col-1">支払先</div>
 			<div class="col-1">科目</div>
 			<div class="col-1">金額</div>
@@ -40,6 +42,10 @@
 			<form action="" method="post">
 				<input type="hidden" name="id" value="<c:out value="${cost.id}" />" />
 				<div class="row">
+					<div class="col-1">
+
+						<fmt:formatDate pattern="MM-dd" value="${cost.costDate}" />
+					</div>
 					<div class="col-1">
 
 						<c:out value="${cost.costDestination}" />

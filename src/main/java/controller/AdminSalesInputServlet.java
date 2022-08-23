@@ -105,7 +105,7 @@ public class AdminSalesInputServlet extends HttpServlet {
 			sales.setAdId(adId);
 			sales.setDiscountId(discountId);
 			sales.setSalesDiscountFee(salesDiscountFee);
-
+			
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			salesDao.insert(sales);
 			response.sendRedirect("../sales");
