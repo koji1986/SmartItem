@@ -15,6 +15,7 @@ import dao.CashDao;
 import dao.DaoFactory;
 import dao.SalesDao;
 import domain.Cash;
+import domain.Sales;
 
 /**
  * Servlet implementation class AdminCashServlet
@@ -40,10 +41,6 @@ public class AdminCashServlet extends HttpServlet {
 
 		try {
 
-			// Getパラメータの日付を取得
-			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-			Date cashDate = sdfDate.parse(request.getParameter("cash_date"));
-
 			CashDao cashDao = DaoFactory.createCashDao();
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			request.setAttribute("shopInfList", salesDao.findAllShopInf());
@@ -52,28 +49,53 @@ public class AdminCashServlet extends HttpServlet {
 
 			request.setAttribute("staffList", salesDao.findAllStaff());
 
-			// もし日付がない: findAll
-			if (cashDate == null) {
+			List<Cash> cashList = cashDao.findAll();
+			request.setAttribute("cashList", cashList);
+			
+			List<Sales> salesList = salesDao.findAll();
+			
+		
+			request.setAttribute("salesList", salesList);
+			
+			
+			
+			
+			
+			// Getパラメータの日付を取得
+			if(request.getParameter("cash_date") != null) {
+			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+			Date cashDate = sdfDate.parse(request.getParameter("cash_date"));
+			
+			
+			
+			
+			Cash cash = cashDao.findByDate(cashDate);
+			request.setAttribute("cashDate", cash.getCashDate());
+			request.setAttribute("cashChange", cash.getCashChange());
+			request.setAttribute("cashStaffId", cash.getStaffId());
+			request.setAttribute("cashCost", cash.getCashCost());
+			}
 
-				List<Cash> cashList = cashDao.findAll();
+		
+			else
+			{
+				
 
-				request.setAttribute("cashList", cashList);
+			
+			 
+				
 
 				request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
 
 			}
 
-			else {
+		
 
-				// 日付がある: findByDate
+				
 
-				Cash cash = cashDao.findByDate(cashDate);
-				request.setAttribute("cashDate", cash.getCashDate());
-				request.setAttribute("cashChange", cash.getCashChange());
-				request.setAttribute("cashStaffId", cash.getStaffId());
-				request.setAttribute("cashCost", cash.getCashCost());
+				
 
-			}
+			
 
 		} catch (Exception e) {
 			throw new ServletException(e);

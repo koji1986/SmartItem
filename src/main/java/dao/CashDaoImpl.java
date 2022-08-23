@@ -25,8 +25,10 @@ public class CashDaoImpl implements CashDao {
 		List<Cash> cashList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.id,cash.cash_date,cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "from cash join staff \n" + "on cash.staff_id=staff.id; ";
+			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
+					+ "from cash \n" + "join staff on cash.staff_id=staff.id \n"
+					+ "join sales on cash.sales_id = sales.id\n" + "join shop_inf on sales.shopInf_id = shop_inf.id \n"
+					+ "join  pic on sales.pic_id= pic.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -43,8 +45,10 @@ public class CashDaoImpl implements CashDao {
 		Cash cash = new Cash();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.cash_date,cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "from cash join staff \n" + "on cash.staff_id=staff.id where id=?; ";
+			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
+					+ "from cash \n" + "join staff on cash.staff_id=staff.id \n"
+					+ "join sales on cash.sales_id = sales.id\n" + "join shop_inf on sales.shopInf_id = shop_inf.id \n"
+					+ "join  pic on sales.pic_id= pic.id where cash.id=?; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, id, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -91,13 +95,22 @@ public class CashDaoImpl implements CashDao {
 
 	private Cash mapToCash(ResultSet rs) throws Exception {
 
-		Integer id = (Integer) rs.getObject("id");
-		Date cashDate = rs.getTimestamp("cash_date");
-		Integer cashChange = (Integer) rs.getObject("cash_change");
-		String staffName = rs.getString("staff_name");
-		Integer cashCost = (Integer) rs.getObject("cash_cost");
+		Cash cash = new Cash();
+		cash.setId((Integer) rs.getObject("id"));
+		cash.setCashDate(rs.getTimestamp("sales_date"));
+		cash.setSalesTime(rs.getTimestamp("sales_time"));
+		cash.setStaffName(rs.getString("staff_name"));
+//		cash.setStaffId((Integer) rs.getObject("staff_id"));
+		cash.setShopInfName(rs.getString("shopInf_name"));
+		//cash.setShopInfId((Integer) rs.getObject("shopInf_id"));
+		cash.setPicNameA( rs.getString("pic_nameA"));
+//		cash.setPicId((Integer) rs.getObject("pic_id"));
+		cash.setSalesAmount((Integer) rs.getObject("sales_amount"));
+		cash.setSalesSalary((Integer) rs.getObject("sales_salary"));
+		cash.setSalesSalary((Integer) rs.getObject("cash_change"));
+		cash.setCashCost((Integer) rs.getObject("cash_cost"));
 
-		return new Cash(id, cashDate, cashChange, staffName, cashCost);
+		return cash;
 
 	}
 
