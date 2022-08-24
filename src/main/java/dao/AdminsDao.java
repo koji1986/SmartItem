@@ -16,4 +16,6 @@ public interface AdminsDao {
 
 	void delete(Admins admins) throws Exception;
 
+	Admins findByLoginIdAndLoginPass(String loginId, String loginPass) throws Exception;
+
 }

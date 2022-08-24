@@ -9,10 +9,12 @@
 
 </head>
 <body>
-	<div>
-		<input type="date" />
-	</div>
-
+	<form action="" method="post">
+		<div>
+			<input type="date" name="sales_day" /> <input type="submit"
+				value="絞り込み" />
+		</div>
+	</form>
 	<div>
 		<input type="button" value="印刷" />
 
@@ -23,12 +25,12 @@
 		<table border="1">
 			<tr>
 				<td>総売上</td>
-				<td></td>
+				<td><c:out value="${totalSales}" /></td>
 			</tr>
 
 			<tr>
 				<td>カード売上</td>
-				<td></td>
+				<td><c:out value="${totalCredit}" /></td>
 
 
 			</tr>
@@ -40,22 +42,23 @@
 
 			<tr>
 				<td>外注費</td>
-				<td></td>
+				<td><c:out value="${totalSalary}" /></td>
 			</tr>
 			<tr>
 				<td>雑収入</td>
-				<td></td>
+				<td><c:out value="${totalCashCost}" /></td>
 
 			</tr>
 			<tr>
 				<td>諸経費</td>
-				<td></td>
+				<td><c:out value="${totalCost}" /></td>
 
 			</tr>
 
 			<tr>
 				<td>差引合計</td>
-				<td></td>
+				<td><c:out
+						value="${totalSales+totalCashCost-totalCredit-totalSalary-totalCost}" /></td>
 			</tr>
 
 
@@ -75,8 +78,9 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td></td>
-				<td></td>
+				<td><c:out value="${totalNewMember}" /></td>
+				<td><c:out value="${totalMember}" /></td>
+				<td><c:out value="${totalNewMember+totalMember}" /></td>
 
 
 			</tr>
@@ -91,13 +95,16 @@
 		<table border="1">
 			<tr>
 				<td>フリー</td>
-				<td>指名</td>
+				<td>NET指名</td>
+				<td>本指名</td>
 				<td>合計</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><c:out value="${totalFree}" /></td>
+				<td><c:out value="${totalNetNomination}" /></td>
+				<td><c:out value="${totalNomination}" /></td>
+				<td><c:out
+						value="${totalFree+totalNetNomination+totalNomination}" /></td>
 			</tr>
 
 
@@ -126,17 +133,14 @@
 				<td>割引名</td>
 				<td>割引金額</td>
 			</tr>
+			<c:forEach items="${salesList}" var="sales" >
+			
 			<tr>
-				<td></td>
-				<td></td>
+				<td><c:out value="${sales.discountName}" /></td>
+				<td><c:out value="${sales.salesDiscountFee}" /></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
+			</c:forEach>
+			
 
 
 		</table>
@@ -151,18 +155,14 @@
 			<tr>
 				<td>広告媒体</td>
 			</tr>
+			<c:forEach items="${salesMap}" var="sales" >
+			
 			<tr>
-				<td></td>
+				<td><c:out value="${sales.adName}" /></td>
 				<td></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
+			</c:forEach>
+			
 
 
 		</table>

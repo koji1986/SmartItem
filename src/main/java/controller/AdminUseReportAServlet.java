@@ -27,6 +27,10 @@ public class AdminUseReportAServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+		
 		request.getRequestDispatcher("/WEB-INF/view/admin/useReportA.jsp").forward(request, response);
 	}
 

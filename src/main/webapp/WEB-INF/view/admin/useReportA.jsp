@@ -11,10 +11,12 @@
 <body>
 
 	<div>A店</div>
-	<div>
-		<input type="date" />
-
-	</div>
+	<form action="" method="post">
+		<div>
+			<input type="date" name="sales_day" /> <input type="submit"
+				value="絞り込み" />
+		</div>
+	</form>
 	<div>印刷</div>
 	<div>
 		<table border="1">

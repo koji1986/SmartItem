@@ -9,6 +9,8 @@ public class Admins {
 	private  String loginId; 
 	private  String loginPass; 
 	private  String loginPass2;
+	
+	public Admins() {};
 	public Admins(Integer id, String loginName, String loginPhoneNumber, String loginEmail, String loginId,
 			String loginPass, String loginPass2) {
 		super();

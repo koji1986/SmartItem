@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import domain.Ad;
@@ -16,6 +17,8 @@ import domain.Staff;
 public interface SalesDao {
 
 	List<Sales> findAll() throws Exception;
+	
+	List<Sales> findByDate(Date salesDate) throws Exception;
 
 	Sales findById(Integer id) throws Exception;
 

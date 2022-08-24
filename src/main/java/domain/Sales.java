@@ -32,6 +32,8 @@ public class Sales {
 	private String discountName;
 	private Integer salesDiscountFee;
 	private Integer salesAmount;
+	private Integer cashCost;
+	private Integer cashId;
 
 	public Sales(Integer id, Date salesDate, Date salesTime, String shopInfName, String customerCategolyName,
 			String customerName, String picName, String salesNomination, String salesPayment, String courseName,
@@ -309,6 +311,22 @@ public class Sales {
 
 	public void setSalesAmount(Integer salesAmount) {
 		this.salesAmount = salesAmount;
+	}
+
+	public Integer getCashCost() {
+		return cashCost;
+	}
+
+	public void setCashCost(Integer cashCost) {
+		this.cashCost = cashCost;
+	}
+
+	public Integer getCashId() {
+		return cashId;
+	}
+
+	public void setCashId(Integer cashId) {
+		this.cashId = cashId;
 	}
 
 }

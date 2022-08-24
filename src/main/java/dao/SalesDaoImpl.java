@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -198,7 +199,7 @@ public class SalesDaoImpl implements SalesDao {
 		sales.setId((Integer) rs.getObject("id"));
 		sales.setSalesDate(rs.getTimestamp("sales_date"));
 		sales.setSalesTime(rs.getTimestamp("sales_time"));
-		sales.setShopInfId((Integer) rs.getObject("shop_inf.id"));
+		sales.setShopInfId((Integer) rs.getObject("shopInf_id"));
 		sales.setShopInfName(rs.getString("shopInf_name"));
 		sales.setCustomerCategolyName(rs.getString("customer_categoly_name"));
 		sales.setCustomerCategolyId((Integer) rs.getObject("customerCategoly_id"));
@@ -223,6 +224,8 @@ public class SalesDaoImpl implements SalesDao {
 		sales.setDiscountName(rs.getString("discount_name"));
 		sales.setDiscountId((Integer) rs.getObject("discount_id"));
 		sales.setSalesDiscountFee((Integer) rs.getObject("sales_discount_fee"));
+		sales.setCashCost((Integer)rs.getObject("cash_cost"));
+		
 
 		return sales;
 	}
@@ -501,5 +504,50 @@ public class SalesDaoImpl implements SalesDao {
 
 		return new Ad(id, adName, row);
 
+	}
+
+	@Override
+	public List<Sales> findByDate(Date salesDate) throws Exception {
+		List<Sales> salesList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "select sales.id,sales.sales_date,sales.sales_time,\n"
+					+ "sales.shopInf_id,\n"
+					+ "shop_inf.shopInf_name,\n"
+					+ "sales.customerCategoly_id,\n"
+					+ "customer_categoly.customer_categoly_name,\n"
+					+ "sales.customer_id, customer.customer_name,\n"
+					+ "sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
+					+ "sales.sales_payment,sales.course_id, course.course_name,\n"
+					+ "sales.option_id,\n"
+					+ "smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
+					+ "sales.sales_carfare,sales.sales_salary,\n"
+					+ "sales.sales_cost,sales.ad_id, \n"
+					+ "sales.discount_id,ad.ad_name,discount.discount_name,sales.sales_discount_fee,sales.sales_amount,\n"
+					+ "cash.sales_id, cash.cash_cost\n"
+					+ "from sales\n"
+					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
+					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
+					+ "join customer on sales.customer_id =customer.id\n"
+					+ "join pic on sales.pic_id=pic.id\n"
+					+ "join course on sales.course_id=course.id\n"
+					+ "join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
+					+ "join staff on sales.staff_id=staff.id\n"
+					+ "join ad on sales.ad_id=ad.id\n"
+					+ "join discount on sales.discount_id=discount.id \n"
+					+ "join cash on sales.id = cash.sales_id\n"
+					+ "where sales.sales_date =?;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, new java.sql.Date(salesDate.getTime()));
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				salesList.add(mapToSales(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return salesList;
+		
+		
 	}
 }
