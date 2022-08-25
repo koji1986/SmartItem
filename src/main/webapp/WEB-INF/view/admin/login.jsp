@@ -1,32 +1,44 @@
-<%@ page pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/signin.css">
 <title>ログイン画面</title>
 
 </head>
 <body>
-	<form action="" method="post">
-		<h2>ID</h2>
-		<h2>
-			<input type="text" name="login_id" placeholder="ID" />
-		</h2>
-		<h2>Password</h2>
-		<h2>
-			<input type="password" name="login_pass" placeholder="Password" />
-		</h2>
-		<h2>
-			<input type="submit" value="ログイン" />
-		</h2>
-		
+	 <div class="form-signin">
+	 <form  method="post">
+    <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt=""
+      width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">ログイン</h1>
+    <label for="inputEmail" class="sr-only">ログインID</label>
+    <input type="text" id="inputEmail" name="loin_id" class="form-control" placeholder="ID" >
+    <label for="inputPassword" class="sr-only">パスワード</label>
+    <input type="password" id="inputPassword" name="login_pass" class="form-control" placeholder="パスワード" >
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> パスワードを記憶しますか？
+      </label>
+    </div>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="ログイン" />
+     </form>
+     <p></p>
+    <a href="accountCreate"><button class="btn btn-lg btn-danger btn-block">新規アカウント登録</button></a>
+</div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 	
-
-
-
-	</form>
-	<h2><a href="/admin/accountCreate">新規アカウント登録</a></h2>
+	
+	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -16,8 +16,8 @@
 <body>
 <!--  NAVの階層「/SmartItem/admin/nav.jsp」 -->
 	
-	
    <nav class="navbar navbar-expand-sm navbar-dark bg-success mt-3 mb-3">
+	<div class="container">
             <a class="navbar-brand bg-white text-success">ナビゲーション</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +104,7 @@
                     
                 </ul>
             </div>
+        </div>
         </nav>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             ></script>

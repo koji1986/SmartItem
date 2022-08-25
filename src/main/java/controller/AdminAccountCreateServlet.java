@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.AdminsDao;
+import dao.DaoFactory;
+import domain.Admins;
+
 /**
  * Servlet implementation class AdminAccountCreateServlet
  */
@@ -34,8 +38,32 @@ public class AdminAccountCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		try {
+		String loginName =request.getParameter("login_name");
+		String loginPhoneNumber =request.getParameter("login_phone_number");
+		String loginEmail =request.getParameter("login_email");
+		String loginId =request.getParameter("login_id");
+		String loginPass =request.getParameter("login_pass");
+		
+		Admins admins = new Admins();
+		admins.setLoginName(loginName);
+		admins.setLoginPhoneNumber(loginPhoneNumber);
+		admins.setLoginEmail(loginEmail);
+		admins.setLoginId(loginId);
+		admins.setLoginPass(loginPass);
+		
+		AdminsDao adminsDao = DaoFactory.createAdminsDao();
+			adminsDao.insert(admins);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		response.sendRedirect("login");
+		
+		
+		
+		
 	}
 
 }

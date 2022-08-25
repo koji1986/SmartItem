@@ -33,8 +33,23 @@ public class AdminsDaoImpl implements AdminsDao {
 
 	@Override
 	public void insert(Admins admins) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = " insert into admins(login_name,login_phone_number,\n"
+					+ "login_email,login_id,login_pass)\n"
+					+ "values(?,?,?,?,?);";
 
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, admins.getLoginName());
+			stmt.setString(2, admins.getLoginPhoneNumber());
+			stmt.setString(3, admins.getLoginEmail());
+			stmt.setString(4, admins.getLoginId());
+			stmt.setString(5, admins.getLoginPass());
+			
+
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
