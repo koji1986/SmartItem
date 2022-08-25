@@ -5,6 +5,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>ナビゲーション</title>
 
 </head>
@@ -17,6 +22,8 @@
 	<h1>
 		<a href="/SmartItem/admin/cash">レジ</a>
 	</h1>
+	
+
 	<table border="1">
 
 		<tr>

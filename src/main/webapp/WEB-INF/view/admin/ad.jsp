@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<c:import url="nav.jsp" />
 	<div class="row">
 		<div class="col-2">広告名</div>
 

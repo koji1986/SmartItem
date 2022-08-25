@@ -5,10 +5,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>A店日報</title>
 
 </head>
 <body>
+<c:import url="nav.jsp" />
 	<form action="" method="post">
 		<div>
 			<input type="date" name="sales_day" /> <input type="submit"
@@ -155,7 +161,7 @@
 			<tr>
 				<td>広告媒体</td>
 			</tr>
-			<c:forEach items="${salesMap}" var="sales" >
+			<c:forEach items="${salesList}" var="sales" >
 			
 			<tr>
 				<td><c:out value="${sales.adName}" /></td>

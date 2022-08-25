@@ -3,9 +3,7 @@ package controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,6 +57,14 @@ public class AdminReportAServlet extends HttpServlet {
 					totalSales += s.getSalesAmount();
 					totalSalary += s.getSalesSalary();
 					totalCashCost += s.getCashCost();
+
+					// TODO広告のList作ったけど、やりかたわからない。
+					/*
+					 * List<Sales> dateAdList; Integer AdId =
+					 * Integer.parseInt(request.getParameter("ad_id")); dateAdList
+					 * =salesDao.findByDateAd(salesDay,AdId );
+					 */
+
 				}
 				request.setAttribute("totalSales", totalSales);
 				request.setAttribute("totalSalary", totalSalary);
@@ -89,7 +95,7 @@ public class AdminReportAServlet extends HttpServlet {
 					} else {
 					}
 				}
-				int totalFree =0;
+				int totalFree = 0;
 				int totalNetNomination = 0;
 				int totalNomination = 0;
 				for (Sales i : salesList) {
@@ -99,25 +105,19 @@ public class AdminReportAServlet extends HttpServlet {
 						totalNetNomination++;
 					} else if (i.getSalesNomination().equals("本指名")) {
 						totalNomination++;
-					}else {}
+					} else {
 					}
-				Map<String, Integer> salesMap = new HashMap<>();
-				System.out.println(salesMap);
-				for(Sales s : salesList) {
-					System.out.println(s.getAdName());
-					System.out.println((Integer)salesMap.get(s.getAdName()));
-					salesMap.put(s.getAdName(), salesMap.get(s.getAdName())+1);
-					}
-				
-				
-			
-				
-				
-				request.setAttribute("salesAdList", salesAdList);
-				
-				
-				
-				
+				}
+
+				// TODO ADのMAP作ったけど、やり方わからない。
+				/*
+				 * Map<String, Integer> salesMap = new HashMap<>();
+				 * System.out.println(salesMap); for (Sales s : salesList) {
+				 * System.out.println(s.getAdName()); System.out.println((Integer)
+				 * salesMap.get(s.getAdName())); salesMap.put(s.getAdName(),
+				 * salesMap.get(s.getAdName()) + 1); }
+				 */
+
 				request.setAttribute("totalFree", totalFree);
 				request.setAttribute("totalNetNomination", totalNetNomination);
 				request.setAttribute("totalNomination", totalNomination);

@@ -5,10 +5,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>A店施術者別日報</title>
 
 </head>
 <body>
+	<c:import url="nav.jsp" />
 
 	<div>A店</div>
 	<form action="" method="post">
@@ -20,22 +26,25 @@
 	<div>印刷</div>
 	<div>
 		<table border="1">
-			<tr>
-				<td>施術者名</td>
-				<td>出勤時間</td>
-				<td>退勤時間</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>A店舗</td>
-				<td>客名</td>
-				<td>コース</td>
-				<td>指名</td>
-				<td>場所</td>
-				<td>開始～終了時刻</td>
-				<td>売上</td>
-				<td>給与</td>
-			</tr>
+			<c:forEach items="${salesList}" var="sales">
+
+				<tr>
+					<td><c:out value="${sales.picName}" /></td>
+					<td>出勤時間</td>
+					<td>退勤時間</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td><c:out value="${sales.shopInfName}" /></td>
+					<td><c:out value="${sales.customerName}" /></td>
+					<td><c:out value="${sales.courseName}" /></td>
+					<td><c:out value="${sales.salesNomination}" /></td>
+					<td>場所</td>
+					<td>開始～終了時刻</td>
+					<td><c:out value="${sales.salesAmount}" /></td>
+					<td><c:out value="${sales.salesSalary}" /></td>
+				</tr>
+			</c:forEach>
 			<tr>
 				<td></td>
 				<td></td>

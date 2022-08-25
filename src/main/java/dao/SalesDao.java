@@ -19,6 +19,8 @@ public interface SalesDao {
 	List<Sales> findAll() throws Exception;
 	
 	List<Sales> findByDate(Date salesDate) throws Exception;
+	
+	List<Sales> findByDateAd(Date salesDate,Integer AdId) throws Exception;
 
 	Sales findById(Integer id) throws Exception;
 
