@@ -10,69 +10,74 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/tableOp.css" />
 <title>オプション情報</title>
 
 </head>
 <body>
 	<c:import url="nav.jsp" />
 
-	<div class="row">
+	<div class="design04">
+
+		<div class="container">
 
 
-		<div class="col-1">店舗名</div>
-		<div class="col-1">オプション名</div>
-		<div class="col-1">料金</div>
-		<div class="col-1">並び替え</div>
-		<div class="col-1">更新</div>
-		<div class="col-1">削除</div>
+			<div class="th item6">店舗名</div>
+			<div class="th item6">オプション名</div>
+			<div class="th item6">料金</div>
+			<div class="th item6">並び替え</div>
+			<div class="th item6">更新</div>
+			<div class="th item6">削除</div>
+		</div>
+		<c:forEach items="${optionList}" var="option">
+
+			<form action="" method="post">
+				<input type="hidden" name="id"
+					value="<c:out value="${option.id}" />" />
+
+				<div class="container">
+					<div class="td item6">
+						<select name="shopInf_id">
+							<c:forEach items="${shopInfList}" var="shop">
+
+								<option value="<c:out value="${shop.id}" />"
+									<c:out value="${shop.id == option.shopInfId ? 'selected' : '' }" />>
+									<c:out value="${shop.shopInfName}" />
+								</option>
+							</c:forEach>
+
+						</select>
+					</div>
+					<div class="td item6">
+						<input type="text" name="option_name"
+							value="<c:out value="${option.optionName}" />" />
+					</div>
+					<div class="td item6">
+						<input type="number" name="option_fee"
+							value="<c:out value="${option.optionFee}" />" />
+					</div>
+					<div class="td item6">
+						<input type="number" name="option_row"
+							value="<c:out value="${option.optionRow}" />" />
+					</div>
+					<div class="td item6">
+
+						<input type="submit" value="更新" name="update" />
+					</div>
+					<div class="td item6">
+
+						<input type="submit" value="削除" />
+					</div>
+				</div>
+			</form>
+		</c:forEach>
+
+
+
 	</div>
-	<c:forEach items="${optionList}" var="option">
 
-		<form action="" method="post">
-			<input type="hidden" name="id" value="<c:out value="${option.id}" />" />
-
-			<div class="row">
-				<div class="col-1">
-					<select name="shopInf_id">
-						<c:forEach items="${shopInfList}" var="shop">
-
-							<option value="<c:out value="${shop.id}" />"
-								<c:out value="${shop.id == option.shopInfId ? 'selected' : '' }" />>
-								<c:out value="${shop.shopInfName}" />
-							</option>
-						</c:forEach>
-
-					</select>
-				</div>
-				<div class="col-1">
-					<input type="text" name="option_name"
-						value="<c:out value="${option.optionName}" />" />
-				</div>
-				<div class="col-1">
-					<input type="number" name="option_fee"
-						value="<c:out value="${option.optionFee}" />" />
-				</div>
-				<div class="col-1">
-					<input type="number" name="option_row"
-						value="<c:out value="${option.optionRow}" />" />
-				</div>
-				<div class="col-1">
-
-					<input type="submit" value="更新" name="update" />
-				</div>
-				<div class="col-1">
-
-					<input type="submit" value="削除" />
-				</div>
-			</div>
-		</form>
-	</c:forEach>
-
-
-
-
-
-
+	<script src="js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

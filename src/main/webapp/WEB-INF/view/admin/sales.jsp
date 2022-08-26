@@ -5,11 +5,19 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/tableOffInput.css" />
 <title>売上一覧</title>
 
 </head>
 <body>
 	<c:import url="nav.jsp" />
+	<div class="design04">
 	<input type="date" name="salse_date" />
 	<label> <input type="radio" name="shop_name" value="1" />A店 <input
 		type="radio" name="shop_name" value="2" />B店
@@ -41,64 +49,64 @@
 
 	<input type="submit" value="絞り込み" />
 
+<p></p>
 
 
 
+	<div class="container moji80">
+		
+			<div class="item17 th">利用日時</div>
+			<div class="item17 th">店舗名</div>
+			<div class="item17 th">種別</div>
+			<div class="item17 th">顧客名</div>
+			<div class="item17 th">施術者名</div>
+			<div class="item17 th">コース</div>
 
-	<table border="1">
-		<tr>
-			<th>利用日時</th>
-			<th>店舗名</th>
-			<th>種別</th>
-			<th>顧客名</th>
-			<th>施術者名</th>
-			<th>コース</th>
+			<div class="item17 th">指名</div>
 
-			<th>指名</th>
+			<div class="item17 th">オプション</div>
 
-			<th>オプション</th>
-
-			<th>支払</th>
-			<th>売上</th>
-			<th>交通費</th>
-			<th>給与</th>
-			<th>経費</th>
-			<th>利益</th>
-			<th>顧客情報</th>
-			<th>売上編集</th>
-			<th>削除</th>
-		</tr>
+			<div class="item17 th">支払</div>
+			<div class="item17 th">売上</div>
+			<div class="item17 th">交通費</div>
+			<div class="item17 th">給与</div>
+			<div class="item17 th">経費</div>
+			<div class="item17 th">利益</div>
+			<div class="item17 th">顧客情報</div>
+			<div class="item17 th">売上編集</div>
+			<div class="item17 th">削除</div>
+		</div>
 		<c:forEach items="${salesList}" var="sales">
-			<tr>
+			<div class="container">
 			
-				<td><c:out value="${sales.salesDate}" /></td>
+				<div class="item17 td moji80"> <fmt:formatDate pattern="yy/MM/dd hh:mm" value="${sales.salesDate}" /></div>
 
-				<td><c:out value="${sales.shopInfName}" /></td>
-				<td><c:out value="${sales.customerCategolyName}" /></td>
-				<td><c:out value="${sales.customerName}" /></td>
-				<td><c:out value="${sales.picName}" /></td>
-				<td><c:out value="${sales.courseName}" /></td>
-				<td><c:out value="${sales.salesNomination}" /></td>
-				<td><c:out value="${sales.optionName}" /></td>
-				<td><c:out value="${sales.salesPayment}" /></td>
-				<td><c:out value="${sales.salesAmount}" /></td>
-				<td><c:out value="${sales.salesCarfare}" /></td>
-				<td><c:out value="${sales.salesSalary}" /></td>
-				<td><c:out value="${sales.salesCost}" /></td>
-				<td><c:out
-						value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" /></td>
+				<div class="item17 td"><c:out value="${sales.shopInfName}" /></div>
+				<div class="item17 td"><c:out value="${sales.customerCategolyName}" /></div>
+				<div class="item17 td"><c:out value="${sales.customerName}" /></div>
+				<div class="item17 td"><c:out value="${sales.picName}" /></div>
+				<div class="item17 td moji80"><c:out value="${sales.courseName}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesNomination}" /></div>
+				<div class="item17 td"><c:out value="${sales.optionName}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesPayment}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesAmount}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesCarfare}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesSalary}" /></div>
+				<div class="item17 td"><c:out value="${sales.salesCost}" /></div>
+				<div class="item17 td"><c:out
+						value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" /></div>
 
-				<td></td>
-				<td><a href="sales/update?id=<c:out value="${sales.id}" />"><input
-						type="button" value="編集" /></a></td>
-			<td><a href="sales/delete?id=<c:out value="${sales.id}" />"><input type="button" value="削除" /></a></td>
-			</tr>
+				<div class="item17 td"></div>
+				<div class="item17 td"><a href="sales/update?id=<c:out value="${sales.id}" />"><input
+						type="button" value="編集" /></a></div>
+			<div class="item17 td"><a href="sales/delete?id=<c:out value="${sales.id}" />"><input type="button" value="削除" /></a></div>
+			</div>
 
 		</c:forEach>
 
 
-
-	</table>
+<p></p>
+	
 
 	<p>
 		<input type="button" value="画面印刷" /> <input type="button"
@@ -107,6 +115,6 @@
 
 
 	</p>
-
+</div>
 </body>
 </html>

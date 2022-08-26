@@ -13,7 +13,7 @@
 .design04 .th {
 	padding: 10px;
 	background: #778ca3;
-	border-right: solid 1px #778ca3;
+   	border-right: solid 1px #778ca3;
 	color: #ffffff;
 	border-bottom: solid 1px #778ca3;
 }
@@ -40,44 +40,4 @@
 	border-left: solid 1px #778ca3;
 }
 
-.container {
-	display: flex;
-	justify-content: center;
-	position: relative;
-}
-
-
-.item5 {
-	width: calc(100%/ 5);
-	padding: 20px 10px;
-	text-align: center;
-}
-
-.item8 {
-	width: calc(100%/ 8);
-	padding: 20px 10px;
-	text-align: center;
-}
-
-.item4 {
-	width: calc(100%/ 4);
-	padding: 20px 10px;
-	text-align: center;
-}
-
-.item6 {
-	width: calc(100%/ 6);
-	padding: 20px 10px;
-	text-align: center;
-}
-
-.item7 {
-	width: calc(100%/ 7);
-	padding: 20px 10px;
-	text-align: center;
-}
-
-input {
-	width: 100%;
-}
 

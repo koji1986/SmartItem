@@ -10,20 +10,23 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/table.css" />
 <title>施術者ランク</title>
 
 </head>
 <body>
 <c:import url="nav.jsp" />
+<div class="design04">
 
-	<div class="row">
-		<div class="col-1">店舗名</div>
-		<div class="col-1">ランク名</div>
-		<div class="col-1">指名料</div>
+	<div class="container">
+		<div class="item6 th">店舗名</div>
+		<div class="item6 th">ランク名</div>
+		<div class="item6 th">指名料</div>
 
-		<div class="col-1">並び替え</div>
-		<div class="col-1">更新</div>
-		<div class="col-1">削除</div>
+		<div class="item6 th">並び替え</div>
+		<div class="item6 th">更新</div>
+		<div class="item6 th">削除</div>
 
 	</div>
 	<c:forEach items="${picRankList}" var="picRank">
@@ -31,9 +34,9 @@
 		<form action="" method="post">
 			<input type="hidden" name="id"
 				value="<c:out value="${picRank.id}" />" />
-			<div class="row">
+			<div class="container">
 
-				<div class="col-1">
+				<div class="item6 td">
 					<select name="shopInf_id">
 						<c:forEach items="${shopInfList}" var="shop">
 
@@ -47,22 +50,22 @@
 
 					</select>
 				</div>
-				<div class="col-1">
+				<div class="item6 td">
 					<input type="text" name="picRank_name"
 						value="<c:out value="${picRank.picRankName}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item6 td">
 					<input type="number" name="picRank_fee"
 						value="<c:out value="${picRank.picRankFee}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item6 td">
 					<input type="number" name="picRank_row"
 						value="<c:out value="${picRank.picRankRow}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item6 td">
 					<input type="submit" value="更新" name="update" />
 				</div>
-				<div class="col-1">
+				<div class="item6 td">
 					<input type="submit" value="削除" />
 				</div>
 			</div>
@@ -73,7 +76,7 @@
 
 
 
-
+</div>
 
 </body>
 </html>

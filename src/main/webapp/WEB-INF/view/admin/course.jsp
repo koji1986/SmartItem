@@ -10,29 +10,32 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/table.css" />
 <title>コース情報</title>
 
 </head>
 <body>
 	<c:import url="nav.jsp" />
+	<div class="design04">
 
-	<div class="row">
-		<div class="col-1">店舗名</div>
-		<div class="col-1">コース名</div>
-		<div class="col-1">金額</div>
-		<div class="col-1">時間（分）</div>
-		<div class="col-1">並び替え</div>
-		<div class="col-1">更新</div>
-		<div class="col-1">削除</div>
+	<div class="container">
+		<div class="item7 th">店舗名</div>
+		<div class="item7 th">コース名</div>
+		<div class="item7 th">金額</div>
+		<div class="item7 th">時間（分）</div>
+		<div class="item7 th">並び替え</div>
+		<div class="item7 th">更新</div>
+		<div class="item7 th">削除</div>
 	</div>
 
 
 	<c:forEach items="${courseList}" var="course">
 		<form action="" method="post">
 			<input type="hidden" name="id" value="<c:out value="${course.id}" />" />
-			<div class="row">
+			<div class="container">
 
-				<div class="col-1">
+				<div class="item7 td">
 
 					<select name="shopInf_id">
 						<c:forEach items="${shopInfList}" var="shop">
@@ -45,28 +48,28 @@
 
 					</select>
 				</div>
-				<div class="col-1">
+				<div class="item7 td">
 					<input type="text" name="course_name"
 						value="<c:out value="${course.courseName}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item7 td">
 					<input type="number" name="course_fee"
 						value="<c:out value="${course.courseFee}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item7 td">
 					<input type="number" name="course_time"
 						value="<c:out value="${course.courseTime}" />" />
 				</div>
-				<div class="col-1">
+				<div class="item7 td">
 					<input type="number" name="course_row"
 						value="<c:out value="${course.courseRow}" />" />
 				</div>
 
-				<div class="col-1">
+				<div class="item7 td">
 
 					<input type="submit" name="update" value="更新">
 				</div>
-				<div class="col-1">
+				<div class="item7 td">
 
 					<input type="submit" value="削除">
 				</div>
@@ -77,7 +80,7 @@
 		</form>
 	</c:forEach>
 
-
+</div>
 
 
 

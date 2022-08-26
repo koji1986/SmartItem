@@ -8,69 +8,105 @@
 <title>売上削除</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/tableTate.css" />
 </head>
 <body>
+<c:import url="../nav.jsp" />
+		<div class="design04">
+		<div class="container">
 	<form action="" method="post">
-		<table border="1">
-			<tr>
-				<th><c:out value="${sales.salesDate}" /></th>
-			<tr>
 
-				<th><c:out value="${sales.shopInfName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.customerCategolyName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.customerName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.picName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.courseName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesNomination}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.optionName}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesPayment}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesAmount}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesCarfare}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesSalary}" /></th>
-			</tr>
-			<tr>
-				<th><c:out value="${sales.salesCost}" /></th>
-			</tr>
-			<tr>
-				<th><c:out
-						value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" /></th>
-			</tr>
-
-			<tr>
-				<th></th>
-			</tr>
+			<div class="item th">
+				<c:out value="${sales.salesDate}" />
+			</div>
 
 
-		
+			<div class="item th">
+				<c:out value="${sales.shopInfName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.customerCategolyName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.customerName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.picName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.courseName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesNomination}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.optionName}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesPayment}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesAmount}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesCarfare}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesSalary}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out value="${sales.salesCost}" />
+			</div>
+
+
+			<div class="item th">
+				<c:out
+					value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" />
+			</div>
+
+
+
+			<div class="item th">
 
 
 
 
 
-		</table>
 
-		<input type="submit" value="削除" />
+
+
+
+
+
+
+			<input type="submit" value="削除" />
+			</div>
 	</form>
+	</div>
+		</div>
 
 </body>
 </html>

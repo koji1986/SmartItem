@@ -10,24 +10,27 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/tableTate.css" />
 <title>売上更新</title>
 
 </head>
 <body>
 	<c:import url="../nav.jsp" />
 
-
+<div class="design04">
+<div class="container">
 	<form action="" method="post">
 
-		<div>
+		<div class="th">
 			<input type="date" name="sales_date"
 				value="<fmt:formatDate value="${salesDate}" pattern="yyyy-MM-dd" />" />
 		</div>
-		<div>
+		<div class="th">
 			<input type="time" name="sales_time"
 				value="<fmt:formatDate value="${salesTime}" pattern="HH:mm" />" />
 		</div>
-		<div>
+		<div class="th">
 			店舗
 			<c:forEach items="${shopInfList}" var="shop">
 
@@ -40,9 +43,9 @@
 			</c:forEach>
 
 
-		</div>
+		</div >
 
-		<div>
+		<div class="th">
 			顧客種別
 			<c:forEach items="${customerCategolyList}" var="categoly">
 
@@ -56,11 +59,11 @@
 		</div>
 
 
-		<div>
+		<div class="th">
 			顧客名 <input type="text" name="customer_id"
 				value="<c:out value="${customerName}" />" />
 		</div>
-		<div>
+		<div class="th">
 			施術者 <select name="pic_id">
 				<c:forEach items="${picList}" var="p">
 					<option value="<c:out value="${p.id}" />"
@@ -72,7 +75,7 @@
 			</select>
 		</div>
 
-		<div>
+		<div class="th">
 			指名 <label> <input type="radio" name="sales_nomination"
 				value="フリー"
 				<c:out value="${salesNomination == 'フリー' ? 'checked' : ''}" /> />フリー
@@ -88,7 +91,7 @@
 
 		</div>
 
-		<div>
+		<div class="th">
 			支払方法 <label> <input type="radio" name="sales_payment"
 				value="現金"
 				<c:out value="${salesPayment == '現金' ? 'checked' : ''}" /> />現金
@@ -100,7 +103,7 @@
 		</div>
 
 
-		<div>
+		<div class="th">
 			コース <select name="course_id">
 				<c:forEach items="${courseList}" var="course">
 
@@ -115,7 +118,7 @@
 			</select>
 		</div>
 
-		<div>
+		<div class="th">
 			オプション <select name="option_id">
 
 				<c:forEach items="${optionList}" var="option">
@@ -130,7 +133,7 @@
 			</select>
 		</div>
 
-		<div>
+		<div class="th">
 			担当者 <select name="staff_id">
 			<c:forEach items="${staffList}" var="staff"  >
 			
@@ -147,21 +150,21 @@
 		</div>
 
 
-		<div>
+		<div class="th">
 			交通費 <input type="number" name="sales_carfare"
 				value="<c:out value="${salesCarfare}" />" />
 		</div>
 
-		<div>
+		<div class="th">
 			給与 <input type="number" name="sales_salary"
 				value="<c:out value="${salesSalary}" />" />
 		</div>
-		<div>
+		<div class="th">
 			経費 <input type="number" name="sales_cost"
 				value="<c:out value="${salesCost}" />" />
 		</div>
 
-		<div>
+		<div class="th">
 			広告媒体 <select name="ad_id">
 			<c:forEach items="${adList}" var="ad" >
 			
@@ -174,7 +177,7 @@
 		</div>
 
 
-		<div>
+		<div class="th">
 			割引名 <select name="discount_id">
 				<c:forEach items="${discountList}" var="discount" >
 				
@@ -189,17 +192,18 @@
 			</select>
 		</div>
 
-		<div>
+		<div class="th">
 			割引額 <input type="number" name="sales_discount_fee"
 				value="<c:out value="${salesDiscountFee}" />" />
 		</div>
+		<div class="th"> 
 		<input type="submit" value="更新" />
-
+</div>
 
 
 	</form>
-
-
+</div>
+</div>
 
 
 

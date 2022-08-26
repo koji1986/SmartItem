@@ -10,37 +10,40 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/table.css" />
 <title>従業員情報</title>
 
 </head>
 <body>
 <c:import url="nav.jsp" />
-	<div class="row">
-		<div class="col-2">従業員名</div>
+<div class="design04">
+	<div class="container">
+		<div class="item4 th">従業員名</div>
 
-		<div class="col-2">並び替え</div>
-		<div class="col-2">更新</div>
-		<div class="col-2">削除</div>
+		<div class="item4 th">並び替え</div>
+		<div class="item4 th">更新</div>
+		<div class="item4 th">削除</div>
 	</div>
 	<c:forEach items="${staffList}" var="staff">
 
 
 		<form action="" method="post">
 			<input type="hidden" name="id" value="<c:out value="${staff.id}" />" />
-			<div class="row">
+			<div class="container">
 
-				<div class="col-2">
+				<div class="item4 td">
 					<input type="text" name="staff_name"
 						value="<c:out value="${staff.staffName}" />" />
 				</div>
-				<div class="col-2">
+				<div class="item4 td">
 					<input type="number" name="staff_row"
 						value="<c:out value="${staff.staffRow}" />" />
 				</div>
-				<div class="col-2">
+				<div class="item4 td">
 					<input type="submit" name="update" value="更新" />
 				</div>
-				<div class="col-2">
+				<div class="item4 td">
 					<input type="submit" value="削除" />
 				</div>
 			</div>
@@ -48,7 +51,7 @@
 		</form>
 	</c:forEach>
 
-
+</div>
 
 </body>
 </html>
