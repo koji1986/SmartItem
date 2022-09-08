@@ -28,7 +28,7 @@ public class OptionDaoImpl implements OptionDao {
 			String sql = " select smart_item_db.option.id,option.shopInf_id, shop_inf.shopInf_name,\n"
 					+ "smart_item_db.option.option_name,smart_item_db.option.option_fee,\n"
 					+ "smart_item_db.option.option_row\n" + "from smart_item_db.option\n" + "join shop_inf\n"
-					+ "on smart_item_db.option.shopInf_id=shop_inf.id;";
+					+ "on smart_item_db.option.shopInf_id=shop_inf.id order by option_row asc;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -65,7 +65,16 @@ public class OptionDaoImpl implements OptionDao {
 
 	@Override
 	public void insert(Option option) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		Connection con = ds.getConnection();
+		String sql = "insert into smart_item_db.option (shopInf_id,option_name,option_fee,option_row)\n"
+				+ "values(?,?,?,?);";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setObject(1, option.getShopInfId(), Types.INTEGER);
+		stmt.setString(2, option.getOptionName());
+		stmt.setObject(3, option.getOptionFee(), Types.INTEGER);
+		stmt.setObject(4, option.getOptionRow(), Types.INTEGER);
+
+		stmt.executeUpdate();
 
 	}
 
@@ -90,7 +99,14 @@ public class OptionDaoImpl implements OptionDao {
 
 	@Override
 	public void delete(Option option) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM smart_item_db.option WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, option.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 

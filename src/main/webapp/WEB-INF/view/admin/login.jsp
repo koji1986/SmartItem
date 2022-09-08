@@ -8,19 +8,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/signin.css">
+  <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
 <title>ログイン画面</title>
 
 </head>
-<body>
+<body class="login">
 	 <div class="form-signin">
 	 <form  method="post">
-    <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt=""
-      width="72" height="72">
+
     <h1 class="h3 mb-3 font-weight-normal">ログイン</h1>
+      <c:if test="${not empty error}">
+					<p>
+						※
+						<c:out value="${error}" />
+					</p>
+				</c:if>
+    
     <label for="inputEmail" class="sr-only">ログインID</label>
-    <input type="text" id="inputEmail" name="loin_id" class="form-control" placeholder="ID" >
+    <input type="text"  name="login_id" class="form-control" placeholder="ID" >
+    <c:if test="${not empty loginIdError}">
+					<p>
+						※
+						<c:out value="${loginIdError}" />
+					</p>
+				</c:if>
     <label for="inputPassword" class="sr-only">パスワード</label>
-    <input type="password" id="inputPassword" name="login_pass" class="form-control" placeholder="パスワード" >
+    <input type="password"  name="login_pass" class="form-control" placeholder="パスワード" >
+    <c:if test="${not empty loginPassError}">
+					<p>
+						※
+						<c:out value="${loginPassError}" />
+					</p>
+				</c:if>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> パスワードを記憶しますか？

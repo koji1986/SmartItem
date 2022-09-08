@@ -18,43 +18,51 @@
 <body>
 	<c:import url="nav.jsp" />
 	<div class="design04">
-	<input type="date" name="salse_date" />
-	<label> <input type="radio" name="shop_name" value="1" />A店 <input
-		type="radio" name="shop_name" value="2" />B店
+		<form action="" method="post">
+			<input type="date" name="sales_date"
+				value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}" />" />
+			<div class="radio">
+				<div>
+					<input type="radio" name="search" value="s1" />A店
+				</div>
+				<div>
+					<input type="radio" name="search" value="s2" />B店
+				</div>
+				<div>
+					<input type="radio" name="search" value="" />全店舗
+				</div>
+			</div>
 
-	</label>
+			<label> <input type="radio" name="shop_nomination" value="1" />フリー
+				<input type="radio" name="shop_nomination" value="2" />NET指名 <input
+				type="radio" name="shop_nomination" value="3" />NET指名
 
-	<label> <input type="radio" name="shop_nomination" value="1" />フリー
-		<input type="radio" name="shop_nomination" value="2" />NET指名 <input
-		type="radio" name="shop_nomination" value="3" />NET指名
-
-	</label>
-	<select name="pic_name">
-		<option value="1">田中</option>
-		<option value="2">鈴木</option>
-		<option value="3">佐藤</option>
-
-
-	</select>
-
-	<p>
-		<input type="text" placeholder="会員NO" />
-	</p>
-	<p>
-		<input type="text" placeholder="顧客名" />
-	</p>
-	<p>
-		<input type="text" placeholder="電話番号" />
-	</p>
-
-	<input type="submit" value="絞り込み" />
-
-<p></p>
+			</label> <select name="pic_name">
+				<option value="1">田中</option>
+				<option value="2">鈴木</option>
+				<option value="3">佐藤</option>
 
 
+			</select>
 
-	<div class="container moji80">
-		
+			<p>
+				<input type="text" placeholder="会員NO" />
+			</p>
+			<p>
+				<input type="text" placeholder="顧客名" />
+			</p>
+			<p>
+				<input type="text" placeholder="電話番号" />
+			</p>
+
+			<input type="submit" value="絞り込み" />
+		</form>
+		<p></p>
+
+
+
+		<div class="container moji80">
+
 			<div class="item17 th">利用日時</div>
 			<div class="item17 th">店舗名</div>
 			<div class="item17 th">種別</div>
@@ -77,44 +85,96 @@
 			<div class="item17 th">削除</div>
 		</div>
 		<c:forEach items="${salesList}" var="sales">
-			<div class="container">
-			
-				<div class="item17 td moji80"> <fmt:formatDate pattern="yy/MM/dd hh:mm" value="${sales.salesDate}" /></div>
+			<form action="" method="post"
+				class="disp s<c:out value="${sales.shopInfId}" />">
+				<input type="hidden" name="id"
+					value="<c:out value="${sales.id}" />" />
+				<div class="container">
 
-				<div class="item17 td"><c:out value="${sales.shopInfName}" /></div>
-				<div class="item17 td"><c:out value="${sales.customerCategolyName}" /></div>
-				<div class="item17 td"><c:out value="${sales.customerName}" /></div>
-				<div class="item17 td"><c:out value="${sales.picName}" /></div>
-				<div class="item17 td moji80"><c:out value="${sales.courseName}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesNomination}" /></div>
-				<div class="item17 td"><c:out value="${sales.optionName}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesPayment}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesAmount}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesCarfare}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesSalary}" /></div>
-				<div class="item17 td"><c:out value="${sales.salesCost}" /></div>
-				<div class="item17 td"><c:out
-						value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" /></div>
+					<div class="item17 td moji80">
+						<fmt:formatDate pattern="yy/MM/dd" value="${sales.salesDate}" />
+						<fmt:formatDate pattern="HH:mm" value="${sales.salesTime}" />
+					</div>
 
-				<div class="item17 td"></div>
-				<div class="item17 td"><a href="sales/update?id=<c:out value="${sales.id}" />"><input
-						type="button" value="編集" /></a></div>
-			<div class="item17 td"><a href="sales/delete?id=<c:out value="${sales.id}" />"><input type="button" value="削除" /></a></div>
-			</div>
+					<div class="item17 td">
+						<c:out value="${sales.shopInfName}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.customerCategolyName}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.customerName}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.picName}" />
+					</div>
+					<div class="item17 td moji80">
+						<c:out value="${sales.courseName}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.salesNomination}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.optionName}" />
+					</div>
+					<div class="item17 td">
+						<c:out value="${sales.salesPayment}" />
+					</div>
+					<div class="item17 td">
+						<fmt:formatNumber value="${sales.salesAmount}" />
+					</div>
+					<div class="item17 td">
+						<fmt:formatNumber value="${sales.salesCarfare}" />
+					</div>
+					<div class="item17 td">
+						<fmt:formatNumber value="${sales.salesSalary}" />
+					</div>
+					<div class="item17 td">
+						<fmt:formatNumber value="${sales.salesCost}" />
+					</div>
+					<div class="item17 td">
+						<fmt:formatNumber
+							value="${sales.salesAmount-sales.salesSalary-sales.salesCost}" />
+					</div>
 
+					<div class="item17 td"></div>
+					<div class="item17 td">
+						<a href="sales/update?id=<c:out value="${sales.id}" />"><input
+							type="button" value="編集" /></a>
+					</div>
+					<div class="item17 td">
+						<a href="sales/delete?id=<c:out value="${sales.id}" />"><input
+							type="button" value="削除" /></a>
+					</div>
+				</div>
+			</form>
 		</c:forEach>
 
 
-<p></p>
-	
-
-	<p>
-		<input type="button" value="画面印刷" /> <input type="button"
-			value="画面出力" />
+		<p></p>
 
 
+		<p>
+			<input type="button" value="画面印刷" /> <input type="button"
+				value="画面出力" />
 
-	</p>
-</div>
+
+
+		</p>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("[name=search]").change(function() {
+					$(".disp").hide();
+					if ($(this).val() == "") {
+						$(".disp").show();
+					} else {
+						const selector = "." + $(this).val();
+						$(selector).show();
+					}
+				});
+			});
+		</script>
+	</div>
 </body>
 </html>

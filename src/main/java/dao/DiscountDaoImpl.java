@@ -26,7 +26,7 @@ public class DiscountDaoImpl implements DiscountDao {
 			Connection con = ds.getConnection();
 			String sql = " select discount.id, discount.shopInf_id, shop_inf.shopInf_name,discount.discount_name,\n"
 					+ "discount.discount_fee,discount_row\n" + "from discount\n"
-					+ "join shop_inf on discount.shopInf_id=shop_inf.id; ";
+					+ "join shop_inf on discount.shopInf_id=shop_inf.id order by discount_row asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -60,7 +60,18 @@ public class DiscountDaoImpl implements DiscountDao {
 
 	@Override
 	public void insert(Discount discount) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		Connection con = ds.getConnection();
+		String sql = "insert into discount(shopInf_id, discount_name,discount_fee,discount_row)\n"
+				+ "values(?,?,?,?);";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setObject(1, discount.getShopInfId(), Types.INTEGER);
+		stmt.setString(2, discount.getDiscountName());
+	
+		stmt.setObject(3, discount.getDiscountFee(), Types.INTEGER);
+		stmt.setObject(4, discount.getDiscountRow(), Types.INTEGER);
+
+		stmt.executeUpdate();
 
 	}
 
@@ -85,7 +96,14 @@ public class DiscountDaoImpl implements DiscountDao {
 
 	@Override
 	public void delete(Discount discount) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM discount WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, discount.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			throw e;
+			}
 
 	}
 

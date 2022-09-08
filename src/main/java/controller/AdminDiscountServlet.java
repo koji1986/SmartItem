@@ -60,6 +60,8 @@ public class AdminDiscountServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			Discount discount = new Discount();
+			DiscountDao discountDao = DaoFactory.createDiscountDao();
 			if (request.getParameter("update") != null) {
 				// 更新
 
@@ -71,7 +73,7 @@ public class AdminDiscountServlet extends HttpServlet {
 				Integer discountRow = Integer.parseInt(request.getParameter("discount_row"));
 
 				Integer discountId = Integer.parseInt(request.getParameter("id"));
-				Discount discount = new Discount();
+
 				discount.setShopInfId(shopInfId);
 				discount.setDiscountName(discountName);
 				discount.setDiscountFee(discountFee);
@@ -79,23 +81,34 @@ public class AdminDiscountServlet extends HttpServlet {
 				discount.setDiscountRow(discountRow);
 				discount.setId(discountId);
 
-				DiscountDao discountDao = DaoFactory.createDiscountDao();
 				discountDao.update(discount);
 				response.sendRedirect("discount");
-			} else {
+			} else if (request.getParameter("new") != null) {
+
+				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
+				String discountName = request.getParameter("discount_name");
+
+				Integer discountFee = Integer.parseInt(request.getParameter("discount_fee"));
+				Integer discountRow = Integer.parseInt(request.getParameter("discount_row"));
+
+				discount.setShopInfId(shopInfId);
+				discount.setDiscountName(discountName);
+				discount.setDiscountFee(discountFee);
+
+				discount.setDiscountRow(discountRow);
+
+				discountDao.insert(discount);
+				response.sendRedirect("discount");
+
+			}
+
+			else {
 				// 削除
 				Integer discountId = Integer.parseInt(request.getParameter("id"));
-				Discount discount = new Discount();
 
-				discount.setShopInfId(1);
-				discount.setDiscountName(null);
-				discount.setDiscountFee(0);
-
-				discount.setDiscountRow(0);
 				discount.setId(discountId);
 
-				DiscountDao discountDao = DaoFactory.createDiscountDao();
-				discountDao.update(discount);
+				discountDao.delete(discount);
 				response.sendRedirect("discount");
 
 			}

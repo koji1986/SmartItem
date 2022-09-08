@@ -31,10 +31,10 @@
 	border-right: solid 1px #778ca3;
 	border-top: solid 1px #778ca3;
 	flex: 1;
-	text-align: center; .
-	flex-c >div: last-child(1){ 
-	border-right: solid 1px #778ca3;
-	border-top: solid 1px #778ca3;
+	text-align: center; }
+	
+.flex-d:last-child{ 
+	
 	border-bottom: solid 1px #778ca3;
 }
 
@@ -47,9 +47,62 @@
 }
 
 .flex-item {
-	display: column;
+	display: flex;
 }
 
 .flex-item>div {
 	padding: 10px;
 }
+
+.flex-e{
+	border-bottom: solid 1px #778ca3;
+	
+}
+
+.f-a{
+	border-right: solid 1px #778ca3;
+	
+}
+
+.f-b{
+border-bottom: solid 1px #778ca3;	
+}
+
+.f-c {
+	display: flex;
+	justify-content: space-around;
+	border-bottom: solid 1px #778ca3;
+	border-right: solid 1px #778ca3;
+	border-left: solid 1px #778ca3;
+	text-align: center;
+}
+
+.f-d{
+	display: flex;
+}
+
+.f-d>div {
+	border-right: solid 1px #778ca3;
+	
+	flex: 1;
+	text-align: center; }
+
+.f-e{
+	border-left: solid 1px #778ca3;
+}
+.f-f{
+	border-bottom: solid 1px #778ca3;	
+	border-right: solid 1px #778ca3;
+}
+
+.ko{
+	 flex-grow: 1;
+	
+	
+}
+
+.f-g{
+	border-top: solid 1px #778ca3;	
+	
+}
+

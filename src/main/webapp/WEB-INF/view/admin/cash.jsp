@@ -5,85 +5,130 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="<%=request.getContextPath()%>/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/style.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/tableCourse.css" />
 <title>レジ</title>
 
 </head>
 <body>
 	<c:import url="nav.jsp" />
 
-	<div>
+	<div class="design04">
 		<h1>レジ</h1>
-	</div>
-	<form action="" method="get">
-		<div>
-			<input type="date" name="cash_day" /> <input type="submit"
-				value="絞り込み" />
+
+		<div class="flex-containerTate">
+			<form action="" method="get">
+				<div class="wide30">
+
+					<div>
+						<input type="date" name="cash_day" 
+						value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}" />"/>
+					</div>
+					<div>
+						<input type="submit" value="絞り込み" />
+					</div>
+				</div>
+			</form>
+
+			<div class="container">
+
+
+				<div class="th item13">日付</div>
+				<div class="th item13">時間</div>
+				<div class="th item13">店舗名</div>
+				<div class="th item13">施術者名1</div>
+				<div class="th item13">施術者名2</div>
+				<div class="th item13">釣銭</div>
+				<div class="th item13">売上</div>
+				<div class="th item13">担当者</div>
+				<div class="th item13">給与</div>
+				<div class="th item13">支払済</div>
+				<div class="th item13">雑費</div>
+				<div class="th item13">更新</div>
+				<div class="th item13">削除</div>
+
+			</div>
+			<c:forEach items="${cashList}" var="cash">
+				<form action="" method="post">
+					<input type="hidden" name="id" value="<c:out value="${cash.id}" />" />
+<input type="hidden" name="cash_day" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${date}" />"/>
+
+					<div class="container">
+
+						<div class="td item13">
+							<fmt:formatDate pattern="yy-MM-dd" value="${cash.cashDate}" />
+						</div>
+						<div class="td item13">
+							<fmt:formatDate pattern="HH:mm" value="${cash.salesTime}" />
+						</div>
+						<div class="td item13">
+							<c:out value="${cash.shopInfName}" />
+						</div>
+						<div class="td item13">
+							<c:out value="${cash.picNameA}" />
+						</div>
+						<div class="td item13"></div>
+						<div class="td item13">
+							<input type="number" name="cash_change"
+								value="<c:out value="${cash.cashChange}" />" />
+						</div>
+						<div class="td item13">
+							<fmt:formatNumber value="${cash.salesAmount}" />
+						</div>
+						<div class="td item13">
+							<c:out value="${cash.staffName}" />
+						</div>
+						<div class="td item13">
+							<fmt:formatNumber value="${cash.salesSalary}" />
+						</div>
+						<div class="td item13">
+							<label><input type="radio" name="salary_done" value="1"
+								<c:out value="${cash.salaryDone == 1 ? 'checked' : '' }" /> />未</label>
+							<label> <input type="radio" name="salary_done" value="2"
+								<c:out value="${cash.salaryDone == 2 ? 'checked' : ''}" /> />済
+							</label>
+						</div>
+						<div class="td item13">
+							<input type="number" name="cash_cost"
+								value="<c:out value="${cash.cashCost}" />" />
+						</div>
+						<div class="td item13">
+							<input type="submit" name="update" value="更新" />
+
+						</div>
+						<div class="td item13">
+							<input type="submit" value="削除" />
+						</div>
+
+
+					</div>
+				</form>
+			</c:forEach>
+
+
+
+
+
+
+
+
+
+			<div class="container">
+				<div class="regi">
+					<div class="item1 th">現在レジ金</div>
+
+
+					<div class="item1 td"><fmt:formatNumber value="${totalCash}" />円</div>
+				</div>
+
+
+			</div>
 		</div>
-	</form>
-
-	<form action="" method="post">
-		<div>
-			<table border="1">
-				<tr>
-					<td>日付</td>
-					<td>時間</td>
-					<td>店舗名</td>
-					<td>施術者名1</td>
-					<td>施術者名2</td>
-					<td>釣銭</td>
-					<td>売上</td>
-					<td>担当者</td>
-					<td>給与</td>
-					<td>支払済</td>
-					<td>雑費</td>
-					<td>更新</td>
-					<td>削除</td>
-				</tr>
-
-				<c:forEach items="${cashList}" var="cash">
-
-					<tr>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${cash.cashDate}" /></td>
-						<td><fmt:formatDate pattern="HH:mm" value="${cash.salesTime}" /></td>
-						<td><c:out value="${cash.shopInfName}" /></td>
-						<td><c:out value="${cash.picNameA}" /></td>
-						<td></td>
-						<td><input type="number" name="cash_change"
-							value="<c:out value="${cash.cashChange}" />" /></td>
-						<td><c:out value="${cash.salesAmount}" /></td>
-						<td><c:out value="${cash.staffName}" /></td>
-						<td><c:out value="${cash.salesSalary}" /></td>
-						<td>トグルでON・OFF</td>
-						<td><input type="number" name="cash_cost"
-							value="<c:out value="${cash.cashCost}" />" /></td>
-						<td><a href="cash/update?id=<c:out value="${cash.id}" />">
-								<input type="button" value="更新" />
-						</a></td>
-						<td><a href="sales/delete?id=<c:out value="${sales.id}" />"><input
-								type="button" value="削除" /></a></td>
-					</tr>
-
-				</c:forEach>
-
-
-			</table>
-
-
-		</div>
-
-
-
-	</form>
-	<div>
-		<table border="1">
-			<tr>
-				<th>現在レジ金</th>
-			</tr>
-			<tr>
-				<th></th>
-			</tr>
-
-		</table>
 	</div>
 
 </body>

@@ -10,15 +10,18 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Input.css" />
 <title>施術者入力</title>
 
 </head>
-<body>
+<body class="picInput">
 	<c:import url="../nav.jsp" />
+	<div class="design04">
 	<form action="" method="post">
-
-		<div>店舗A</div>
-		<div>
+<div class="container">
+		<div class="item th">店舗A</div>
+		<div class="item th">
 			施術者ランク <select name="picRank_idA">
 				<c:forEach items="${picRankList}" var="rank">
 					<option value="<c:out value="${rank.id}" />">
@@ -28,14 +31,20 @@
 
 			</select>
 		</div>
-		<div>
+		<div  class="item th">
 			施術者名1 <input type="text" name="pic_nameA" />
+			<c:if test="${not empty picNameAError}">
+					<p>
+						※
+						<c:out value="${picNameAError}" />
+					</p>
+				</c:if>
 		</div>
-		<div>
+		<div class="item th">
 			ふりがな <input type="text" name="pic_kanaA" />
 		</div>
-		<div>店舗B</div>
-		<div>
+		<div class="item th">店舗B</div>
+		<div class="item th">
 			施術者ランク <select name="picRank_idB">
 				<c:forEach items="${picRankList}" var="rank">
 					<option value="<c:out value="${rank.id}" />">
@@ -45,37 +54,44 @@
 
 			</select>
 		</div>
-		<div>
+		<div class="item th">
 			施術者名2 <input type="text" name="pic_nameB" />
 		</div>
-		<div>
+		<div class="item th">
 			ふりがな <input type="text" name="pic_kanaB" />
 		</div>
 
-		<div>
+		<div class="item th">
 			電話番号 <input type="tel" name="pic_phone_number" />
 		</div>
-		<div>
+		<div class="item th">
 			メールアドレス <input type="email" name="pic_email" />
 		</div>
-		<div>
+		<div class="item th">
 			住所 <input type="text" name="pic_address" />
 		</div>
-		<div>
+		<div class="item th">
 			入店日 <input type="date" name="pic_entry_day" />
+			<c:if test="${not empty entryDayError}">
+					<p>
+						※
+						<c:out value="${entryDayError}" />
+					</p>
+				</c:if>
 		</div>
-		<div>
+		<div class="item th">
 			退店日 <input type="date" name="pic_out_day" />
+			
 		</div>
-		<div>
+		<div class="item th">
 			注意事項
 			<textarea name="pic_memo" cols="30" rows="10"></textarea>
 		</div>
-		<div>
+		<div class="item th">
 			<input type="submit" value="登録" />
 		</div>
-
+</div>
 	</form>
-
+</div>
 </body>
 </html>

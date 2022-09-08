@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -21,8 +22,19 @@ public class AdminsDaoImpl implements AdminsDao {
 
 	@Override
 	public List<Admins> findAll() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		List<Admins> adminsList = new ArrayList<>();
+		try {
+			Connection con = ds.getConnection();
+			String sql = " select*from admins; ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				adminsList.add(mapToAdmin(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return adminsList;
 	}
 
 	@Override
@@ -88,6 +100,7 @@ public class AdminsDaoImpl implements AdminsDao {
 		 admin.setId((Integer) rs.getObject("id"));
 		 admin.setLoginId(rs.getString("login_id")); 
 		 admin.setLoginPass(rs.getString("login_pass"));
+		 admin.setLoginName(rs.getString("login_name"));
 		 return admin;
 		 } 
 	}

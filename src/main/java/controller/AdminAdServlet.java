@@ -55,31 +55,46 @@ public class AdminAdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			Ad ad = new Ad();
+			AdDao adDao = DaoFactory.createAdDao();
 			if (request.getParameter("update") != null) {
 				// 更新
 				String adName = request.getParameter("ad_name");
 				Integer adRow = Integer.parseInt(request.getParameter("ad_row"));
 				Integer adId = Integer.parseInt(request.getParameter("id"));
 
-				Ad ad = new Ad();
+			
 
 				ad.setAdName(adName);
 
 				ad.setAdRow(adRow);
 				ad.setId(adId);
 
-				AdDao adDao = DaoFactory.createAdDao();
+			
 				adDao.update(ad);
 				response.sendRedirect("ad");
+			} else if (request.getParameter("new") != null) {
+
+			
+				String adName = request.getParameter("ad_name");
+
+			
+				Integer adRow = Integer.parseInt(request.getParameter("ad_row"));
+
+			
+				ad.setAdName(adName);
+			
+				ad.setAdRow(adRow);
+
+				adDao.insert(ad);
+				response.sendRedirect("ad");
+
 			} else {
-				Integer adId = Integer.parseInt(request.getParameter("id"));
-				Ad ad = new Ad();
-				ad.setId(adId);
-				ad.setAdName(null);
-				ad.setAdRow(0);
 				// 削除
-				AdDao adDao = DaoFactory.createAdDao();
-				adDao.update(ad);
+				Integer adId = Integer.parseInt(request.getParameter("id"));
+
+				ad.setId(adId);
+				adDao.delete(ad);
 				response.sendRedirect("ad");
 			}
 		} catch (Exception e) {

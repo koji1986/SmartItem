@@ -55,31 +55,50 @@ public class AdminStaffServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			Staff staff = new Staff();
+			StaffDao staffDao = DaoFactory.createStaffDao();
 			if (request.getParameter("update") != null) {
 				// 更新
 				String staffName = request.getParameter("staff_name");
 				Integer staffRow = Integer.parseInt(request.getParameter("staff_row"));
 				Integer staffId = Integer.parseInt(request.getParameter("id"));
 
-				Staff staff = new Staff();
+				
 
 				staff.setStaffName(staffName);
 
 				staff.setStaffRow(staffRow);
 				staff.setId(staffId);
 
-				StaffDao staffDao = DaoFactory.createStaffDao();
+				
 				staffDao.update(staff);
 				response.sendRedirect("staff");
-			} else {
+			}else if (request.getParameter("new") != null) {
+
+			
+				String staffName = request.getParameter("staff_name");
+
+			
+				Integer staffRow = Integer.parseInt(request.getParameter("staff_row"));
+
+			
+				staff.setStaffName(staffName);
+			
+				staff.setStaffRow(staffRow);
+
+				staffDao.insert(staff);
+				response.sendRedirect("staff");
+
+			}  
+			
+			else {
 				Integer staffId = Integer.parseInt(request.getParameter("id"));
-				Staff staff = new Staff();
+				
 				staff.setId(staffId);
-				staff.setStaffName(null);
-				staff.setStaffRow(0);
+				
 				// 削除
-				StaffDao staffDao = DaoFactory.createStaffDao();
-				staffDao.update(staff);
+				
+				staffDao.delete(staff);
 				response.sendRedirect("staff");
 			}
 		} catch (Exception e) {

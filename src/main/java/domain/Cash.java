@@ -17,6 +17,7 @@ public class Cash {
 	private Integer staffId;
 	private String staffName;
 	private Integer cashCost;
+	private Integer salaryDone;
 
 	public Cash() {
 		super();
@@ -142,6 +143,14 @@ public class Cash {
 
 	public void setPicId(Integer picId) {
 		this.picId = picId;
+	}
+
+	public Integer getSalaryDone() {
+		return salaryDone;
+	}
+
+	public void setSalaryDone(Integer salaryDone) {
+		this.salaryDone = salaryDone;
 	}
 
 	

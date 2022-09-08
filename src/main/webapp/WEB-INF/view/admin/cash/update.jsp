@@ -7,24 +7,36 @@
 <meta charset="UTF-8">
 <title>TITLE</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/style.css">
+	href="<%=request.getContextPath()%>/css/tableCourse.css">
 </head>
 <body>
+<c:import url="../nav.jsp" />
 	<form action="" method="post">
-		<table border="1">
-			<tr>
-				<th>釣銭</th>
-				<td><input type="number" name="cash_change"
-					value="<c:out value="${cashChange}" />" /></td>
-			</tr>
-			<tr>
-				<th>雑費</th>
-				<td><input type="number" name="cash_cost"
-					value="<c:out value="${cashCost}" />" /></td>
-			</tr>
+		<div class="design04">
+		<div class="wide30">
+			<div class="container">
 
-		</table>
-		<input type="submit" value="更新" />
+				<div class="item2 th">釣銭</div>
+				<div class="item2 td last">
+					<input type="number" name="cash_change"
+						value="<c:out value="${cashChange}" />" />
+				</div>
+			</div>
+			<div class="container">
+				<div class="item2 th">雑費</div>
+				<div class="item2 td">
+					<input type="number" name="cash_cost"
+						value="<c:out value="${cashCost}" />" />
+				</div>
+			</div>
+
+
+
+<p></p>
+
+			<input type="submit" value="更新" />
+
+		</div></div>
 	</form>
 </body>
 </html>

@@ -31,7 +31,8 @@ public class AdminPicServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 * @see HttpServlet#doGet(HttpServletRequest request, Ht
+	 * tpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -10,60 +10,64 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Input.css" />
 <title>顧客情報入力</title>
 
 </head>
-<body>
+<body class="cutomerInput">
 <c:import url="../nav.jsp" />
+<div class="design04">
 	<form action="" method="post">
-
-		<div>
+<div class="container">
+		<div class="item th">
 			会員NO <input type="text" name="customer_no" />
 		</div>
-		<div>
-			会員名 <input type="text" name="customer_name" />
+		<div class="item th">
+			会員名 <input type="text" name="customer_name" required/>
+			
 		</div>
-		<div>
+		<div class="item th">
 			ふりがな <input type="text" name="customer_kana" />
 		</div>
-		<div>
+		<div class="item th">
 			電話番号1 <input type="tel" name="customer_phone_number1" />
 		</div>
-		<div>
+		<div class="item th">
 			電話番号2 <input type="tel" name="customer_phone_number2" />
 		</div>
-		<div>
+		<div class="item th">
 			電話番号3 <input type="tel" name="customer_phone_number3" />
 		</div>
-		<div>
+		<div class="item th">
 			メールアドレス <input type="email" name="customer_email" />
 		</div>
-		<div>
+		<div class="item th">
 			住所1 <input type="text" name="customer_address1" />
 		</div>
-		<div>
+		<div class="item th">
 			住所2 <input type="text" name="customer_address2" />
 		</div>
 
-		<div>
+		<div class="item th">
 			クレジットカード番号 <input type="text" name="customer_credit_number" />
 		</div>
-		<div>
+		<div class="item th">
 			有効期限 <input type="text" name="customer_credit_date" />
 		</div>
-		<div>
+		<div class="item th">
 			cvv <input type="number" name="customer_credit_cvv" />
 		</div>
-		<div>
+		<div class="item th">
 			注意事項
 			<textarea name="customer_memo" cols="30" rows="10"></textarea>
 		</div>
-		<div>
+		<div class="item th">
 			<input type="submit" value="登録" />
 		</div>
 
-
+</div>
 	</form>
-
+</div>
 </body>
 </html>

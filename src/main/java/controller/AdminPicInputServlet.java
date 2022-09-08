@@ -59,6 +59,39 @@ public class AdminPicInputServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			PicRankDao picRankDao = DaoFactory.createPicRankDao();
+			List<PicRank> picRankList = picRankDao.findAll();
+			request.setAttribute("picRankList", picRankList);
+			boolean isError = false; 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date picEntryDay =new Date();
+			Date picOutDay =new Date();
+			
+			if(request.getParameter("pic_nameA").isBlank()) {
+				request.setAttribute("picNameAError", "名前が未入力です。");
+				 isError = true; // 入力に不備ありと判定
+			}
+			
+			if (request.getParameter("pic_entry_day").isBlank()) {
+				 // エラーメッセージの作成
+				 request.setAttribute("entryDayError", "入社日が未入力です。");
+				 isError = true; // 入力に不備ありと判定
+				 } 
+			else {picEntryDay = sdf.parse(request.getParameter("pic_entry_day"));}
+			
+			if (request.getParameter("pic_out_day").isBlank()) {
+				picOutDay=null;
+			} 
+			else {picOutDay = sdf.parse(request.getParameter("pic_out_day"));}
+			
+			if (isError == true) {
+				
+				 request.getRequestDispatcher("/WEB-INF/view/admin/pic/input.jsp")
+				 .forward(request, response);
+				 return;
+				 } 
+			
+			
 			Integer picRankIdA = Integer.parseInt(request.getParameter("picRank_idA"));
 			String picNameA = request.getParameter("pic_nameA");
 			String picKanaA = request.getParameter("pic_kanaA");
@@ -70,9 +103,8 @@ public class AdminPicInputServlet extends HttpServlet {
 			String picEmail = request.getParameter("pic_email");
 			String picAddress = request.getParameter("pic_address");
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date picEntryDay = sdf.parse(request.getParameter("pic_entry_day"));
-			Date picOutDay = sdf.parse(request.getParameter("pic_out_day"));
+			
+			
 
 			String picMemo = request.getParameter("pic_memo");
 

@@ -50,6 +50,10 @@ public class AdminCourseServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 
+		if (request.getParameter("new") != null) {
+
+		}
+
 	}
 
 	/**
@@ -59,8 +63,11 @@ public class AdminCourseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+
+			Course course = new Course();
+			CourseDao courseDao = DaoFactory.createCourseDao();
 			if (request.getParameter("update") != null) {
-			// 更新
+				// 更新
 
 				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
 				String courseName = request.getParameter("course_name");
@@ -70,7 +77,7 @@ public class AdminCourseServlet extends HttpServlet {
 				Integer courseRow = Integer.parseInt(request.getParameter("course_row"));
 
 				Integer courseId = Integer.parseInt(request.getParameter("id"));
-				Course course = new Course();
+
 				course.setShopInfId(shopInfId);
 				course.setCourseName(courseName);
 				course.setCourseFee(courseFee);
@@ -78,28 +85,36 @@ public class AdminCourseServlet extends HttpServlet {
 				course.setCourseRow(courseRow);
 				course.setId(courseId);
 
-				CourseDao courseDao = DaoFactory.createCourseDao();
 				courseDao.update(course);
 				response.sendRedirect("course");
-		} else {
-			// 削除
-			Integer courseId = Integer.parseInt(request.getParameter("id"));
-			Course course = new Course();
-			course.setShopInfId(1);
-			course.setCourseName(null);
-			course.setCourseFee(0);
-			course.setCourseTime(0);
-			course.setCourseRow(0);
-			course.setId(courseId);
+			} else if (request.getParameter("new") != null) {
 
-			CourseDao courseDao = DaoFactory.createCourseDao();
-			courseDao.update(course);
-			response.sendRedirect("course");
-		}
+				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
+				String courseName = request.getParameter("course_name");
+
+				Integer courseFee = Integer.parseInt(request.getParameter("course_fee"));
+				Integer courseTime = Integer.parseInt(request.getParameter("course_time"));
+				Integer courseRow = Integer.parseInt(request.getParameter("course_row"));
+
+				course.setShopInfId(shopInfId);
+				course.setCourseName(courseName);
+				course.setCourseFee(courseFee);
+				course.setCourseTime(courseTime);
+				course.setCourseRow(courseRow);
+
+				courseDao.insert(course);
+				response.sendRedirect("course");
+
+			} else {
+				// 削除
+				Integer courseId = Integer.parseInt(request.getParameter("id"));
+
+				course.setId(courseId);
+				courseDao.delete(course);
+				response.sendRedirect("course");
+			}
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-
 	}
-
 }

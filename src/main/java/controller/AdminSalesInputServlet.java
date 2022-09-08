@@ -65,27 +65,101 @@ public class AdminSalesInputServlet extends HttpServlet {
 			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 
-			Date salesTime = sdfTime.parse(request.getParameter("sales_time"));
-			Date salesDate = sdfDate.parse(request.getParameter("sales_date"));
+			Date salesTime = new Date();
+			if (request.getParameter("sales_time") == null || request.getParameter("sales_time").isBlank()) {
+			} else {
+				salesTime = sdfTime.parse(request.getParameter("sales_time"));
+			}
+			Date salesDate = new Date();
+			if (request.getParameter("sales_date") == null || request.getParameter("sales_date").isBlank()) {
+			} else {
+				salesDate = sdfDate.parse(request.getParameter("sales_date"));
+			}
+			Integer shopInfId = 1;
+			if (request.getParameter("shopInf_id") == null) {
+			} else {
+				shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
+			}
+			Integer customerCategolyId = 1;
+			if (request.getParameter("customerCategoly_id") == null) {
+			} else {
+				customerCategolyId = Integer.parseInt(request.getParameter("customerCategoly_id"));
+			}
+			Integer customerId = 1;
+			if (request.getParameter("customer_id") == null || request.getParameter("customer_id").isBlank()) {
+			} else {
+				customerId = Integer.parseInt(request.getParameter("customer_id"));
+			}
+			Integer picId = 1;
+			if (request.getParameter("pic_id") == null) {
+			} else {
+				picId = Integer.parseInt(request.getParameter("pic_id"));
+			}
+			
+			String salesNomination ="フリー";
+			if(request.getParameter("sales_nomination")==null) {
+				
+			}else {
+			salesNomination = request.getParameter("sales_nomination");
+			}
+			String salesPayment = "現金";
+			if(request.getParameter("sales_payment")==null) {
+				
+			}else {
+			salesPayment = request.getParameter("sales_payment");
+			}
+			Integer courseId = 1;
+			if (request.getParameter("course_id") == null) {
+			} else {
+				courseId = Integer.parseInt(request.getParameter("course_id"));
+			}
 
-			Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
-			Integer customerCategolyId = Integer.parseInt(request.getParameter("customerCategoly_id"));
-			Integer customerId = Integer.parseInt(request.getParameter("customer_id"));
-			Integer picId = Integer.parseInt(request.getParameter("pic_id"));
-			String salesNomination = request.getParameter("sales_nomination");
-			String salesPayment = request.getParameter("sales_payment");
-			Integer courseId = Integer.parseInt(request.getParameter("course_id"));
-			Integer optionId = Integer.parseInt(request.getParameter("option_id"));
-			Integer staffId = Integer.parseInt(request.getParameter("staff_id"));
-			Integer salesAmount = Integer.parseInt(request.getParameter("sales_amount"));
-
-			Integer salesCarfare = Integer.parseInt(request.getParameter("sales_carfare"));
-			Integer salesSalary = Integer.parseInt(request.getParameter("sales_salary"));
-			Integer salesCost = Integer.parseInt(request.getParameter("sales_cost"));
-			Integer adId = Integer.parseInt(request.getParameter("ad_id"));
-			Integer discountId = Integer.parseInt(request.getParameter("discount_id"));
-			Integer salesDiscountFee = Integer.parseInt(request.getParameter("sales_discount_fee"));
-
+			Integer optionId = 1;
+			if (request.getParameter("option_id") == null) {
+			} else {
+				optionId = Integer.parseInt(request.getParameter("option_id"));
+			}
+			Integer staffId = 1;
+			if (request.getParameter("staff_id") == null) {
+			} else {
+				staffId = Integer.parseInt(request.getParameter("staff_id"));
+			}
+			Integer salesAmount = 0;
+			if (request.getParameter("sales_amount") == null || request.getParameter("sales_amount").isBlank()) {
+			} else {
+				salesAmount = Integer.parseInt(request.getParameter("sales_amount"));
+			}
+			Integer salesCarfare = 0;
+			if (request.getParameter("sales_carfare") == null || request.getParameter("sales_carfare").isBlank()) {
+			} else {
+				salesCarfare = Integer.parseInt(request.getParameter("sales_carfare"));
+			}
+			Integer salesSalary = 0;
+			if (request.getParameter("sales_salary") == null || request.getParameter("sales_salary").isBlank()) {
+			} else {
+				salesSalary = Integer.parseInt(request.getParameter("sales_salary"));
+			}
+			Integer salesCost = 0;
+			if (request.getParameter("sales_cost") == null || request.getParameter("sales_cost").isBlank()) {
+			} else {
+				salesCost = Integer.parseInt(request.getParameter("sales_cost"));
+			}
+			Integer adId = 1;
+			if (request.getParameter("ad_id") == null) {
+			} else {
+				adId = Integer.parseInt(request.getParameter("ad_id"));
+			}
+			Integer discountId = 1;
+			if (request.getParameter("discount_id") == null) {
+			} else {
+				discountId = Integer.parseInt(request.getParameter("discount_id"));
+			}
+			
+			Integer salesDiscountFee =0;
+			if(request.getParameter("sales_discount_fee").isBlank()) {
+			}else {
+			salesDiscountFee = Integer.parseInt(request.getParameter("sales_discount_fee"));
+			}
 			Sales sales = new Sales();
 			sales.setSalesDate(salesDate);
 			sales.setSalesTime(salesTime);
@@ -105,7 +179,7 @@ public class AdminSalesInputServlet extends HttpServlet {
 			sales.setAdId(adId);
 			sales.setDiscountId(discountId);
 			sales.setSalesDiscountFee(salesDiscountFee);
-			
+
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			salesDao.insert(sales);
 			response.sendRedirect("../sales");

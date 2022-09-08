@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import dao.AdminsDao;
 import dao.DaoFactory;
 import domain.Admins;
@@ -40,18 +42,65 @@ public class AdminAccountCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			boolean isError = false; 
+			
 		String loginName =request.getParameter("login_name");
-		String loginPhoneNumber =request.getParameter("login_phone_number");
-		String loginEmail =request.getParameter("login_email");
-		String loginId =request.getParameter("login_id");
-		String loginPass =request.getParameter("login_pass");
 		
+		if (loginName.isBlank()) {
+			 // エラーメッセージの作成
+			 request.setAttribute("nameError", "名前が未入力です。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		
+		String loginPhoneNumber =request.getParameter("login_phone_number");
+		
+		if (loginPhoneNumber.isBlank()) {
+			 // エラーメッセージの作成
+			 request.setAttribute("loginPhoneNumberError", "電話番号が未入力です。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		
+		String loginEmail =request.getParameter("login_email");
+		if (loginEmail.isBlank()) {
+			 // エラーメッセージの作成
+			 request.setAttribute("loginEmailError", "メールアドレスが未入力です。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		String loginId =request.getParameter("login_id");
+		if (loginId.isBlank()) {
+			 // エラーメッセージの作成
+			 request.setAttribute("loginIdError", "ログインIDが未入力です。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		String loginPass =request.getParameter("login_pass");
+		if (loginPass.isBlank()) {
+			 // エラーメッセージの作成
+			 request.setAttribute("loginPassError", "ログインパスワードが未入力です。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		String loginPass2 =request.getParameter("login_pass2");
+		
+		
+		if (!(loginPass.equals(loginPass2))) {
+			 // エラーメッセージの作成
+			 request.setAttribute("loginPass2Error", "確認用のパスワードが違います。");
+			 isError = true; // 入力に不備ありと判定
+			 } 
+		
+		String hashed = BCrypt.hashpw
+				(loginPass, BCrypt.gensalt());
 		Admins admins = new Admins();
 		admins.setLoginName(loginName);
 		admins.setLoginPhoneNumber(loginPhoneNumber);
 		admins.setLoginEmail(loginEmail);
 		admins.setLoginId(loginId);
-		admins.setLoginPass(loginPass);
+		admins.setLoginPass(hashed);
+		
+		if (isError == true) {
+			 request.getRequestDispatcher("/WEB-INF/view/admin/accountCreate.jsp")
+			 .forward(request, response);
+			 return;
+			 } 
 		
 		AdminsDao adminsDao = DaoFactory.createAdminsDao();
 			adminsDao.insert(admins);

@@ -1,2 +1,64 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 
+.sales{
+	background-image:url("../image/売上一覧.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+}
+
+.salesInput{
+background-image:url("../image/売上入力.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+}
+
+.costInput{
+	background-image:url("../image/経費入力.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+	
+}
+.costUpdate{
+	background-image:url("../image/経費編集.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+}
+.cutomerInput{
+	background-image:url("../image/顧客入力.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+	
+}
+.cutomerUpdate{
+	background-image:url("../image/顧客編集.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+	
+}
+.picUpdate{
+	background-image:url("../image/施術者編集.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+	
+}
+.picInput{
+	background-image:url("../image/施術者入力.png");
+background-color: #bfb4b4;
+ background-size: cover; 
+	
+}
+
+.login{background-image:url("../image/表紙動画縮小版.gif");
+
+ background-size: cover; 
+	
+}
+
+.radio{
+	display:flex;
+	justify-content: center;
+	
+}
+
+
+}

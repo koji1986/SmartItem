@@ -44,6 +44,7 @@ public class AdminCustomerInputServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String customerNo = request.getParameter("customer_no");
+			
 			String customerName = request.getParameter("customer_name");
 			String customerKana = request.getParameter("customer_kana");
 			String customerPhoneNumber1 = request.getParameter("customer_phone_number1");

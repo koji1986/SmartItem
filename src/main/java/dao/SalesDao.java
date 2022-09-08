@@ -19,12 +19,20 @@ public interface SalesDao {
 	List<Sales> findAll() throws Exception;
 	
 	List<Sales> findByDate(Date salesDate) throws Exception;
+
+	List<Sales> findByDateOderAd(Date salesDate) throws Exception;
 	
-	List<Sales> findByDateAd(Date salesDate,Integer AdId) throws Exception;
+	List<Sales> findByDateAd(Date salesDate) throws Exception;
+	
+	List<Sales> findByDatePicId(Date salesDate,Integer picId) throws Exception;
+	
 
 	Sales findById(Integer id) throws Exception;
 
+
 	void insert(Sales sales) throws Exception;
+	
+	void insertUseReport(Sales sales) throws Exception;
 
 	void update(Sales sales) throws Exception;
 
@@ -41,6 +49,7 @@ public interface SalesDao {
 	List<Ad> findAllAd() throws Exception;
 	List<Discount> findAllDiscount() throws Exception;
 	
+
 	
 	
 

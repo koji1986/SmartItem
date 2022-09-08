@@ -25,10 +25,12 @@ public class CashDaoImpl implements CashDao {
 		List<Cash> cashList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "from cash \n" + "join staff on cash.staff_id=staff.id \n"
-					+ "join sales on cash.sales_id = sales.id\n" + "join shop_inf on sales.shopInf_id = shop_inf.id \n"
-					+ "join  pic on sales.pic_id= pic.id; ";
+			String sql = "  select sales.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, sales.cash_change,staff.staff_name,sales.cash_cost,sales.salary_done \r\n"
+					+ "					 from sales   \r\n"
+					+ "                     left join cash on cash.sales_id = sales.id  \r\n"
+					+ "                     left join staff on cash.staff_id=staff.id \r\n"
+					+ "                     left join shop_inf on sales.shopInf_id = shop_inf.id \r\n"
+					+ "					 left join  pic on sales.pic_id= pic.id;  ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -45,10 +47,12 @@ public class CashDaoImpl implements CashDao {
 		Cash cash = new Cash();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "from cash \n" + "join staff on cash.staff_id=staff.id \n"
-					+ "join sales on cash.sales_id = sales.id\n" + "join shop_inf on sales.shopInf_id = shop_inf.id \n"
-					+ "join  pic on sales.pic_id= pic.id where cash.id=?; ";
+			String sql = "  select sales.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, sales.cash_change,staff.staff_name,sales.cash_cost,sales.salary_done \r\n"
+					+ "					 from sales   \r\n"
+					+ "                     left join cash on cash.sales_id = sales.id  \r\n"
+					+ "                     left join staff on cash.staff_id=staff.id \r\n"
+					+ "                     left join shop_inf on sales.shopInf_id = shop_inf.id \r\n"
+					+ "					 left join  pic on sales.pic_id= pic.id  where sales.id=?; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, id, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -71,13 +75,14 @@ public class CashDaoImpl implements CashDao {
 	public void update(Cash cash) throws Exception {
 		try {
 			Connection con = ds.getConnection();
-			String sql = "    update cash set  cash_change=?, cash_cost=? where id=?;";
+			String sql = "    update sales set  cash_change=?, cash_cost=? ,salary_done=? where id=?;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setObject(1, cash.getCashChange(), Types.INTEGER);
 
 			stmt.setObject(2, cash.getCashCost(), Types.INTEGER);
-			stmt.setObject(3, cash.getId(), Types.INTEGER);
+			stmt.setObject(3, cash.getSalaryDone(), Types.INTEGER);
+			stmt.setObject(4, cash.getId(), Types.INTEGER);
 
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -109,6 +114,7 @@ public class CashDaoImpl implements CashDao {
 		cash.setSalesSalary((Integer) rs.getObject("sales_salary"));
 		cash.setCashChange((Integer) rs.getObject("cash_change"));
 		cash.setCashCost((Integer) rs.getObject("cash_cost"));
+		cash.setSalaryDone((Integer) rs.getObject("salary_done"));
 
 		return cash;
 
@@ -120,10 +126,12 @@ public class CashDaoImpl implements CashDao {
 
 		try {
 			Connection con = ds.getConnection();
-			String sql = "  select cash.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, cash.cash_change,staff.staff_name,cash.cash_cost\n"
-					+ "					from cash join staff on cash.staff_id=staff.id \n"
-					+ "					join sales on cash.sales_id = sales.id join shop_inf on sales.shopInf_id = shop_inf.id\n"
-					+ "					join  pic on sales.pic_id= pic.id where sales.sales_date=?;  ";
+			String sql = "  select sales.id,sales.sales_date,sales.sales_time, shop_inf.shopInf_name, pic.pic_nameA, sales.sales_amount,sales.sales_salary, sales.cash_change,staff.staff_name,sales.cash_cost,sales.salary_done \r\n"
+					+ "					 from sales   \r\n"
+					+ "                     left join cash on cash.sales_id = sales.id  \r\n"
+					+ "                     left join staff on cash.staff_id=staff.id \r\n"
+					+ "                     left join shop_inf on sales.shopInf_id = shop_inf.id \r\n"
+					+ "					 left join  pic on sales.pic_id= pic.id where sales.sales_date=?;  ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setDate(1, new java.sql.Date(cashDate.getTime()));
 			ResultSet rs = stmt.executeQuery();

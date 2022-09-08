@@ -81,3 +81,8 @@ input {
 	width: 100%;
 }
 
+.item2 {
+	width: calc(100%/ 2);
+	padding: 20px 10px;
+	text-align: center;
+}

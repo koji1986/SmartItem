@@ -37,13 +37,12 @@ public class AdminCostAServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-
+			Date costDate = new Date();
 			CostDao costDao = DaoFactory.createCostDao();
 			List<Cost> costList;
-
 			if (request.getParameter("cost_day") != null) {
 				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-				Date costDate = sdfDate.parse(request.getParameter("cost_day"));
+				costDate = sdfDate.parse(request.getParameter("cost_day"));
 
 				costList = costDao.findByCostDate(costDate);
 
@@ -52,6 +51,7 @@ public class AdminCostAServlet extends HttpServlet {
 				costList = costDao.findAll();
 
 			}
+			request.setAttribute("costDate", costDate);
 			request.setAttribute("costList", costList);
 			request.getRequestDispatcher("/WEB-INF/view/admin/costA.jsp").forward(request, response);
 		} catch (Exception e) {

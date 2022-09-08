@@ -11,11 +11,11 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/tableTate.css" />
+	href="<%=request.getContextPath()%>/css/Input.css" />
 <title>売上入力</title>
 
 </head>
-<body>
+<body class="salesInput">
 	<c:import url="../nav.jsp" />
 	<div class="design04">
 		<form action="" method="post">

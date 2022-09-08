@@ -60,6 +60,8 @@ public class AdminOptionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			Option option = new Option();
+			OptionDao optionDao = DaoFactory.createOptionDao();
 			if (request.getParameter("update") != null) {
 				// 更新
 
@@ -71,7 +73,7 @@ public class AdminOptionServlet extends HttpServlet {
 				Integer optionRow = Integer.parseInt(request.getParameter("option_row"));
 
 				Integer optionId = Integer.parseInt(request.getParameter("id"));
-				Option option = new Option();
+				
 				option.setShopInfId(shopInfId);
 				option.setOptionName(optionName);
 				option.setOptionFee(optionFee);
@@ -79,24 +81,34 @@ public class AdminOptionServlet extends HttpServlet {
 				option.setOptionRow(optionRow);
 				option.setId(optionId);
 
-				OptionDao optionDao = DaoFactory.createOptionDao();
+				
 				optionDao.update(option);
 				response.sendRedirect("option");
-			} else {
+			} else if (request.getParameter("new") != null){
+				
+				
+				
+				Integer shopInfId = Integer.parseInt(request.getParameter("shopInf_id"));
+				String optionName = request.getParameter("option_name");
+				Integer optionFee = Integer.parseInt(request.getParameter("option_fee"));
+			
+				Integer optionRow = Integer.parseInt(request.getParameter("option_row"));
+
+				option.setShopInfId(shopInfId);
+				option.setOptionName(optionName);
+				option.setOptionFee(optionFee);
+			
+				option.setOptionRow(optionRow);
+
+				optionDao.insert(option);
+				response.sendRedirect("option");
+			}else {
 				// 削除
 				Integer optionId = Integer.parseInt(request.getParameter("id"));
-				Option option = new Option();
-				option.setShopInfId(1);
-				option.setOptionName(null);
-				option.setOptionFee(0);
 
-				option.setOptionRow(0);
 				option.setId(optionId);
-
-				OptionDao optionDao = DaoFactory.createOptionDao();
-				optionDao.update(option);
+				optionDao.delete(option);
 				response.sendRedirect("option");
-
 			}
 		} catch (Exception e) {
 			throw new ServletException(e);

@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
 	<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/table.css" />
+	href="<%=request.getContextPath()%>/css/tableOffInput.css" />
 <title>施術者情報</title>
 
 </head>
@@ -53,7 +53,7 @@
         <c:forEach items="${picList}" var="pic">
 
             <form action="" method="post">
-                <input type="hidden" name="id" value="<c:out value=" ${pic.id}" />" />
+                <input type="hidden" name="id" value="<c:out value="${pic.id}" />" />
                 <div class="container">
                     <div class="item8 td">
 
@@ -81,10 +81,10 @@
                     </div>
                     <div class="item8 td">
 
-                        <a href="pic/update?id=<c:out value=" ${pic.id}" />"><input type="button" value="詳細" /></a>
+                        <a href="pic/update?id=<c:out value="${pic.id}" />"><input type="button" value="詳細" /></a>
                     </div>
                     <div class="item8 td">
-                        <input type="submit" value="削除" />
+                        <input type="submit" value="削除" onclick="return confirm('本当に削除しますか?')"/>
                     </div>
                 </div>
             </form>

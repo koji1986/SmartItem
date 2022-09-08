@@ -34,6 +34,13 @@ public class Sales {
 	private Integer salesAmount;
 	private Integer cashCost;
 	private Integer cashId;
+	private Integer cashChange;
+	private Integer salaryDone;
+	private Integer adCount;
+	private Date inTime;
+	private Date outTime;
+	private Date start;
+	private String spot;
 
 	public Sales(Integer id, Date salesDate, Date salesTime, String shopInfName, String customerCategolyName,
 			String customerName, String picName, String salesNomination, String salesPayment, String courseName,
@@ -328,5 +335,63 @@ public class Sales {
 	public void setCashId(Integer cashId) {
 		this.cashId = cashId;
 	}
+
+	public Integer getCashChange() {
+		return cashChange;
+	}
+
+	public void setCashChange(Integer cashChange) {
+		this.cashChange = cashChange;
+	}
+
+	public Integer getSalaryDone() {
+		return salaryDone;
+	}
+
+	public void setSalaryDone(Integer salaryDone) {
+		this.salaryDone = salaryDone;
+	}
+
+	public Integer getAdCount() {
+		return adCount;
+	}
+
+	public void setAdCount(Integer adCount) {
+		this.adCount = adCount;
+	}
+
+	public Date getInTime() {
+		return inTime;
+	}
+
+	public void setInTime(Date inTime) {
+		this.inTime = inTime;
+	}
+
+	public Date getOutTime() {
+		return outTime;
+	}
+
+	public void setOutTime(Date outTime) {
+		this.outTime = outTime;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public String getSpot() {
+		return spot;
+	}
+
+	public void setSpot(String spot) {
+		this.spot = spot;
+	}
+	
+	
 
 }

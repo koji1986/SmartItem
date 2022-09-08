@@ -13,25 +13,35 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/tableOffInput.css" />
 <title>A店経費</title>
+<style>
+@media print {
+	.top,.button {
+		display: none;
+	}
+}
+</style>
 
 </head>
 <body>
-	<c:import url="nav.jsp" />
-	<div class="design04">
-	<div>A店舗</div>
-	<p></p>
-	<form action="" method="get">
-		<div>
-			<input type="date" name="cost_day" /> <input type="submit"
-				value="絞り込み" />
-		</div>
-	</form>
-	<p></p>
-	<div>
-		<a href="cost/input"><input type="button" value="経費情報入力" /></a>
 
+	<div class="top">
+		<c:import url="nav.jsp" />
 	</div>
-<p></p>
+	<div class="design04">
+		<div>A店舗</div>
+		<p></p>
+		<form action="" method="get">
+			<div class="top">
+				<input type="date" name="cost_day" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${costDate}" />" /> <input type="submit"
+					value="絞り込み" />
+			</div>
+		</form>
+		<p></p>
+		<div class="top">
+			<a href="cost/input"><input type="button" value="経費情報入力" /></a>
+
+		</div>
+		<p></p>
 
 		<div class="container">
 
@@ -61,7 +71,7 @@
 
 						<c:out value="${cost.costSubjectName}" />
 					</div>
-					<div class="item8 td">
+					<div class="item8 td costFee">
 
 						<c:out value="${cost.costFee}" />
 					</div>
@@ -80,14 +90,15 @@
 					</div>
 					<div class="item8 td">
 
-						<input type="submit" value="削除" />
+						<input type="submit" value="削除"
+							onclick="return confirm('本当に削除しますか?')" />
 
 					</div>
 				</div>
 			</form>
 		</c:forEach>
 
-<p></p>
+		<p></p>
 
 
 
@@ -97,18 +108,28 @@
 					<th>経費合計</th>
 				</tr>
 				<tr>
-					<td></td>
+					<td class="total"></td>
 				</tr>
 
 
 			</table>
 
 		</div>
-<p></p>
-		<div>
-			<input type="button" value="印刷" />
+		<p></p>
+		<div class="button">
+			<button class="btn btn-primary" onclick="print()">印刷</button>
 		</div>
 	</div>
 
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	let total = 0;
+	$('.costFee').each(function() {
+		total += parseInt($(this).text());
+	});
+	$('.total').text(total);
+});
+</script>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class AdDaoImpl implements AdDao {
 		List<Ad> adList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select*from ad; ";
+			String sql = " select*from ad order by ad_name asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -56,7 +56,17 @@ public class AdDaoImpl implements AdDao {
 
 	@Override
 	public void insert(Ad ad) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		Connection con = ds.getConnection();
+		String sql = "insert into ad(ad_name,ad_row)\n"
+				+ "values(?,?);";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setString(1, ad.getAdName());
+	
+		stmt.setObject(2, ad.getAdRow(), Types.INTEGER);
+
+		stmt.executeUpdate();
+
 
 	}
 

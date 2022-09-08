@@ -34,24 +34,23 @@ public class SalesDaoImpl implements SalesDao {
 		List<Sales> salesList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = " select sales.id,sales.sales_date,sales.sales_time,shop_inf.id,\n"
-					+ "sales.shopInf_id,shop_inf.shopInf_name,sales.customerCategoly_id, customer_categoly.customer_categoly_name,\n"
-					+ "sales.customer_id, customer.customer_name,sales.pic_id,  pic.pic_nameA,sales.sales_nomination,\n"
-					+ "sales.sales_payment, sales.course_id, course.course_name,\n"
-					+ "sales.option_id, smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
-					+ "sales.sales_carfare,sales.sales_salary,\n"
-					+ "sales.sales_cost, sales.ad_id, ad.ad_name, sales.discount_id, discount.discount_name,sales.sales_discount_fee ,\n"
-					+ "sales.sales_amount,cash.cash_cost\n"
-					+ "from sales  \n"
-					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
-					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
-					+ "join customer on sales.customer_id =customer.id  join pic on sales.pic_id=pic.id\n"
-					+ "join course on sales.course_id=course.id\n"
-					+ "join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
-					+ "join staff on sales.staff_id=staff.id  \n"
-					+ "join ad on sales.ad_id=ad.id\n"
-					+ "join discount on sales.discount_id=discount.id\n"
-					+ "join cash on cash.sales_id=sales.id; ";
+			String sql = " select sales.id,sales.sales_date,sales.sales_time,shop_inf.id,\r\n"
+					+ "					 sales.shopInf_id,shop_inf.shopInf_name,sales.customerCategoly_id, customer_categoly.customer_categoly_name,\r\n"
+					+ "					 sales.customer_id, customer.customer_name,sales.pic_id,  pic.pic_nameA,sales.sales_nomination,\r\n"
+					+ "					 sales.sales_payment, sales.course_id, course.course_name,\r\n"
+					+ "					 sales.option_id, smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\r\n"
+					+ "					 sales.sales_carfare,sales.sales_salary,\r\n"
+					+ "					 sales.sales_cost, sales.ad_id, ad.ad_name, sales.discount_id, discount.discount_name,sales.sales_discount_fee ,\r\n"
+					+ "					 sales.sales_amount,cash.cash_cost\r\n" + "					 from sales  \r\n"
+					+ "					 left join shop_inf on sales.shopInf_id=shop_inf.id\r\n"
+					+ "					 left join customer_categoly on sales.customerCategoly_id=customer_categoly.id\r\n"
+					+ "					 left join customer on sales.customer_id =customer.id  join pic on sales.pic_id=pic.id\r\n"
+					+ "					 left join course on sales.course_id=course.id\r\n"
+					+ "					 left join smart_item_db.option on sales.option_id=smart_item_db.option.id\r\n"
+					+ "					 left join staff on sales.staff_id=staff.id  \r\n"
+					+ "					 left join ad on sales.ad_id=ad.id\r\n"
+					+ "					 left join discount on sales.discount_id=discount.id\r\n"
+					+ "                     left join cash on cash.sales_id=sales.id; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -72,17 +71,17 @@ public class SalesDaoImpl implements SalesDao {
 					+ "sales.shopInf_id, shop_inf.id, shop_inf.shopInf_name, sales.customerCategoly_id, customer_categoly.customer_categoly_name,\n"
 					+ "sales.customer_id, customer.customer_name,sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
 					+ "sales.sales_payment,sales.course_id, course.course_name,\n"
-					+ " sales.option_id,  smart_item_db.option.option_name,sales.staff_id,  staff.staff_name,\n"
-					+ "sales.sales_carfare,sales.sales_salary,\n" + "sales.sales_cost, sales.ad_id, ad.ad_name,"
-					+ " sales.discount_id, discount.discount_name,sales.sales_discount_fee," + " sales.sales_amount, cash.cash_cost\n"
-					+ "from sales\n" + "join shop_inf on sales.shopInf_id=shop_inf.id\n"
-					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
-					+ "join customer on sales.customer_id =customer.id\n" + "join pic on sales.pic_id=pic.id\n"
-					+ "join course on sales.course_id=course.id\n"
-					+ "join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
-					+ "join staff on sales.staff_id=staff.id\n" + "join ad on sales.ad_id=ad.id\n"
-					+ "join discount on sales.discount_id=discount.id "
-					+ "join cash on cash.sales_id=sales.id" + " where sales.id=?;";
+					+ "sales.option_id,  smart_item_db.option.option_name,sales.staff_id,  staff.staff_name,\n"
+					+ "sales.sales_carfare,sales.sales_salary,  sales.sales_cost, sales.ad_id, ad.ad_name,\n"
+					+ "sales.discount_id, discount.discount_name,sales.sales_discount_fee,\n"
+					+ "sales.sales_amount, cash.cash_cost  from sales\n"
+					+ "left join shop_inf on sales.shopInf_id=shop_inf.id\n"
+					+ "left join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
+					+ "left join customer on sales.customer_id =customer.id  join pic on sales.pic_id=pic.id\n"
+					+ "left join course on sales.course_id=course.id\n"
+					+ "left join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
+					+ "left join staff on sales.staff_id=staff.id  left join ad on sales.ad_id=ad.id\n"
+					+ "left join discount on sales.discount_id=discount.id  left join cash on sales.id=cash.sales_id where sales.id=?;";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, id, Types.INTEGER);
@@ -186,7 +185,7 @@ public class SalesDaoImpl implements SalesDao {
 		List<ShopInf> shopInfList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select * from shop_inf;  ";
+			String sql = " select * from shop_inf order by shop_inf.id asc;  ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -247,7 +246,7 @@ public class SalesDaoImpl implements SalesDao {
 		List<CustomerCategoly> customerCategolyList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = "select* from customer_categoly; ";
+			String sql = "select* from customer_categoly order by customer_categoly.id asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -304,7 +303,7 @@ public class SalesDaoImpl implements SalesDao {
 			Connection con = ds.getConnection();
 			String sql = "select course.id,course.shopInf_id, shop_inf.shopInf_name,course_name,\n"
 					+ "course_fee,course_time,course_row\n" + "from course\n" + "join shop_inf\n"
-					+ "on course.shopInf_id=shop_inf.id; ";
+					+ "on course.shopInf_id=shop_inf.id order by course_row asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -325,7 +324,7 @@ public class SalesDaoImpl implements SalesDao {
 			String sql = " select smart_item_db.option.id,option.shopInf_id, shop_inf.shopInf_name,\n"
 					+ "smart_item_db.option.option_name,smart_item_db.option.option_fee,\n"
 					+ "smart_item_db.option.option_row\n" + "from smart_item_db.option\n" + "join shop_inf\n"
-					+ "on smart_item_db.option.shopInf_id=shop_inf.id;";
+					+ "on smart_item_db.option.shopInf_id=shop_inf.id order by smart_item_db.option.option_row asc;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -359,7 +358,7 @@ public class SalesDaoImpl implements SalesDao {
 		List<Ad> adList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select*from ad; ";
+			String sql = " select*from ad order by ad_row asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -514,23 +513,23 @@ public class SalesDaoImpl implements SalesDao {
 	public List<Sales> findByDate(Date salesDate) throws Exception {
 		List<Sales> salesList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "select sales.id,sales.sales_date,sales.sales_time,\n" + "sales.shopInf_id,\n"
-					+ "shop_inf.shopInf_name,\n" + "sales.customerCategoly_id,\n"
-					+ "customer_categoly.customer_categoly_name,\n" + "sales.customer_id, customer.customer_name,\n"
-					+ "sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
-					+ "sales.sales_payment,sales.course_id, course.course_name,\n" + "sales.option_id,\n"
-					+ "smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
-					+ "sales.sales_carfare,sales.sales_salary,\n" + "sales.sales_cost,sales.ad_id, \n"
-					+ "sales.discount_id,ad.ad_name,discount.discount_name,sales.sales_discount_fee,sales.sales_amount,\n"
-					+ "cash.sales_id, cash.cash_cost\n" + "from sales\n"
-					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
-					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
-					+ "join customer on sales.customer_id =customer.id\n" + "join pic on sales.pic_id=pic.id\n"
-					+ "join course on sales.course_id=course.id\n"
-					+ "join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
-					+ "join staff on sales.staff_id=staff.id\n" + "join ad on sales.ad_id=ad.id\n"
-					+ "join discount on sales.discount_id=discount.id \n" + "join cash on sales.id = cash.sales_id\n"
-					+ "where sales.sales_date =?;";
+			String sql = " select sales.id,sales.sales_date,sales.sales_time,  sales.shopInf_id,\r\n"
+					+ "					 shop_inf.shopInf_name,  sales.customerCategoly_id,\r\n"
+					+ "					 customer_categoly.customer_categoly_name,  sales.customer_id, customer.customer_name,\r\n"
+					+ "					 sales.pic_id, pic.pic_nameA,sales.sales_nomination,\r\n"
+					+ "					 sales.sales_payment,sales.course_id, course.course_name,  sales.option_id,\r\n"
+					+ "					 smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\r\n"
+					+ "					 sales.sales_carfare,sales.sales_salary,  sales.sales_cost,sales.ad_id, \r\n"
+					+ "					 sales.discount_id,ad.ad_name,discount.discount_name,sales.sales_discount_fee,sales.sales_amount,\r\n"
+					+ "					  sales.cash_cost  from sales\r\n"
+					+ "					 left join shop_inf on sales.shopInf_id=shop_inf.id\r\n"
+					+ "					 left join customer_categoly on sales.customerCategoly_id=customer_categoly.id\r\n"
+					+ "					 left join customer on sales.customer_id =customer.id  left join pic on sales.pic_id=pic.id\r\n"
+					+ "					 left join course on sales.course_id=course.id\r\n"
+					+ "					 left join smart_item_db.option on sales.option_id=smart_item_db.option.id\r\n"
+					+ "					 left join staff on sales.staff_id=staff.id  left join ad on sales.ad_id=ad.id\r\n"
+					+ "					 left join discount on sales.discount_id=discount.id   left join cash on sales.id = cash.sales_id\r\n"
+					+ "					  where sales.sales_date =?;";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, new java.sql.Date(salesDate.getTime()));
@@ -546,38 +545,150 @@ public class SalesDaoImpl implements SalesDao {
 	}
 
 	@Override
-	public List<Sales> findByDateAd(Date salesDate, Integer AdId) throws Exception {
+	public List<Sales> findByDateAd(Date salesDate) throws Exception {
 		List<Sales> DateAdList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "select sales.id,sales.sales_date,sales.sales_time,\n" + "sales.shopInf_id,\n"
-					+ "shop_inf.shopInf_name,\n" + "sales.customerCategoly_id,\n"
-					+ "customer_categoly.customer_categoly_name,\n" + "sales.customer_id, customer.customer_name,\n"
-					+ "sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
-					+ "sales.sales_payment,sales.course_id, course.course_name,\n" + "sales.option_id,\n"
-					+ "smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
-					+ "sales.sales_carfare,sales.sales_salary,\n" + "sales.sales_cost,sales.ad_id, \n"
-					+ "sales.discount_id,sales.ad_id,\n"
-					+ "ad.ad_name,discount.discount_name,sales.sales_discount_fee,sales.sales_amount,\n"
-					+ "cash.sales_id, cash.cash_cost\n" + "from sales\n"
-					+ "join shop_inf on sales.shopInf_id=shop_inf.id\n"
-					+ "join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
-					+ "join customer on sales.customer_id =customer.id\n" + "join pic on sales.pic_id=pic.id\n"
-					+ "join course on sales.course_id=course.id\n"
-					+ "join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
-					+ "join staff on sales.staff_id=staff.id\n" + "join ad on sales.ad_id=ad.id\n"
-					+ "join discount on sales.discount_id=discount.id \n" + "join cash on sales.id = cash.sales_id\n"
-					+ "where sales.sales_date =? && sales.ad_id=?;";
+			String sql = "select ad.ad_name, count(*) as ad_count from sales  \r\n" + "join ad on ad.id=sales.ad_id\r\n"
+					+ "where sales_date=? group by ad_name ;";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, new java.sql.Date(salesDate.getTime()));
-			stmt.setObject(2, AdId, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				DateAdList.add(mapToSales(rs));
+				DateAdList.add(mapToSalesAd(rs));
 			}
 		} catch (Exception e) {
 			throw e;
 		}
 		return DateAdList;
 	}
+
+	private Sales mapToSalesAd(ResultSet rs) throws Exception {
+		Sales sales = new Sales();
+
+		sales.setAdName(rs.getString("ad_name"));
+		Long count = rs.getLong("ad_count");
+		sales.setAdCount(count.intValue());
+
+		return sales;
+	}
+
+	@Override
+	public List<Sales> findByDatePicId(Date salesDate, Integer picId) throws Exception {
+		List<Sales> DatePicList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "select pic.pic_nameA,\n" + "shop_inf.shopInf_name,\n" + "customer.customer_name,\n"
+					+ "course.course_name,\n" + "sales.sales_nomination,\n" + "sales.sales_amount,\n"
+					+ "sales.sales_salary,\n" + "use_report.in_time,\n" + "use_report.out_time,\n"
+					+ "sales.sales_time, use_report.start,\n" + "use_report.spot\n" + "from sales\n"
+					+ "left join pic on pic.id = sales.pic_id\n"
+					+ "left join shop_inf on shop_inf.id = sales.shopInf_id\n"
+					+ "left join customer on customer.id = sales.customer_id\n"
+					+ "left join course on course.id = sales.course_id\n"
+					+ "left join use_report on use_report.sales_id = sales.id\n"
+					+ "where sales.sales_date=? && sales.pic_id=?;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, new java.sql.Date(salesDate.getTime()));
+			stmt.setObject(2, picId, Types.INTEGER);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				DatePicList.add(mapToSalesPic(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return DatePicList;
+	}
+
+	private Sales mapToSalesPic(ResultSet rs) throws Exception {
+		Sales sales = new Sales();
+
+		sales.setShopInfName(rs.getString("shopInf_name"));
+
+		sales.setCustomerName(rs.getString("customer_name"));
+
+		sales.setPicName(rs.getString("pic_nameA"));
+
+		sales.setSalesNomination(rs.getString("sales_nomination"));
+
+		sales.setCourseName(rs.getString("course_name"));
+
+		sales.setSalesTime(rs.getTimestamp("sales_time"));
+
+		sales.setSalesAmount((Integer) rs.getObject("sales_amount"));
+
+		sales.setSalesSalary((Integer) rs.getObject("sales_salary"));
+
+		sales.setInTime(rs.getTimestamp("in_time"));
+		sales.setOutTime(rs.getTimestamp("out_time"));
+		sales.setStart(rs.getTimestamp("start"));
+		sales.setSpot(rs.getString("spot"));
+
+		return sales;
+	}
+
+	@Override
+	public void insertUseReport(Sales sales) throws Exception {
+
+		try (Connection con = ds.getConnection()) {
+			String sql = " insert into use_report(sales_id,pic_id,in_time,out_time,spot,start)\n"
+					+ "values(?,?,?,?,?,?)\n"
+					+ "ON DUPLICATE KEY UPDATE sales_id = ?\n"
+					+ " ;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, sales.getId(), Types.INTEGER);
+			stmt.setObject(2, sales.getPicId(), Types.INTEGER);
+			stmt.setObject(3, sales.getInTime());
+			stmt.setObject(4, sales.getOutTime());
+			stmt.setString(5, sales.getSpot());
+			stmt.setObject(6, sales.getStart());
+			stmt.setObject(7, sales.getId(),Types.INTEGER);
+
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	@Override
+	public List<Sales> findByDateOderAd(Date salesDate) throws Exception {
+		List<Sales> salesList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "select sales.id,sales.sales_date,sales.sales_time,  sales.shopInf_id,\n"
+					+ "shop_inf.shopInf_name,  sales.customerCategoly_id,\n"
+					+ "customer_categoly.customer_categoly_name,  sales.customer_id, customer.customer_name,\n"
+					+ "sales.pic_id, pic.pic_nameA,sales.sales_nomination,\n"
+					+ "sales.sales_payment,sales.course_id, course.course_name,  sales.option_id,\n"
+					+ "smart_item_db.option.option_name,sales.staff_id, staff.staff_name,\n"
+					+ "sales.sales_carfare,sales.sales_salary,  sales.sales_cost,sales.ad_id, \n"
+					+ "sales.discount_id,ad.ad_name,discount.discount_name,sales.sales_discount_fee,sales.sales_amount,\n"
+					+ "sales.cash_cost  from sales\n"
+					+ "left join shop_inf on sales.shopInf_id=shop_inf.id\n"
+					+ "left join customer_categoly on sales.customerCategoly_id=customer_categoly.id\n"
+					+ "left join customer on sales.customer_id =customer.id  left join pic on sales.pic_id=pic.id\n"
+					+ "left join course on sales.course_id=course.id\n"
+					+ "left join smart_item_db.option on sales.option_id=smart_item_db.option.id\n"
+					+ "left join staff on sales.staff_id=staff.id  left join ad on sales.ad_id=ad.id\n"
+					+ "left join discount on sales.discount_id=discount.id   left join cash on sales.id = cash.sales_id\n"
+					+ "where sales.sales_date =?\n"
+					+ "ORDER BY sales.discount_id DESC;";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, new java.sql.Date(salesDate.getTime()));
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				salesList.add(mapToSales(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return salesList;
+	}
+
+
+
+
 }

@@ -65,12 +65,36 @@ public class AdminCostInputServlet extends HttpServlet {
 		try {
 			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
-			Date costDate = sdfDate.parse(request.getParameter("cost_date"));
-			Integer staffId = Integer.parseInt(request.getParameter("staff_id"));
-			Integer shopNameId = Integer.parseInt(request.getParameter("shop_id"));
+			Date costDate = new Date();
+			if(request.getParameter("cost_date").isBlank()) {}
+			else {
+				costDate = sdfDate.parse(request.getParameter("cost_date"));
+			}
+			Integer staffId =1;
+			if(request.getParameter("staff_id").isBlank() || request.getParameter("staff_id")==null) {}
+			else {
+			staffId = Integer.parseInt(request.getParameter("staff_id"));
+			}
+			
+			Integer shopNameId = 1;
+			if(request.getParameter("shop_id")==null) {}
+			else {
+			 shopNameId = Integer.parseInt(request.getParameter("shop_id"));
+			}
+			
+			
 			String costDestination = request.getParameter("cost_destination");
-			Integer costSubjectId = Integer.parseInt(request.getParameter("cost_subject_id"));
-			Integer costFee = Integer.parseInt(request.getParameter("cost_fee"));
+			
+			Integer costSubjectId = 1;
+			if(request.getParameter("cost_subject_id").isBlank() || request.getParameter("cost_subject_id")==null) {}
+			else {
+			costSubjectId = Integer.parseInt(request.getParameter("cost_subject_id"));
+			}
+			Integer costFee = 0;
+			if(request.getParameter("cost_fee").isBlank() || request.getParameter("cost_fee")==null) {}
+			else {
+			costFee = Integer.parseInt(request.getParameter("cost_fee"));
+			}
 			String costDetail = request.getParameter("cost_detail");
 
 			Cost cost = new Cost();

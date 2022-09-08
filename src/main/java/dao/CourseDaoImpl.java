@@ -26,7 +26,7 @@ public class CourseDaoImpl implements CourseDao {
 			Connection con = ds.getConnection();
 			String sql = "select course.id,course.shopInf_id, shop_inf.shopInf_name,course_name,\n"
 					+ "course_fee,course_time,course_row\n" + "from course\n" + "join shop_inf\n"
-					+ "on course.shopInf_id=shop_inf.id; ";
+					+ "on course.shopInf_id=shop_inf.id order by course_row asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -61,7 +61,17 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public void insert(Course course) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		Connection con = ds.getConnection();
+		String sql = "insert into course(shopInf_id,course_name,course_fee,course_time,course_row)\n"
+				+ "values(?,?,?,?,?);";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setObject(1, course.getShopInfId(), Types.INTEGER);
+		stmt.setString(2, course.getCourseName());
+		stmt.setObject(3, course.getCourseFee(), Types.INTEGER);
+		stmt.setObject(4, course.getCourseTime(), Types.INTEGER);
+		stmt.setObject(5, course.getCourseRow(), Types.INTEGER);
+
+		stmt.executeUpdate();
 
 	}
 
@@ -88,7 +98,14 @@ public class CourseDaoImpl implements CourseDao {
 
 	@Override
 	public void delete(Course course) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM course WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, course.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 

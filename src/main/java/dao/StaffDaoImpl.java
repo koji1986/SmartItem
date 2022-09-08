@@ -24,7 +24,7 @@ public class StaffDaoImpl implements StaffDao {
 		List<Staff> staffList = new ArrayList<>();
 		try {
 			Connection con = ds.getConnection();
-			String sql = " select*from staff; ";
+			String sql = " select*from staff order by staff_row asc; ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -56,8 +56,16 @@ public class StaffDaoImpl implements StaffDao {
 
 	@Override
 	public void insert(Staff staff) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		Connection con = ds.getConnection();
+		String sql = "insert into staff(staff_name,staff_row)\n"
+				+ "values(?,?);";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		
+		stmt.setString(1, staff.getStaffName());
+	
+		stmt.setObject(2, staff.getStaffRow(), Types.INTEGER);
 
+		stmt.executeUpdate();
 	}
 
 	@Override
@@ -81,7 +89,14 @@ public class StaffDaoImpl implements StaffDao {
 
 	@Override
 	public void delete(Staff staff) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM staff WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, staff.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			throw e;
+			}
 
 	}
 

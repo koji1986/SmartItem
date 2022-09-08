@@ -43,29 +43,50 @@ public class AdminCashServlet extends HttpServlet {
 
 			CashDao cashDao = DaoFactory.createCashDao();
 			SalesDao salesDao = DaoFactory.createSalesDao();
-			
+			Date date;
 			List<Cash> cashList;
 
 			// Getパラメータの日付を取得
 			if (request.getParameter("cash_day") != null) {
 
 				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-				Date cashDay = sdfDate.parse(request.getParameter("cash_day"));
+				date = sdfDate.parse(request.getParameter("cash_day"));
 
-				cashList = cashDao.findByDate(cashDay);
-				
-			
-				
-			}
-			else {
-				cashList = cashDao.findAll();
+				cashList = cashDao.findByDate(date);
 
+			} else {
+				
+				date = new Date();
+				cashList = cashDao.findByDate(date);
+				
+				
 				List<Sales> salesList = salesDao.findAll();
 
 				request.setAttribute("salesList", salesList);
 			}
-			
+
 			request.setAttribute("cashList", cashList);
+			int totalSales = 0;
+			int totalSalary = 0;
+			int totalChange = 0;
+			int totalCost = 0;
+			
+			for(Cash c : cashList) {
+				if(c.getSalaryDone()==1) {
+				}
+				else {
+				totalSales += c.getSalesAmount();
+				totalSalary += c.getSalesSalary();
+				totalChange += c.getCashChange();
+				totalCost += c.getCashCost();
+				}
+			}
+			
+			 int totalCash = 100000 + totalSales -totalSalary - totalChange -totalCost;
+		
+			 
+			 request.setAttribute("date", date);
+			request.setAttribute("totalCash", totalCash);
 			request.getRequestDispatcher("/WEB-INF/view/admin/cash.jsp").forward(request, response);
 
 		} catch (Exception e) {
@@ -83,30 +104,95 @@ public class AdminCashServlet extends HttpServlet {
 		if (request.getParameter("update") != null) {
 			// 更新
 			try {
-				SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-				Date cashDate = sdfDate.parse(request.getParameter("cash_date"));
 
 				Integer cashChange = Integer.parseInt(request.getParameter("cash_change"));
-				Integer staffId = Integer.parseInt(request.getParameter("staff_id"));
+
 				Integer cashCost = Integer.parseInt(request.getParameter("cash_cost"));
 
 				Integer cashId = Integer.parseInt(request.getParameter("id"));
+				Integer salaryDone = Integer.parseInt(request.getParameter("salary_done"));
 				Cash cash = new Cash();
-				cash.setCashDate(cashDate);
+
 				cash.setCashChange(cashChange);
-				cash.setStaffId(staffId);
+
 				cash.setCashCost(cashCost);
 
 				cash.setId(cashId);
 
+				cash.setSalaryDone(salaryDone);
+
 				CashDao cashDao = DaoFactory.createCashDao();
 				cashDao.update(cash);
-				response.sendRedirect("cash");
+				
+				
+				SalesDao salesDao = DaoFactory.createSalesDao();
+				Date date;
+				List<Cash> cashList;
+				
+
+				// Getパラメータの日付を取得
+				if (request.getParameter("cash_day") != null) {
+
+					SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+					date = sdfDate.parse(request.getParameter("cash_day"));
+
+					cashList = cashDao.findByDate(date);
+
+				} else {
+					
+					date = new Date();
+					cashList = cashDao.findByDate(date);
+					
+					
+					List<Sales> salesList = salesDao.findAll();
+
+					request.setAttribute("salesList", salesList);
+				}
+				
+				request.setAttribute("cashList", cashList);
+				int totalSales = 0;
+				int totalSalary = 0;
+				int totalChange = 0;
+				int totalCost = 0;
+				
+				for(Cash c : cashList) {
+					if(c.getSalaryDone()==1) {
+					}
+					else {
+					totalSales += c.getSalesAmount();
+					totalSalary += c.getSalesSalary();
+					totalChange += c.getCashChange();
+					totalCost += c.getCashCost();
+					}
+				}
+				
+				 int totalCash = 100000 + totalSales -totalSalary - totalChange -totalCost;
+			
+				 
+				 request.setAttribute("date", date);
+				request.setAttribute("totalCash", totalCash);
+				
+				response.sendRedirect("cash?cash_day="+request.getParameter("cash_day"));
 			} catch (Exception e) {
 				throw new ServletException(e);
 			}
 		} else {
 			// 削除
+			try {
+				Integer cashId = Integer.parseInt(request.getParameter("id"));
+				Cash cash = new Cash();
+				cash.setId(cashId);
+				cash.setCashCost(0);
+				cash.setCashChange(0);
+				cash.setSalaryDone(1);
+				// 削除
+				CashDao cashDao = DaoFactory.createCashDao();
+				cashDao.update(cash);
+				response.sendRedirect("cash");
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 
 	}

@@ -18,7 +18,8 @@
 	
    <nav class="navbar navbar-expand-sm navbar-dark bg-success mt-3 mb-3">
 	<div class="container">
-            <a class="navbar-brand bg-white text-success">ナビゲーション</a>
+            <a class="navbar-brand bg-white text-success">
+            <img src="<%=request.getContextPath()%>/image/logo.png" width="100px" height="40px"alt="" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -88,16 +89,16 @@
                             <a class="dropdown-item" href="/SmartItem/admin/option">オプション情報</a>
                             <a class="dropdown-item" href="/SmartItem/admin/ad">広告媒体情報</a>
                             <a class="dropdown-item" href="/SmartItem/admin/discount">割引情報</a>
-                            <a class="dropdown-item" href="/SmartItem/admin/discount">従業員情報</a>
+                            <a class="dropdown-item" href="/SmartItem/admin/staff">従業員情報</a>
                         </div>
                     </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            ユーザー名
+                           ユーザー名：<c:out value="${admin.loginName}" />
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/SmartItem/admin/sales">ログアウト</a>
+                            <a class="dropdown-item" href="/SmartItem/admin/logout">ログアウト</a>
                             <a class="dropdown-item" href="/SmartItem/admin/sales/input">登録情報変更</a>
                         </div>
                     </li>
