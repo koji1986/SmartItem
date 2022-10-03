@@ -50,9 +50,9 @@
             <div class="item8 th">削除</div>
         </div>
 
-        <c:forEach items="${picList}" var="pic" class="disp">
+        <c:forEach items="${picList}" var="pic" >
 
-            <form action="" method="post">
+            <form action="" method="post" class="disp">
                 <input type="hidden" name="id" value="<c:out value="${pic.id}" />" />
                 <div class="container">
                     <div class="item8 td">
