@@ -32,18 +32,27 @@
 					<input type="radio" name="search" value="" />全店舗
 				</div>
 			</div>
+			<div class="radio">
 
-			<label> <input type="radio" name="shop_nomination" value="1" />フリー
-				<input type="radio" name="shop_nomination" value="2" />NET指名 <input
-				type="radio" name="shop_nomination" value="3" />NET指名
+				<label> <input type="radio" name="shop_nomination"
+					value="フリー" />フリー <input type="radio" name="shop_nomination"
+					value="NET指名" />NET指名 <input type="radio" name="shop_nomination"
+					value="本指名" />本指名
 
-			</label> <select name="pic_name">
-				<option value="1">田中</option>
-				<option value="2">鈴木</option>
-				<option value="3">佐藤</option>
+				</label>
+			</div>
+			
+			<select name="pic_name">
+				<c:forEach items="${picList}" var="p">
+
+					<option value="<c:out value="${p.id}" />"><c:out
+							value="${p.picNameA}" /></option>
+				</c:forEach>
+
 
 
 			</select>
+			<p></p>
 
 			<p>
 				<input type="text" placeholder="会員NO" />
@@ -86,9 +95,9 @@
 		</div>
 		<c:forEach items="${salesList}" var="sales">
 			<form action="" method="post"
-				class="disp s<c:out value="${sales.shopInfId}" />">
-				<input type="hidden" name="id"
-					value="<c:out value="${sales.id}" />" />
+				class="disp s<c:out value="${sales.shopInfId}" /> "
+				data-id="<c:out value="${sales.salesNomination}" />">
+				<input type="hidden" name="id" value="<c:out value="${sales.id}" />" />
 				<div class="container">
 
 					<div class="item17 td moji80">
@@ -173,6 +182,26 @@
 						$(selector).show();
 					}
 				});
+			});
+
+			$(document).ready(function() {
+				$("[name=shop_nomination]").change(function() {
+					$(".disp").hide();
+
+					if ($(this).val() == "") {
+						$(".disp").show();
+					} else if ($(this).val() == "フリー") {
+
+						$('[data-id="フリー"]').show();
+					} else if ($(this).val() == "NET指名") {
+
+						$('[data-id="NET指名"]').show();
+					} else {
+						$('[data-id="本指名"]').show();
+					}
+
+				});
+
 			});
 		</script>
 	</div>

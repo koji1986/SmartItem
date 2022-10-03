@@ -50,7 +50,7 @@
             <div class="item8 th">削除</div>
         </div>
 
-        <c:forEach items="${picList}" var="pic">
+        <c:forEach items="${picList}" var="pic" class="disp">
 
             <form action="" method="post">
                 <input type="hidden" name="id" value="<c:out value="${pic.id}" />" />
@@ -92,7 +92,20 @@
 
 
     </div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("[name=pic_existence]").change(function(){
+		$(.disp).hide();
+		
+		
+		
+	});
+	
+});
 
+
+</script>
 
 
 </body>

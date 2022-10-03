@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.SalesDao;
+import domain.Pic;
 import domain.Sales;
 
 /**
@@ -38,8 +39,10 @@ public class AdminSalesServlet extends HttpServlet {
 			
 			SalesDao salesDao = DaoFactory.createSalesDao();
 			List<Sales> salesList = salesDao.findAll();
-		
+			List<Pic> picList =salesDao.findAllPic();		
 			request.setAttribute("salesList", salesList);
+			request.setAttribute("picList", picList);
+			
 			request.getRequestDispatcher("/WEB-INF/view/admin/sales.jsp").forward(request, response);
 			} catch (Exception e) {
 			throw new ServletException(e);
@@ -63,7 +66,7 @@ public class AdminSalesServlet extends HttpServlet {
 				salesDay = sdfDate.parse(request.getParameter("sales_date"));
 				salesList = salesDao.findByDate(salesDay);
 				request.setAttribute("date", salesDay);
-				System.out.println(1);
+				
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

@@ -157,4 +157,27 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	}
 
+	@Override
+	public List<Customer> findByNammeTelMember(String NameTelMember) throws Exception {
+		List<Customer> customerList =new ArrayList<>();
+		try {
+			Connection con = ds.getConnection();
+			String sql = "SELECT * FROM customer WHERE customer_phone_number1 LIKE ? OR customer_phone_number2 LIKE ? OR customer_phone_number3 LIKE ? "
+					+ "OR customer_name LIKE ? OR customer_no LIKE ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, "%"+NameTelMember+"%");
+			stmt.setString(2, "%"+NameTelMember+"%");
+			stmt.setString(3, "%"+NameTelMember+"%");
+			stmt.setString(4, "%"+NameTelMember+"%");
+			stmt.setString(5, "%"+NameTelMember+"%");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				customerList.add(mapToCustomer(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return customerList;
+	}
+
 }

@@ -23,9 +23,13 @@
 			</a>
 		</div>
 		<p></p>
+		<form action="" method="post">
 		<div>
-			<input type="text" />
+			顧客検索：<input type="text" placeholder="名前･会員NO･電話番号" name="nameTelMember"/>
 		</div>
+		<br />
+		<input type="submit" class="btn-primary" value="検索" />
+		</form>
 		<p></p>
 		<div>
 
@@ -69,7 +73,7 @@
 						</div>
 						<div class="item7 td">
 
-							<input type="submit" value="削除" onclick="return confirm('本当に削除しますか?')" />
+							<input type="submit" value="削除" name="delete" onclick="return confirm('本当に削除しますか?')" />
 						</div>
 					</div>
 				</form>

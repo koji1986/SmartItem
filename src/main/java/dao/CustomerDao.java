@@ -16,5 +16,7 @@ public interface CustomerDao {
 	void update(Customer customer) throws Exception;
 
 	void delete(Customer customer) throws Exception;
+	
+	List<Customer> findByNammeTelMember(String NameTelMember) throws Exception;
 
 }
